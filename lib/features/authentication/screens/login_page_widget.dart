@@ -1,10 +1,10 @@
-import 'package:rentro_car/common/styles/inputdecoration_style.dart';
-import 'package:rentro_car/common/widgets/app_button_widget.dart';
+import 'package:rentro_car/utils/common/styles/inputdecoration_style.dart';
+import 'package:rentro_car/utils/common/widgets/app_button_widget.dart';
 import 'package:rentro_car/features/authentication/models/login_modle.dart';
 import 'package:rentro_car/features/authentication/screens/signup_page_widget.dart';
 import 'package:rentro_car/utils/customs/app_model.dart';
 import 'package:rentro_car/utils/customs/app_utils.dart';
-import 'package:rentro_car/utils/theme/theme.dart';
+import 'package:rentro_car/utils/common/theme.dart';
 import 'package:flutter/material.dart';
 
 class LoginPageWidget extends StatefulWidget {
@@ -108,55 +108,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               autofocus: true,
                               textInputAction: TextInputAction.next,
                               obscureText: false,
-                              decoration: InputDecoration(
-                                isDense: true,
-                                labelStyle:
-                                    AppTheme.of(context).bodyLarge.override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                hintText: 'Username',
-                                hintStyle:
-                                    AppTheme.of(context).labelMedium.override(
-                                          fontFamily: 'Poppins',
-                                          letterSpacing: 0.0,
-                                        ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x39131313),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppTheme.of(context).error,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppTheme.of(context).error,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                filled: true,
-                                fillColor:
-                                    AppTheme.of(context).primaryBackground,
-                                contentPadding:
-                                    const EdgeInsetsDirectional.fromSTEB(
-                                        12, 16, 12, 16),
-                              ),
+                              decoration: InputdecorationStyle(hint: "user name").decorationStyle,
                               style: AppTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Poppins',
                                     letterSpacing: 0.0,
@@ -194,7 +146,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   .passwrodFieldTextControllerValidator
                                   .asValidator(context),
                             ),
-                          ].divide(SizedBox(height: 16)),
+                          ].divide(const SizedBox(height: 16)),
                         ),
                       ),
                     ),

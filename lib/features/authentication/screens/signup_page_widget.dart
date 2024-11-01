@@ -1,7 +1,8 @@
+import 'package:rentro_car/utils/common/styles/inputdecoration_style.dart';
 import 'package:rentro_car/features/authentication/screens/login_page_widget.dart';
 import 'package:rentro_car/utils/customs/app_model.dart';
-import 'package:rentro_car/utils/theme/theme.dart';
-import 'package:rentro_car/common/widgets/app_button_widget.dart';
+import 'package:rentro_car/utils/common/theme.dart';
+import 'package:rentro_car/utils/common/widgets/app_button_widget.dart';
 import 'package:rentro_car/utils/customs/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -106,7 +107,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            16, 16, 16, 16),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -117,54 +119,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               autofocus: true,
                               textInputAction: TextInputAction.next,
                               obscureText: false,
-                              decoration: InputDecoration(
-                                isDense: true,
-                                labelStyle:
-                                    AppTheme.of(context).bodyLarge.override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                hintText: 'Username',
-                                hintStyle:
-                                    AppTheme.of(context).labelMedium.override(
-                                          fontFamily: 'Poppins',
-                                          letterSpacing: 0.0,
-                                        ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x39131313),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppTheme.of(context).error,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppTheme.of(context).error,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                filled: true,
-                                fillColor:
-                                    AppTheme.of(context).secondaryBackground,
-                                contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                    12, 16, 12, 16),
-                              ),
+                              decoration:
+                                  InputdecorationStyle(hint: "user name")
+                                      .decorationStyle,
                               style: AppTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Poppins',
                                     letterSpacing: 0.0,
@@ -180,54 +137,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               autofocus: true,
                               textInputAction: TextInputAction.next,
                               obscureText: false,
-                              decoration: InputDecoration(
-                                isDense: true,
-                                labelStyle:
-                                    AppTheme.of(context).bodyLarge.override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                hintText: 'Email',
-                                hintStyle:
-                                    AppTheme.of(context).labelMedium.override(
-                                          fontFamily: 'Poppins',
-                                          letterSpacing: 0.0,
-                                        ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x39131313),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppTheme.of(context).error,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppTheme.of(context).error,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                filled: true,
-                                fillColor:
-                                    AppTheme.of(context).secondaryBackground,
-                                contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                    12, 16, 12, 16),
-                              ),
+                              decoration: InputdecorationStyle(hint: "Email")
+                                  .decorationStyle,
                               style: AppTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Poppins',
                                     letterSpacing: 0.0,
@@ -245,67 +156,22 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               textInputAction: TextInputAction.done,
                               obscureText:
                                   !_model.signupPasswrodFieldVisibility,
-                              decoration: InputDecoration(
-                                isDense: true,
-                                labelStyle:
-                                    AppTheme.of(context).bodyLarge.override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                hintText: 'Password',
-                                hintStyle:
-                                    AppTheme.of(context).labelMedium.override(
-                                          fontFamily: 'Poppins',
-                                          letterSpacing: 0.0,
-                                        ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x39131313),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppTheme.of(context).error,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppTheme.of(context).error,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                filled: true,
-                                fillColor:
-                                    AppTheme.of(context).secondaryBackground,
-                                contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                    12, 16, 12, 16),
-                                suffixIcon: InkWell(
-                                  onTap: () => setState(
-                                    () => _model.signupPasswrodFieldVisibility =
-                                        !_model.signupPasswrodFieldVisibility,
-                                  ),
-                                  focusNode: FocusNode(skipTraversal: true),
-                                  child: Icon(
-                                    _model.signupPasswrodFieldVisibility
-                                        ? Icons.visibility_outlined
-                                        : Icons.visibility_off_outlined,
-                                    size: 22,
-                                  ),
-                                ),
-                              ),
+                              decoration: InputdecorationStyle(
+                                  hint: "Password",
+                                  suffixIcon: InkWell(
+                                    onTap: () => setState(
+                                      () => _model
+                                              .signupPasswrodFieldVisibility =
+                                          !_model.signupPasswrodFieldVisibility,
+                                    ),
+                                    focusNode: FocusNode(skipTraversal: true),
+                                    child: Icon(
+                                      _model.signupPasswrodFieldVisibility
+                                          ? Icons.visibility_outlined
+                                          : Icons.visibility_off_outlined,
+                                      size: 22,
+                                    ),
+                                  )).decorationStyle,
                               style: AppTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
@@ -324,53 +190,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               textInputAction: TextInputAction.done,
                               obscureText:
                                   !_model.signupConfirmPasswrodFieldVisibility,
-                              decoration: InputDecoration(
-                                isDense: true,
-                                labelStyle:
-                                    AppTheme.of(context).bodyLarge.override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                hintText: 'Confirm Password',
-                                hintStyle:
-                                    AppTheme.of(context).labelMedium.override(
-                                          fontFamily: 'Poppins',
-                                          letterSpacing: 0.0,
-                                        ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x39131313),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppTheme.of(context).error,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppTheme.of(context).error,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                filled: true,
-                                fillColor:
-                                    AppTheme.of(context).secondaryBackground,
-                                contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                    12, 16, 12, 16),
+                              decoration: InputdecorationStyle(
+                                hint: "Confirm Password",
                                 suffixIcon: InkWell(
                                   onTap: () => setState(
                                     () => _model
@@ -386,7 +207,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                     size: 22,
                                   ),
                                 ),
-                              ),
+                              ).decorationStyle,
                               style: AppTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
@@ -414,7 +235,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                             ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(7, 0, 0, 0),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(7, 0, 0, 0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,

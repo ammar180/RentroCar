@@ -1,4 +1,4 @@
-import 'package:rentro_car/features/authentication/screens/login_page_widget.dart';
+import 'features/authentication/screens/onboarding_page_widget.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class App extends StatelessWidget {
     return const MaterialApp(
       title: 'RentroCar',
       themeMode: ThemeMode.light,
-      home: LoginPageWidget(),
+      home: OnboardingWidget(),
     );
   }
 }
