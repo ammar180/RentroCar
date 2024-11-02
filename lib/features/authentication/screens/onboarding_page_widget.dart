@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:rentro_car/utils/common/widgets/app_button_widget.dart';
 import 'package:rentro_car/utils/common/widgets/app_icon_widget.dart';
-import 'package:rentro_car/features/authentication/models/onboarding_modle.dart';
+import 'package:rentro_car/features/authentication/models/onboarding_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:rentro_car/features/authentication/screens/login_page_widget.dart';
 import 'package:rentro_car/utils/customs/app_animations.dart';

@@ -7,8 +7,8 @@ import 'package:rentro_car/utils/customs/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
-import '../models/signup_model.dart';
-export '../models/signup_model.dart';
+import '../models/signup_page_model.dart';
+export '../models/signup_page_model.dart';
 
 class SignUpPageWidget extends StatefulWidget {
   /// create a simple login page with username and password fields and login
@@ -56,237 +56,243 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: AppTheme.of(context).primaryBackground,
-        body: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                      'https://picsum.photos/seed/807/600',
-                      width: 40,
-                      height: 40,
-                      fit: BoxFit.cover,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                        'https://picsum.photos/seed/807/600',
+                        width: 40,
+                        height: 40,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'RentroCar',
-                    style: AppTheme.of(context).headlineSmall.override(
-                          fontFamily: 'Roboto Mono',
-                          letterSpacing: 0.0,
-                        ),
-                  ),
-                ].divide(const SizedBox(width: 10)),
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                    'Sign Up',
-                    style: AppTheme.of(context).displaySmall.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                  ),
-                  Material(
-                    color: Colors.transparent,
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                    Text(
+                      'RentroCar',
+                      style: AppTheme.of(context).headlineSmall.override(
+                            fontFamily: 'Roboto Mono',
+                            letterSpacing: 0.0,
+                          ),
                     ),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width * 0.9,
-                      decoration: BoxDecoration(
-                        color: AppTheme.of(context).secondaryBackground,
+                  ].divide(const SizedBox(width: 10)),
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      'Sign Up',
+                      style: AppTheme.of(context).displaySmall.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                    ),
+                    Material(
+                      color: Colors.transparent,
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            16, 16, 16, 16),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            TextFormField(
-                              controller:
-                                  _model.signupUsernameFieldTextController,
-                              focusNode: _model.signupUsernameFieldFocusNode,
-                              autofocus: true,
-                              textInputAction: TextInputAction.next,
-                              obscureText: false,
-                              decoration:
-                                  InputdecorationStyle(hint: "user name")
-                                      .decorationStyle,
-                              style: AppTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Poppins',
-                                    letterSpacing: 0.0,
-                                  ),
-                              cursorColor: AppTheme.of(context).primaryText,
-                              validator: _model
-                                  .signupUsernameFieldTextControllerValidator
-                                  .asValidator(context),
-                            ),
-                            TextFormField(
-                              controller: _model.signupEmailFieldTextController,
-                              focusNode: _model.signupEmailFieldFocusNode,
-                              autofocus: true,
-                              textInputAction: TextInputAction.next,
-                              obscureText: false,
-                              decoration: InputdecorationStyle(hint: "Email")
-                                  .decorationStyle,
-                              style: AppTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Poppins',
-                                    letterSpacing: 0.0,
-                                  ),
-                              cursorColor: AppTheme.of(context).primaryText,
-                              validator: _model
-                                  .signupEmailFieldTextControllerValidator
-                                  .asValidator(context),
-                            ),
-                            TextFormField(
-                              controller:
-                                  _model.signupPasswrodFieldTextController,
-                              focusNode: _model.signupPasswrodFieldFocusNode,
-                              autofocus: false,
-                              textInputAction: TextInputAction.done,
-                              obscureText:
-                                  !_model.signupPasswrodFieldVisibility,
-                              decoration: InputdecorationStyle(
-                                  hint: "Password",
+                      child: Container(
+                        width: MediaQuery.sizeOf(context).width * 0.9,
+                        decoration: BoxDecoration(
+                          color: AppTheme.of(context).secondaryBackground,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              16, 16, 16, 16),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextFormField(
+                                controller:
+                                    _model.signupUsernameFieldTextController,
+                                focusNode: _model.signupUsernameFieldFocusNode,
+                                autofocus: true,
+                                textInputAction: TextInputAction.next,
+                                obscureText: false,
+                                decoration:
+                                    InputdecorationStyle(hint: "user name")
+                                        .decorationStyle,
+                                style: AppTheme.of(context).bodyMedium.override(
+                                      fontFamily: 'Poppins',
+                                      letterSpacing: 0.0,
+                                    ),
+                                cursorColor: AppTheme.of(context).primaryText,
+                                validator: _model
+                                    .signupUsernameFieldTextControllerValidator
+                                    .asValidator(context),
+                              ),
+                              TextFormField(
+                                controller:
+                                    _model.signupEmailFieldTextController,
+                                focusNode: _model.signupEmailFieldFocusNode,
+                                autofocus: true,
+                                textInputAction: TextInputAction.next,
+                                obscureText: false,
+                                decoration: InputdecorationStyle(hint: "Email")
+                                    .decorationStyle,
+                                style: AppTheme.of(context).bodyMedium.override(
+                                      fontFamily: 'Poppins',
+                                      letterSpacing: 0.0,
+                                    ),
+                                cursorColor: AppTheme.of(context).primaryText,
+                                validator: _model
+                                    .signupEmailFieldTextControllerValidator
+                                    .asValidator(context),
+                              ),
+                              TextFormField(
+                                controller:
+                                    _model.signupPasswrodFieldTextController,
+                                focusNode: _model.signupPasswrodFieldFocusNode,
+                                autofocus: false,
+                                textInputAction: TextInputAction.done,
+                                obscureText:
+                                    !_model.signupPasswrodFieldVisibility,
+                                decoration: InputdecorationStyle(
+                                    hint: "Password",
+                                    suffixIcon: InkWell(
+                                      onTap: () => setState(
+                                        () => _model
+                                                .signupPasswrodFieldVisibility =
+                                            !_model
+                                                .signupPasswrodFieldVisibility,
+                                      ),
+                                      focusNode: FocusNode(skipTraversal: true),
+                                      child: Icon(
+                                        _model.signupPasswrodFieldVisibility
+                                            ? Icons.visibility_outlined
+                                            : Icons.visibility_off_outlined,
+                                        size: 22,
+                                      ),
+                                    )).decorationStyle,
+                                style: AppTheme.of(context).bodyMedium.override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
+                                cursorColor: AppTheme.of(context).primaryText,
+                                validator: _model
+                                    .signupPasswrodFieldTextControllerValidator
+                                    .asValidator(context),
+                              ),
+                              TextFormField(
+                                controller: _model
+                                    .signupConfirmPasswrodFieldTextController,
+                                focusNode:
+                                    _model.signupConfirmPasswrodFieldFocusNode,
+                                autofocus: false,
+                                textInputAction: TextInputAction.done,
+                                obscureText: !_model
+                                    .signupConfirmPasswrodFieldVisibility,
+                                decoration: InputdecorationStyle(
+                                  hint: "Confirm Password",
                                   suffixIcon: InkWell(
                                     onTap: () => setState(
                                       () => _model
-                                              .signupPasswrodFieldVisibility =
-                                          !_model.signupPasswrodFieldVisibility,
+                                              .signupConfirmPasswrodFieldVisibility =
+                                          !_model
+                                              .signupConfirmPasswrodFieldVisibility,
                                     ),
                                     focusNode: FocusNode(skipTraversal: true),
                                     child: Icon(
-                                      _model.signupPasswrodFieldVisibility
+                                      _model.signupConfirmPasswrodFieldVisibility
                                           ? Icons.visibility_outlined
                                           : Icons.visibility_off_outlined,
                                       size: 22,
                                     ),
-                                  )).decorationStyle,
-                              style: AppTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
                                   ),
-                              cursorColor: AppTheme.of(context).primaryText,
-                              validator: _model
-                                  .signupPasswrodFieldTextControllerValidator
-                                  .asValidator(context),
-                            ),
-                            TextFormField(
-                              controller: _model
-                                  .signupConfirmPasswrodFieldTextController,
-                              focusNode:
-                                  _model.signupConfirmPasswrodFieldFocusNode,
-                              autofocus: false,
-                              textInputAction: TextInputAction.done,
-                              obscureText:
-                                  !_model.signupConfirmPasswrodFieldVisibility,
-                              decoration: InputdecorationStyle(
-                                hint: "Confirm Password",
-                                suffixIcon: InkWell(
-                                  onTap: () => setState(
-                                    () => _model
-                                            .signupConfirmPasswrodFieldVisibility =
-                                        !_model
-                                            .signupConfirmPasswrodFieldVisibility,
-                                  ),
-                                  focusNode: FocusNode(skipTraversal: true),
-                                  child: Icon(
-                                    _model.signupConfirmPasswrodFieldVisibility
-                                        ? Icons.visibility_outlined
-                                        : Icons.visibility_off_outlined,
-                                    size: 22,
-                                  ),
-                                ),
-                              ).decorationStyle,
-                              style: AppTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
-                                  ),
-                              cursorColor: AppTheme.of(context).primaryText,
-                              validator: _model
-                                  .signupConfirmPasswrodFieldTextControllerValidator
-                                  .asValidator(context),
-                            ),
-                          ].divide(const SizedBox(height: 16)),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Already have account?',
-                        style: AppTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Poppins',
-                              color: AppTheme.of(context).primaryText,
-                              letterSpacing: 0.0,
-                            ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(7, 0, 0, 0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginPageWidget(),
-                                ));
-                          },
-                          child: Text(
-                            'Login',
-                            style: AppTheme.of(context).bodyLarge.override(
-                                  fontFamily: 'Poppins',
-                                  color: AppTheme.of(context).primary,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline,
-                                ),
+                                ).decorationStyle,
+                                style: AppTheme.of(context).bodyMedium.override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
+                                cursorColor: AppTheme.of(context).primaryText,
+                                validator: _model
+                                    .signupConfirmPasswrodFieldTextControllerValidator
+                                    .asValidator(context),
+                              ),
+                            ].divide(const SizedBox(height: 16)),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ].divide(const SizedBox(height: 20)),
-              ),
-              ButtonWidget(
-                onPressed: () {
-                  if (kDebugMode) {
-                    print('Button pressed ...');
-                  }
-                },
-                text: 'Sign Up',
-                options: ButtonOptions(
-                  width: MediaQuery.sizeOf(context).width * 0.9,
-                  height: 62,
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  color: AppTheme.of(context).primary,
-                  textStyle: AppTheme.of(context).titleMedium.override(
-                        fontFamily: 'Poppins',
-                        color: Colors.white,
-                        letterSpacing: 0.0,
-                      ),
-                  elevation: 0,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Already have account?',
+                          style: AppTheme.of(context).bodyMedium.override(
+                                fontFamily: 'Poppins',
+                                color: AppTheme.of(context).primaryText,
+                                letterSpacing: 0.0,
+                              ),
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(7, 0, 0, 0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const LoginPageWidget(),
+                                  ));
+                            },
+                            child: Text(
+                              'Login',
+                              style: AppTheme.of(context).bodyLarge.override(
+                                    fontFamily: 'Poppins',
+                                    color: AppTheme.of(context).primary,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ].divide(const SizedBox(height: 20)),
                 ),
-              ),
-            ],
+                ButtonWidget(
+                  onPressed: () {
+                    if (kDebugMode) {
+                      print('Button pressed ...');
+                    }
+                  },
+                  text: 'Sign Up',
+                  options: ButtonOptions(
+                    width: MediaQuery.sizeOf(context).width * 0.9,
+                    height: 62,
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    color: AppTheme.of(context).primary,
+                    textStyle: AppTheme.of(context).titleMedium.override(
+                          fontFamily: 'Poppins',
+                          color: Colors.white,
+                          letterSpacing: 0.0,
+                        ),
+                    elevation: 0,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
