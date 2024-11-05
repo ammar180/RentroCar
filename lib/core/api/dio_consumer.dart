@@ -38,11 +38,11 @@ class DioConsumer extends ApiConsumer {
   Future delete(String path,
       {dynamic data,
       Map<String, dynamic>? queryParameter,
-      bool isFormData = false}) async {
+      bool isFromData = false}) async {
     try {
       final response = await dio.delete(
         path,
-        data: isFormData?FormData.fromMap(data): data,
+        data: isFromData?FormData.fromMap(data): data,
         queryParameters: queryParameter,
       );
       return response.data;
@@ -55,11 +55,11 @@ class DioConsumer extends ApiConsumer {
   Future patch(String path,
       {dynamic data,
       Map<String, dynamic>? queryParameter,
-      bool isFormData = false}) async {
+      bool isFromData = false}) async {
     try {
       final response = await dio.patch(
         path,
-        data: isFormData?FormData.fromMap(data): data,
+        data: isFromData?FormData.fromMap(data): data,
         queryParameters: queryParameter,
       );
       return response.data;
@@ -72,11 +72,11 @@ class DioConsumer extends ApiConsumer {
   Future post(String path,
       {dynamic data,
       Map<String, dynamic>? queryParameter,
-      bool isFormData = false}) async {
+      bool isFromData = false}) async {
     try {
       final response = await dio.post(
         path,
-        data: isFormData?FormData.fromMap(data): data,
+        data: isFromData?FormData.fromMap(data): data,
         queryParameters: queryParameter,
       );
       return response.data;
@@ -89,11 +89,11 @@ class DioConsumer extends ApiConsumer {
   Future put(String path,
       {dynamic data,
       Map<String, dynamic>? queryParameter,
-      bool isFormData = false}) async {
+      bool isFromData = false}) async {
     try {
       final response = await dio.put(
         path,
-        data: isFormData?FormData.fromMap(data): data,
+        data: isFromData?FormData.fromMap(data): data,
         queryParameters: queryParameter,
       );
       return response.data;
