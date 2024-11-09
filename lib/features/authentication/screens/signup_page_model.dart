@@ -1,4 +1,4 @@
-import '../screens/signup_page_widget.dart';
+import 'signup_page_widget.dart';
 import 'package:rentro_car/utils/customs/app_model.dart';
 import 'package:flutter/material.dart';
 

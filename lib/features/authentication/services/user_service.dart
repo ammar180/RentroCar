@@ -6,6 +6,7 @@ import 'package:rentro_car/core/errors/exceptions.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:rentro_car/features/authentication/models/login_model.dart';
 import 'package:rentro_car/features/authentication/models/signup_model.dart';
+import 'package:rentro_car/features/authentication/models/user_model.dart';
 
 class UserService {
   final ApiConsumer api;
@@ -36,7 +37,6 @@ class UserService {
 
   Future<Either<String, SignupModel>> signUp({
     required String name,
-    required String phone,
     required String email,
     required String password,
     required String confirmPassword,
@@ -48,17 +48,26 @@ class UserService {
         isFromData: true,
         data: {
           ApiKeys.name: name,
-          ApiKeys.phone: phone,
           ApiKeys.email: email,
           ApiKeys.password: password,
           ApiKeys.confirmPassword: confirmPassword,
-          ApiKeys.location:
-              '{"name":"methalfa","address":"meet halfa","coordinates":[30.1572709,31.224779]}',
-          //ApiKeys.profilePic: await uploadImageToAPI(profilePic)
         },
       );
       final signUPModel = SignupModel.fromJson(response);
       return Right(signUPModel);
+    } on ServerException catch (e) {
+      return Left(e.errModel.errorMessage);
+    }
+  }
+
+  Future<Either<String, UserModel>> getUserProfile() async {
+    try {
+      final response = await api.get(
+        EndPoints.getUserDataEndPoint(
+          CacheHelper().getData(key: ApiKeys.id),
+        ),
+      );
+      return Right(UserModel.fromJson(response));
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     }

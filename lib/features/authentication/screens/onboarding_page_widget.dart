@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:rentro_car/utils/common/widgets/app_button_widget.dart';
 import 'package:rentro_car/utils/common/widgets/app_icon_widget.dart';
-import 'package:rentro_car/features/authentication/models/onboarding_page_model.dart';
+import 'package:rentro_car/features/authentication/screens/onboarding_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:rentro_car/features/authentication/screens/login_page_widget.dart';
 import 'package:rentro_car/utils/customs/app_animations.dart';
@@ -400,13 +400,13 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
           title: Text(
             () {
               if (_model.pageViewCurrentIndex == 0) {
-                return 'Welcome Page 1';
+                return _model.window1Title;
               } else if (_model.pageViewCurrentIndex == 1) {
-                return 'Welcome Page 2';
+                return _model.window2Title;
               } else if (_model.pageViewCurrentIndex == 2) {
-                return 'Welcome Page 3';
+                return _model.window3Title;
               } else {
-                return 'Welcome Page 4';
+                return _model.window4Title;
               }
             }(),
             style: AppTheme.of(context).headlineMedium.override(
@@ -458,7 +458,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                           children: [
                             Expanded(
                               child: Image.network(
-                                'https://images.unsplash.com/photo-1509042239860-f550ce710b93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxjb2ZmZWV8ZW58MHx8fHwxNzA2NjUzOTMwfDA&ixlib=rb-4.0.3&q=80&w=1080',
+                                _model.window1Image,
                                 width: double.infinity,
                                 height: 500,
                                 fit: BoxFit.cover,
@@ -472,7 +472,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Onboarding Title',
+                                    _model.window1SubTitle,
                                     style: AppTheme.of(context)
                                         .headlineMedium
                                         .override(
@@ -485,7 +485,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 12, 0, 0),
                                     child: Text(
-                                      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+                                      _model.window1Desc,
                                       style: AppTheme.of(context)
                                           .labelMedium
                                           .override(
@@ -535,7 +535,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Image.network(
-                              'https://images.unsplash.com/photo-1512568400610-62da28bc8a13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw5fHxjb2ZmZWV8ZW58MHx8fHwxNzA2NjUzOTMwfDA&ixlib=rb-4.0.3&q=80&w=1080',
+                              _model.window2Image,
                               width: double.infinity,
                               height: 500,
                               fit: BoxFit.cover,
@@ -548,7 +548,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Onboarding Title',
+                                    _model.window2SubTitle,
                                     style: AppTheme.of(context)
                                         .headlineMedium
                                         .override(
@@ -561,7 +561,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 12, 0, 0),
                                     child: Text(
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+                                      _model.window2Desc,
                                       style: AppTheme.of(context)
                                           .labelMedium
                                           .override(
@@ -611,7 +611,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Image.network(
-                              'https://images.unsplash.com/photo-1485808191679-5f86510681a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNHx8Y29mZmVlfGVufDB8fHx8MTcwNjY1MzkzMHww&ixlib=rb-4.0.3&q=80&w=1080',
+                              _model.window3Image,
                               width: double.infinity,
                               height: 500,
                               fit: BoxFit.cover,
@@ -624,7 +624,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Onboarding Title',
+                                    _model.window3SubTitle,
                                     style: AppTheme.of(context)
                                         .headlineMedium
                                         .override(
@@ -637,7 +637,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 12, 0, 0),
                                     child: Text(
-                                      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                                      _model.window3Desc,
                                       style: AppTheme.of(context)
                                           .labelMedium
                                           .override(
@@ -691,7 +691,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                             image: DecorationImage(
                               fit: BoxFit.cover,
                               image: Image.network(
-                                'https://images.unsplash.com/photo-1522992319-0365e5f11656?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxMnx8Y29mZmVlfGVufDB8fHx8MTcwNjY1MzkzMHww&ixlib=rb-4.0.3&q=80&w=1080',
+                                _model.window4Image,
                               ).image,
                             ),
                           ),

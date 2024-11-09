@@ -7,9 +7,9 @@ class LoginPageModel extends AppModel<LoginPageWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for username_field widget.
-  FocusNode? usernameFieldFocusNode;
-  TextEditingController? usernameFieldTextController;
-  String? Function(BuildContext, String?)? usernameFieldTextControllerValidator;
+  FocusNode? emailFieldFocusNode;
+  TextEditingController? emailFieldTextController;
+  String? Function(BuildContext, String?)? emailFieldTextControllerValidator;
   // State field(s) for passwrod_field widget.
   FocusNode? passwrodFieldFocusNode;
   TextEditingController? passwrodFieldTextController;
@@ -23,8 +23,8 @@ class LoginPageModel extends AppModel<LoginPageWidget> {
 
   @override
   void dispose() {
-    usernameFieldFocusNode?.dispose();
-    usernameFieldTextController?.dispose();
+    emailFieldFocusNode?.dispose();
+    emailFieldTextController?.dispose();
 
     passwrodFieldFocusNode?.dispose();
     passwrodFieldTextController?.dispose();

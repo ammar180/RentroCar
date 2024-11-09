@@ -2,7 +2,10 @@ class EndPoints {
   static String baseUrl = "https://xhlo-lkyx-rhhz.n7c.xano.io/api:ebq6sPqW/";
   static String login = "auth/login";
 
-  static String signUp = '';
+  static String getUserDataEndPoint(id) {
+    return "user/get-user/$id";
+  }
+  static String signUp = 'auth/signup';
 }
 
 class ApiKeys {

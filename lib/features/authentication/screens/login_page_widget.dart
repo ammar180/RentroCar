@@ -1,9 +1,9 @@
-import 'package:rentro_car/features/authentication/providers/auth_cubit.dart';
-import 'package:rentro_car/features/authentication/providers/auth_state.dart';
+import 'package:rentro_car/features/authentication/providers/user_cubit.dart';
+import 'package:rentro_car/features/authentication/providers/user_state.dart';
 import 'package:rentro_car/features/authentication/screens/profile_page_widget.dart';
 import 'package:rentro_car/utils/common/styles/inputdecoration_style.dart';
 import 'package:rentro_car/utils/common/widgets/app_button_widget.dart';
-import 'package:rentro_car/features/authentication/models/login_page_model.dart';
+import 'package:rentro_car/features/authentication/screens/login_page_model.dart';
 import 'package:rentro_car/features/authentication/screens/signup_page_widget.dart';
 import 'package:rentro_car/utils/customs/app_model.dart';
 import 'package:rentro_car/utils/customs/app_utils.dart';
@@ -30,8 +30,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     super.initState();
     _model = createModel(context, () => LoginPageModel());
 
-    _model.usernameFieldTextController ??= TextEditingController();
-    _model.usernameFieldFocusNode ??= FocusNode();
+    _model.emailFieldTextController ??= TextEditingController();
+    _model.emailFieldFocusNode ??= FocusNode();
 
     _model.passwrodFieldTextController ??= TextEditingController();
     _model.passwrodFieldFocusNode ??= FocusNode();
@@ -52,18 +52,18 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
         key: scaffoldKey,
         backgroundColor: AppTheme.of(context).primaryBackground,
         body: SafeArea(
-          child: BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
+          child: BlocConsumer<UserCubit, UserState>(listener: (context, state) {
             if (state is SignInSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text("success"),
                 ),
               );
-              context.read<AuthCubit>().getUserProfile();
+              context.read<UserCubit>().getUserProfile();
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ProfileScreen(),
+                  builder: (context) => const ProfileWidget(),
                 ),
               );
             } else if (state is SignInFailure) {
@@ -74,6 +74,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               );
             }
           }, builder: (context, state) {
+            context.read<UserCubit>().loginPageModel = _model;
             return Padding(
               padding: EdgeInsets.all(14),
               child: Column(
@@ -131,14 +132,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 TextFormField(
-                                  controller:
-                                      context.read<AuthCubit>().signInEmail,
-                                  focusNode: _model.usernameFieldFocusNode,
+                                  controller: _model.emailFieldTextController,
+                                  focusNode: _model.emailFieldFocusNode,
                                   autofocus: true,
                                   textInputAction: TextInputAction.next,
                                   obscureText: false,
                                   decoration:
-                                      InputdecorationStyle(hint: "user name")
+                                      InputdecorationStyle(hint: "Email")
                                           .decorationStyle,
                                   style:
                                       AppTheme.of(context).bodyMedium.override(
@@ -147,12 +147,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                           ),
                                   cursorColor: AppTheme.of(context).primaryText,
                                   validator: _model
-                                      .usernameFieldTextControllerValidator
+                                      .emailFieldTextControllerValidator
                                       .asValidator(context),
                                 ),
                                 TextFormField(
                                   controller:
-                                      context.read<AuthCubit>().signInPassword,
+                                      _model.passwrodFieldTextController,
                                   focusNode: _model.passwrodFieldFocusNode,
                                   autofocus: false,
                                   textInputAction: TextInputAction.done,
@@ -226,7 +226,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                   ),
                   ButtonWidget(
                     onPressed: () async =>
-                        await context.read<AuthCubit>().login(),
+                        await context.read<UserCubit>().login(),
                     text: 'Login',
                     options: ButtonOptions(
                       width: MediaQuery.sizeOf(context).width * 0.9,
