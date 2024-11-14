@@ -47,6 +47,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         }
       },
       builder: (context, state) {
+        context.read<UserCubit>().getUserProfile();
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: AppTheme.of(context).primaryBackground,
@@ -109,7 +110,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           child: Image.network(
-                                            'https://images.unsplash.com/photo-1592520113018-180c8bc831c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTI3fHxwcm9maWxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
+                                            state.user.profilePic,
                                             width: 100,
                                             height: 100,
                                             fit: BoxFit.cover,

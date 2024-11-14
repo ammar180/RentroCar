@@ -4,7 +4,6 @@ import 'package:rentro_car/utils/common/widgets/app_button_widget.dart';
 import 'package:rentro_car/utils/common/widgets/app_icon_widget.dart';
 import 'package:rentro_car/features/authentication/screens/onboarding_page_model.dart';
 import 'package:flutter/material.dart';
-import 'package:rentro_car/features/authentication/screens/login_page_widget.dart';
 import 'package:rentro_car/utils/customs/app_animations.dart';
 import 'package:rentro_car/utils/customs/app_model.dart';
 import 'package:rentro_car/utils/common/theme.dart';
@@ -791,12 +790,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                             0, 24, 0, 0),
                                         child: ButtonWidget(
                                           onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const LoginPageWidget(),
-                                                ));
+                                            Navigator.pushNamed(
+                                                context, '/main');
                                           },
                                           text: 'Get Started',
                                           options: ButtonOptions(

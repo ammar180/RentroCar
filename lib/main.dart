@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rentro_car/core/api/dio_consumer.dart';
 import 'package:rentro_car/core/cache/cache_helper.dart';
 import 'package:rentro_car/features/authentication/providers/user_cubit.dart';
+import 'package:rentro_car/features/authentication/screens/profile_page_widget.dart';
 import 'package:rentro_car/features/authentication/services/user_service.dart';
+import 'package:rentro_car/utils/main_screen.dart';
 
 import 'features/authentication/screens/onboarding_page_widget.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +25,14 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'RentroCar',
       themeMode: ThemeMode.light,
-      home: OnboardingWidget(),
+      home: const OnboardingWidget(),
+      routes: {
+        '/main': (context) => const MainScreen(),
+        '/profile': (context) => const ProfileWidget(),
+      },
     );
   }
 }
