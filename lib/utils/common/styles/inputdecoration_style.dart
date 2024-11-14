@@ -1,4 +1,4 @@
-import 'package:rentro_car/utils/theme/theme.dart';
+import 'package:rentro_car/utils/common/theme.dart';
 import 'package:flutter/material.dart';
 
 class InputdecorationStyle {
@@ -18,14 +18,14 @@ class InputdecorationStyle {
             letterSpacing: 0.0,
           ),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: Color(0x39131313),
           width: 1,
         ),
         borderRadius: BorderRadius.circular(12),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: Color(0x00000000),
           width: 1,
         ),
@@ -47,6 +47,6 @@ class InputdecorationStyle {
       ),
       filled: true,
       fillColor: AppTheme.getLight().primaryBackground,
-      contentPadding: EdgeInsetsDirectional.fromSTEB(12, 16, 12, 16),
+      contentPadding: const EdgeInsetsDirectional.fromSTEB(12, 16, 12, 16),
       suffixIcon: suffixIcon);
 }
