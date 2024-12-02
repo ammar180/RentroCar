@@ -1,5 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+Widget wrapWithModel<T extends AppModel>({
+  required T model,
+  required Widget child,
+  required VoidCallback updateCallback,
+  bool updateOnChange = false,
+}) {
+  // Set the component to optionally update the page on updates.
+  model.setOnUpdate(
+    onUpdate: updateCallback,
+    updateOnChange: updateOnChange,
+  );
+  // Models for components within a page will be disposed by the page's model,
+  // so we don't want the component widget to dispose them until the page is
+  // itself disposed.
+  model.disposeOnWidgetDisposal = false;
+  // Wrap in a Provider so that the model can be accessed by the component.
+  return Provider<T>.value(
+    value: model,
+    child: child,
+  );
+}
 
 abstract class AppModel<W extends Widget> {
   // Initialization methods
