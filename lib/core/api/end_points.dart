@@ -6,6 +6,8 @@ class EndPoints {
     return "user/get-user/$id";
   }
   static String signUp = 'auth/signup';
+
+  static String getHomeCars = 'cars';
 }
 
 class ApiKeys {
@@ -23,4 +25,16 @@ class ApiKeys {
   static String location = 'Location';
 
   static String confirmPassword = '';
+
+  // car model keys
+  static String carId = 'CarId';
+  static String carModel = 'Model';
+  static String carAvailableDays = 'AvailableDays';
+  static String carRentingPrice = 'RentingPrice';
+  static String carIsAvailable = 'IsAvailable';
+  static String carPhotos = 'CarPhotos';
+
+  static String topRatedCars = 'TopRatedCars';
+
+  static String mostPopularCars = 'mostPopularCars';
 }

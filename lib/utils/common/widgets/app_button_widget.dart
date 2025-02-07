@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+
 class ButtonOptions {
   const ButtonOptions({
     this.textAlign,
@@ -46,7 +47,6 @@ class ButtonOptions {
   final double? hoverElevation;
 }
 
-
 class ButtonWidget extends StatefulWidget {
   const ButtonWidget({
     super.key,
@@ -66,10 +66,10 @@ class ButtonWidget extends StatefulWidget {
   final bool showLoadingIndicator;
 
   @override
-  State<ButtonWidget> createState() => _FFButtonWidgetState();
+  State<ButtonWidget> createState() => _AppButtonWidgetState();
 }
 
-class _FFButtonWidgetState extends State<ButtonWidget> {
+class _AppButtonWidgetState extends State<ButtonWidget> {
   bool loading = false;
 
   int get maxLines => widget.options.maxLines ?? 1;
@@ -97,8 +97,7 @@ class _FFButtonWidgetState extends State<ButtonWidget> {
           )
         : AutoSizeText(
             text ?? '',
-            style:
-                text == null ? null : widget.options.textStyle,
+            style: text == null ? null : widget.options.textStyle,
             textAlign: widget.options.textAlign,
             maxLines: maxLines,
             overflow: TextOverflow.ellipsis,
@@ -241,6 +240,7 @@ class _FFButtonWidgetState extends State<ButtonWidget> {
     );
   }
 }
+
 double? _getTextWidth(String? text, TextStyle? style, int maxLines) =>
     text != null
         ? (TextPainter(
