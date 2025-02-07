@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "125403876173",
+    "project_id": "to-do-gx3ti2",
+    "storage_bucket": "to-do-gx3ti2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125403876173:android:0b113e238236304f938504",
+        "android_client_info": {
+          "package_name": "com.capstone.rentrocar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNZRbf0qJQCf2toeFWL7DAfO7HpWCMvRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
