@@ -66,6 +66,11 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get ownedCars => _ownedCars ?? const [];
   bool hasOwnedCars() => _ownedCars != null;
 
+  // "loved_cars" field.
+  List<DocumentReference>? _lovedCars;
+  List<DocumentReference> get lovedCars => _lovedCars ?? const [];
+  bool hasLovedCars() => _lovedCars != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -77,6 +82,7 @@ class UsersRecord extends FirestoreRecord {
     _isVerified = snapshotData['is_verified'] as bool?;
     _uverficationData = snapshotData['uverfication_data'] as DocumentReference?;
     _ownedCars = getDataList(snapshotData['owned_cars']);
+    _lovedCars = getDataList(snapshotData['loved_cars']);
   }
 
   static CollectionReference get collection =>
@@ -155,7 +161,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.location == e2?.location &&
         e1?.isVerified == e2?.isVerified &&
         e1?.uverficationData == e2?.uverficationData &&
-        listEquality.equals(e1?.ownedCars, e2?.ownedCars);
+        listEquality.equals(e1?.ownedCars, e2?.ownedCars) &&
+        listEquality.equals(e1?.lovedCars, e2?.lovedCars);
   }
 
   @override
@@ -169,7 +176,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.location,
         e?.isVerified,
         e?.uverficationData,
-        e?.ownedCars
+        e?.ownedCars,
+        e?.lovedCars
       ]);
 
   @override

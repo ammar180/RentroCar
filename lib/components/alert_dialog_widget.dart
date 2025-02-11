@@ -39,6 +39,8 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => AlertDialogModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

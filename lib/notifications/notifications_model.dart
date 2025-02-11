@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'cardetails_widget.dart' show CardetailsWidget;
+import 'notifications_widget.dart' show NotificationsWidget;
 import 'package:flutter/material.dart';
 
-class CardetailsModel extends FlutterFlowModel<CardetailsWidget> {
+class NotificationsModel extends FlutterFlowModel<NotificationsWidget> {
   @override
   void initState(BuildContext context) {}
 

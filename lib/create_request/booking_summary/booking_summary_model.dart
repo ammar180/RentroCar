@@ -1,9 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'car_added_successfully_widget.dart' show CarAddedSuccessfullyWidget;
+import 'booking_summary_widget.dart' show BookingSummaryWidget;
 import 'package:flutter/material.dart';
 
-class CarAddedSuccessfullyModel
-    extends FlutterFlowModel<CarAddedSuccessfullyWidget> {
+class BookingSummaryModel extends FlutterFlowModel<BookingSummaryWidget> {
   @override
   void initState(BuildContext context) {}
 

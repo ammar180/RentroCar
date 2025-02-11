@@ -35,6 +35,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
 
     _model.passwrodFieldTextController ??= TextEditingController();
     _model.passwrodFieldFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

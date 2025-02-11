@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
+
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -131,41 +133,46 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : const FavoriteWidget(),
         ),
         FFRoute(
-          name: 'Notification',
-          path: '/notification',
+          name: 'Notifications',
+          path: '/notifications',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'Notification')
-              : const NotificationWidget(),
+              ? const NavBarPage(initialPage: 'Notifications')
+              : const NotificationsWidget(),
         ),
         FFRoute(
           name: 'cardetails',
           path: '/cardetails',
-          builder: (context, params) => const CardetailsWidget(),
+          asyncParams: {
+            'car': getDoc(['car'], CarRecord.fromSnapshot),
+          },
+          builder: (context, params) => CardetailsWidget(
+            car: params.getParam(
+              'car',
+              ParamType.Document,
+            ),
+          ),
         ),
         FFRoute(
-          name: 'AddCarStepsInfo',
-          path: '/addCarStepsInfo',
-          builder: (context, params) => const AddCarStepsInfoWidget(),
+          name: 'AddingNewCarPage',
+          path: '/addingNewCarPage',
+          builder: (context, params) => const AddingNewCarPageWidget(),
         ),
         FFRoute(
-          name: 'NewCar_info',
-          path: '/newCarInfo',
-          builder: (context, params) => const NewCarInfoWidget(),
+          name: 'edit_profile',
+          path: '/editProfile',
+          builder: (context, params) => const EditProfileWidget(),
         ),
         FFRoute(
-          name: 'NewCar_photos',
-          path: '/newCarPhotos',
-          builder: (context, params) => const NewCarPhotosWidget(),
-        ),
-        FFRoute(
-          name: 'NewCar_PricingAvailability',
-          path: '/newCarPricingAvailability',
-          builder: (context, params) => const NewCarPricingAvailabilityWidget(),
-        ),
-        FFRoute(
-          name: 'CarAddedSuccessfully',
-          path: '/carAddedSuccessfully',
-          builder: (context, params) => const CarAddedSuccessfullyWidget(),
+          name: 'booking_summary',
+          path: '/bookingSummary',
+          builder: (context, params) => BookingSummaryWidget(
+            borrowerdCarReference: params.getParam(
+              'borrowerdCarReference',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['car'],
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

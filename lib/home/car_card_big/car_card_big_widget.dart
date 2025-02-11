@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -6,7 +7,12 @@ import 'car_card_big_model.dart';
 export 'car_card_big_model.dart';
 
 class CarCardBigWidget extends StatefulWidget {
-  const CarCardBigWidget({super.key});
+  const CarCardBigWidget({
+    super.key,
+    required this.carParam,
+  });
+
+  final CarRecord? carParam;
 
   @override
   State<CarCardBigWidget> createState() => _CarCardBigWidgetState();
@@ -25,6 +31,8 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CarCardBigModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,7 +59,10 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Hero(
-            tag: 'italyImage',
+            tag: valueOrDefault<String>(
+              widget.carParam?.carPhotos.firstOrNull,
+              'https://files.friendycar.com/uploads/cars/36261/FnBuiB0vJokoQkoRkRSDdwkSAMHgoo5n19JP0PHg.jpg',
+            ),
             transitionOnUserGestures: true,
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
@@ -61,7 +72,10 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
                 topRight: Radius.circular(20.0),
               ),
               child: Image.network(
-                'https://images.unsplash.com/photo-1528114039593-4366cc08227d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8aXRhbHl8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60',
+                valueOrDefault<String>(
+                  widget.carParam?.carPhotos.firstOrNull,
+                  'https://files.friendycar.com/uploads/cars/36261/FnBuiB0vJokoQkoRkRSDdwkSAMHgoo5n19JP0PHg.jpg',
+                ),
                 width: double.infinity,
                 height: 167.0,
                 fit: BoxFit.cover,
@@ -78,7 +92,7 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
-                      'Toyota crolla',
+                      '${widget.carParam?.make}${widget.carParam?.model}',
                       style: FlutterFlowTheme.of(context).titleLarge.override(
                             fontFamily: 'Open Sans',
                             letterSpacing: 0.0,
@@ -97,7 +111,10 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
                               size: 14.0,
                             ),
                             Text(
-                              '5.00',
+                              valueOrDefault<String>(
+                                widget.carParam?.rate.toString(),
+                                '0.0',
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .labelSmall
                                   .override(
@@ -119,7 +136,17 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
                       ],
                     ),
                     Text(
-                      'Available on 2 August',
+                      widget.carParam?.availableDate != null
+                          ? valueOrDefault<String>(
+                              dateTimeFormat(
+                                "MMMEd",
+                                widget.carParam?.availableDate,
+                                locale:
+                                    FFLocalizations.of(context).languageCode,
+                              ),
+                              '2/9/2025',
+                            )
+                          : 'Available Now!',
                       style: FlutterFlowTheme.of(context).bodySmall.override(
                             fontFamily: 'Open Sans',
                             letterSpacing: 0.0,
@@ -133,15 +160,31 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      'EGP 720/day',
+                      formatNumber(
+                        widget.carParam!.rentalFare,
+                        formatType: FormatType.custom,
+                        format: 'EGP # / day',
+                        locale: '',
+                      ),
                       style: FlutterFlowTheme.of(context).titleMedium.override(
                             fontFamily: 'Open Sans',
                             letterSpacing: 0.0,
                           ),
                     ),
                     FFButtonWidget(
-                      onPressed: () {
-                        print('ButtonDetails pressed ...');
+                      onPressed: () async {
+                        context.pushNamed(
+                          'cardetails',
+                          queryParameters: {
+                            'car': serializeParam(
+                              widget.carParam,
+                              ParamType.Document,
+                            ),
+                          }.withoutNulls,
+                          extra: <String, dynamic>{
+                            'car': widget.carParam,
+                          },
+                        );
                       },
                       text: 'Details',
                       options: FFButtonOptions(

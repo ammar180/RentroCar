@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -6,7 +8,12 @@ import 'car_card_model.dart';
 export 'car_card_model.dart';
 
 class CarCardWidget extends StatefulWidget {
-  const CarCardWidget({super.key});
+  const CarCardWidget({
+    super.key,
+    required this.car,
+  });
+
+  final CarRecord? car;
 
   @override
   State<CarCardWidget> createState() => _CarCardWidgetState();
@@ -25,6 +32,8 @@ class _CarCardWidgetState extends State<CarCardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CarCardModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -54,7 +63,10 @@ class _CarCardWidgetState extends State<CarCardWidget> {
             alignment: const AlignmentDirectional(1.0, -1.0),
             children: [
               Hero(
-                tag: 'italyImage',
+                tag: valueOrDefault<String>(
+                  widget.car?.carPhotos.firstOrNull,
+                  'https://files.friendycar.com/uploads/cars/36261/FnBuiB0vJokoQkoRkRSDdwkSAMHgoo5n19JP0PHg.jpg',
+                ),
                 transitionOnUserGestures: true,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.only(
@@ -64,7 +76,10 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                     topRight: Radius.circular(20.0),
                   ),
                   child: Image.network(
-                    'https://images.unsplash.com/photo-1528114039593-4366cc08227d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8aXRhbHl8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60',
+                    valueOrDefault<String>(
+                      widget.car?.carPhotos.firstOrNull,
+                      'https://files.friendycar.com/uploads/cars/36261/FnBuiB0vJokoQkoRkRSDdwkSAMHgoo5n19JP0PHg.jpg',
+                    ),
                     width: double.infinity,
                     height: 109.0,
                     fit: BoxFit.cover,
@@ -74,7 +89,15 @@ class _CarCardWidgetState extends State<CarCardWidget> {
               ToggleIcon(
                 onPressed: () async {
                   safeSetState(() => _model.loved = !_model.loved);
-                },
+                  await currentUserReference!.update({
+                    ...mapToFirestore(
+                      {
+                        'loved_cars':
+                            FieldValue.arrayUnion([widget.car?.reference]),
+                      },
+                    ),
+                  });
+                                },
                 value: _model.loved,
                 onIcon: Icon(
                   Icons.favorite,
@@ -101,12 +124,10 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Toyota crolla',
-                        style: FlutterFlowTheme.of(context).bodyLarge.override(
+                        '${widget.car?.make} ${widget.car?.model}',
+                        style: FlutterFlowTheme.of(context).titleLarge.override(
                               fontFamily: 'Open Sans',
-                              fontSize: 14.0,
                               letterSpacing: 0.0,
-                              fontWeight: FontWeight.w600,
                             ),
                       ),
                       Row(
@@ -118,7 +139,12 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                             size: 24.0,
                           ),
                           Text(
-                            '5.00',
+                            formatNumber(
+                              widget.car!.rate,
+                              formatType: FormatType.custom,
+                              format: '#.##',
+                              locale: '',
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .labelSmall
                                 .override(
@@ -131,7 +157,20 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                     ],
                   ),
                   Text(
-                    'Available on 2 August',
+                    valueOrDefault<String>(
+                      widget.car?.availableDate != null
+                          ? valueOrDefault<String>(
+                              dateTimeFormat(
+                                "MMMEd",
+                                widget.car?.availableDate,
+                                locale:
+                                    FFLocalizations.of(context).languageCode,
+                              ),
+                              '2/2/2025',
+                            )
+                          : 'Available Now!',
+                      'Available Now!',
+                    ),
                     style: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Open Sans',
                           letterSpacing: 0.0,
@@ -150,7 +189,7 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                             size: 24.0,
                           ),
                           Text(
-                            'Giza',
+                            'N/A',
                             style:
                                 FlutterFlowTheme.of(context).bodySmall.override(
                                       fontFamily: 'Open Sans',
@@ -169,13 +208,18 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                             size: 24.0,
                           ),
                           Text(
-                            'EGP 720/day',
-                            style:
-                                FlutterFlowTheme.of(context).bodySmall.override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            formatNumber(
+                              widget.car!.rentalFare,
+                              formatType: FormatType.custom,
+                              format: 'EGP # / day',
+                              locale: '',
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                         ].divide(const SizedBox(width: 4.0)),
                       ),

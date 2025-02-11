@@ -139,7 +139,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'MyCars': const MyCarsWidget(),
       'home': const HomeWidget(),
       'Favorite': const FavoriteWidget(),
-      'Notification': const NotificationWidget(),
+      'Notifications': const NotificationsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 

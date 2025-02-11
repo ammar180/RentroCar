@@ -9,6 +9,7 @@ import 'schema/users_record.dart';
 import 'schema/location_record.dart';
 import 'schema/user_verfication_record.dart';
 import 'schema/car_record.dart';
+import 'schema/trip_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -21,6 +22,7 @@ export 'schema/users_record.dart';
 export 'schema/location_record.dart';
 export 'schema/user_verfication_record.dart';
 export 'schema/car_record.dart';
+export 'schema/trip_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -165,6 +167,43 @@ Future<List<CarRecord>> queryCarRecordOnce({
     queryCollectionOnce(
       CarRecord.collection,
       CarRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query TripRecords (as a Stream and as a Future).
+Future<int> queryTripRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      TripRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<TripRecord>> queryTripRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      TripRecord.collection,
+      TripRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<TripRecord>> queryTripRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      TripRecord.collection,
+      TripRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

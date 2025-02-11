@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'add_car_steps_info_widget.dart' show AddCarStepsInfoWidget;
+import 'borrowed_car_card_widget.dart' show BorrowedCarCardWidget;
 import 'package:flutter/material.dart';
 
-class AddCarStepsInfoModel extends FlutterFlowModel<AddCarStepsInfoWidget> {
+class BorrowedCarCardModel extends FlutterFlowModel<BorrowedCarCardWidget> {
   @override
   void initState(BuildContext context) {}
 

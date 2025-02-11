@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -39,6 +40,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
 
     _model.signupConfirmPasswrodFieldTextController ??= TextEditingController();
     _model.signupConfirmPasswrodFieldFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -570,7 +573,24 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                       return;
                     }
 
-                    context.goNamedAuth('home', context.mounted);
+                    await UsersRecord.collection
+                        .doc(user.uid)
+                        .update(createUsersRecordData(
+                          email: valueOrDefault<String>(
+                            _model.signupEmailFieldTextController.text,
+                            'user@example.com',
+                          ),
+                          phoneNumber: valueOrDefault<String>(
+                            _model.phoneFieldTextController.text,
+                            '+20123456789',
+                          ),
+                          displayName: valueOrDefault<String>(
+                            _model.nameFieldTextController.text,
+                            'Ahmed',
+                          ),
+                        ));
+
+                    context.pushNamedAuth('edit_profile', context.mounted);
                   },
                   text: 'Sign Up',
                   options: FFButtonOptions(

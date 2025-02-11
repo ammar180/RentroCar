@@ -1,4 +1,4 @@
-import '/car_management/my_car_card/my_car_card_widget.dart';
+import '/car_management/componants/my_car_card/my_car_card_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'my_cars_widget.dart' show MyCarsWidget;
 import 'package:flutter/material.dart';

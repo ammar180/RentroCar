@@ -31,6 +31,8 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyCarCardModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

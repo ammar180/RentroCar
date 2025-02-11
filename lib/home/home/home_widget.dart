@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/home/car_card/car_card_widget.dart';
@@ -25,6 +26,8 @@ class _HomeWidgetState extends State<HomeWidget> {
 
     _model.searchBarFieldTextController ??= TextEditingController();
     _model.searchBarFieldFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -128,76 +131,133 @@ class _HomeWidgetState extends State<HomeWidget> {
                       .asValidator(context),
                 ),
               ),
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        wrapWithModel(
-                          model: _model.carCard1Model,
-                          updateCallback: () => safeSetState(() {}),
-                          child: const CarCardWidget(),
-                        ),
-                        wrapWithModel(
-                          model: _model.carCard2Model,
-                          updateCallback: () => safeSetState(() {}),
-                          child: const CarCardWidget(),
-                        ),
-                        wrapWithModel(
-                          model: _model.carCard3Model,
-                          updateCallback: () => safeSetState(() {}),
-                          child: const CarCardWidget(),
-                        ),
-                      ].divide(const SizedBox(width: 20.0)),
-                    ),
-                  ),
-                ].divide(const SizedBox(height: 12.0)),
-              ),
               Container(
-                height: 490.4,
+                height: MediaQuery.sizeOf(context).height * 0.73,
                 decoration: const BoxDecoration(),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        'Top Rated Cars',
-                        style: FlutterFlowTheme.of(context).titleSmall.override(
-                              fontFamily: 'Inter',
-                              letterSpacing: 0.0,
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            'Most Popular Cars',
+                            style: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                          Container(
+                            height: 232.99,
+                            decoration: const BoxDecoration(),
+                            child: StreamBuilder<List<CarRecord>>(
+                              stream: queryCarRecord(
+                                limit: 10,
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          FlutterFlowTheme.of(context).primary,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                List<CarRecord> listViewCarRecordList =
+                                    snapshot.data!;
+
+                                return ListView.separated(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: listViewCarRecordList.length,
+                                  separatorBuilder: (_, __) =>
+                                      const SizedBox(width: 10.0),
+                                  itemBuilder: (context, listViewIndex) {
+                                    final listViewCarRecord =
+                                        listViewCarRecordList[listViewIndex];
+                                    return CarCardWidget(
+                                      key: Key(
+                                          'Keymm9_${listViewIndex}_of_${listViewCarRecordList.length}'),
+                                      car: listViewCarRecord,
+                                    );
+                                  },
+                                );
+                              },
                             ),
+                          ),
+                        ].divide(const SizedBox(height: 12.0)),
                       ),
-                      wrapWithModel(
-                        model: _model.carCardBigModel1,
-                        updateCallback: () => safeSetState(() {}),
-                        child: const CarCardBigWidget(),
-                      ),
-                      wrapWithModel(
-                        model: _model.carCardBigModel2,
-                        updateCallback: () => safeSetState(() {}),
-                        child: const CarCardBigWidget(),
-                      ),
-                      wrapWithModel(
-                        model: _model.carCardBigModel3,
-                        updateCallback: () => safeSetState(() {}),
-                        child: const CarCardBigWidget(),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Top Rated Cars',
+                            style: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                          StreamBuilder<List<CarRecord>>(
+                            stream: queryCarRecord(
+                              queryBuilder: (carRecord) =>
+                                  carRecord.orderBy('rate'),
+                              limit: 10,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<CarRecord> columnCarRecordList =
+                                  snapshot.data!;
+
+                              return Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: List.generate(
+                                    columnCarRecordList.length, (columnIndex) {
+                                  final columnCarRecord =
+                                      columnCarRecordList[columnIndex];
+                                  return CarCardBigWidget(
+                                    key: Key(
+                                        'Key2pd_${columnIndex}_of_${columnCarRecordList.length}'),
+                                    carParam: columnCarRecord,
+                                  );
+                                }).divide(const SizedBox(height: 10.0)),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ].divide(const SizedBox(height: 10.0)),
                   ),
                 ),
-              ),
-              Text(
-                'Most Popular Cars',
-                style: FlutterFlowTheme.of(context).titleSmall.override(
-                      fontFamily: 'Inter',
-                      letterSpacing: 0.0,
-                    ),
               ),
             ].divide(const SizedBox(height: 30.0)),
           ),
