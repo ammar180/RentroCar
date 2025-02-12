@@ -58,7 +58,8 @@ final authenticatedUserStream = FirebaseAuth.instance
 }).asBroadcastStream();
 
 class AuthUserStreamWidget extends StatelessWidget {
-  const AuthUserStreamWidget({super.key, required this.builder});
+  const AuthUserStreamWidget({Key? key, required this.builder})
+      : super(key: key);
 
   final WidgetBuilder builder;
 

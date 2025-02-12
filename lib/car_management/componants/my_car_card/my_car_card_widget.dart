@@ -51,7 +51,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
         color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.circular(20.0),
         border: Border.all(
-          color: const Color(0x19131313),
+          color: Color(0x19131313),
           width: 1.0,
         ),
       ),
@@ -59,7 +59,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Stack(
-            alignment: const AlignmentDirectional(1.0, -1.0),
+            alignment: AlignmentDirectional(1.0, -1.0),
             children: [
               Hero(
                 tag: valueOrDefault<String>(
@@ -68,7 +68,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                 ),
                 transitionOnUserGestures: true,
                 child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(0.0),
                     bottomRight: Radius.circular(0.0),
                     topLeft: Radius.circular(20.0),
@@ -89,7 +89,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(14.0),
+              padding: EdgeInsets.all(14.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +133,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                                   letterSpacing: 0.0,
                                 ),
                           ),
-                        ].divide(const SizedBox(width: 4.0)),
+                        ].divide(SizedBox(width: 4.0)),
                       ),
                     ],
                   ),
@@ -168,7 +168,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                                   letterSpacing: 0.0,
                                 ),
                       ),
-                    ].divide(const SizedBox(width: 5.0)),
+                    ].divide(SizedBox(width: 5.0)),
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -196,7 +196,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                                       fontWeight: FontWeight.w500,
                                     ),
                           ),
-                        ].divide(const SizedBox(width: 4.0)),
+                        ].divide(SizedBox(width: 4.0)),
                       ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
@@ -223,11 +223,11 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                                       fontWeight: FontWeight.w500,
                                     ),
                           ),
-                        ].divide(const SizedBox(width: 4.0)),
+                        ].divide(SizedBox(width: 4.0)),
                       ),
                     ],
                   ),
-                ].divide(const SizedBox(height: 4.0)),
+                ].divide(SizedBox(height: 4.0)),
               ),
             ),
           ),

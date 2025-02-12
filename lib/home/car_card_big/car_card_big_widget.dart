@@ -51,7 +51,7 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
         color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.circular(20.0),
         border: Border.all(
-          color: const Color(0x19131313),
+          color: Color(0x19131313),
           width: 1.0,
         ),
       ),
@@ -65,7 +65,7 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
             ),
             transitionOnUserGestures: true,
             child: ClipRRect(
-              borderRadius: const BorderRadius.only(
+              borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(0.0),
                 bottomRight: Radius.circular(0.0),
                 topLeft: Radius.circular(20.0),
@@ -83,7 +83,7 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,7 +92,7 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
-                      '${widget.carParam?.make}${widget.carParam?.model}',
+                      '${widget.carParam?.make} ${widget.carParam?.model}',
                       style: FlutterFlowTheme.of(context).titleLarge.override(
                             fontFamily: 'Open Sans',
                             letterSpacing: 0.0,
@@ -131,7 +131,7 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
                                     letterSpacing: 0.0,
                                   ),
                             ),
-                          ].divide(const SizedBox(width: 4.0)),
+                          ].divide(SizedBox(width: 4.0)),
                         ),
                       ],
                     ),
@@ -152,7 +152,7 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
                             letterSpacing: 0.0,
                           ),
                     ),
-                  ].divide(const SizedBox(height: 8.0)),
+                  ].divide(SizedBox(height: 8.0)),
                 ),
                 Column(
                   mainAxisSize: MainAxisSize.max,
@@ -189,11 +189,11 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
                       text: 'Details',
                       options: FFButtonOptions(
                         height: 40.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 0.0),
                         iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: const Color(0x1A131313),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: Color(0x1A131313),
                         textStyle: FlutterFlowTheme.of(context)
                             .bodyLarge
                             .override(
@@ -206,7 +206,7 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-                  ].divide(const SizedBox(height: 5.0)),
+                  ].divide(SizedBox(height: 5.0)),
                 ),
               ],
             ),

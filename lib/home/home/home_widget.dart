@@ -47,23 +47,34 @@ class _HomeWidgetState extends State<HomeWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(10.0),
-          child: AppBar(
-            backgroundColor: Colors.transparent,
-            automaticallyImplyLeading: false,
-            actions: const [],
-            centerTitle: false,
-            elevation: 2.0,
-          ),
-        ),
         body: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(20.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              SizedBox(
-                width: 335.0,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      'assets/images/rentrocar-logo.jpg',
+                      width: 40.0,
+                      height: 40.0,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  Text(
+                    'RentroCar',
+                    style: FlutterFlowTheme.of(context).headlineSmall.override(
+                          fontFamily: 'Roboto Mono',
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ].divide(SizedBox(width: 10.0)),
+              ),
+              Container(
+                width: MediaQuery.sizeOf(context).width * 1.0,
                 child: TextFormField(
                   controller: _model.searchBarFieldTextController,
                   focusNode: _model.searchBarFieldFocusNode,
@@ -79,7 +90,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           letterSpacing: 0.0,
                         ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
+                      borderSide: BorderSide(
                         color: Color(0x8914181B),
                         width: 1.0,
                       ),
@@ -108,7 +119,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                     filled: true,
                     fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                    contentPadding: const EdgeInsets.all(14.0),
+                    contentPadding: EdgeInsets.all(14.0),
                     prefixIcon: Icon(
                       Icons.search_sharp,
                       color: FlutterFlowTheme.of(context).primaryText,
@@ -133,7 +144,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               ),
               Container(
                 height: MediaQuery.sizeOf(context).height * 0.73,
-                decoration: const BoxDecoration(),
+                decoration: BoxDecoration(),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -155,7 +166,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           ),
                           Container(
                             height: 232.99,
-                            decoration: const BoxDecoration(),
+                            decoration: BoxDecoration(),
                             child: StreamBuilder<List<CarRecord>>(
                               stream: queryCarRecord(
                                 limit: 10,
@@ -185,7 +196,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   scrollDirection: Axis.horizontal,
                                   itemCount: listViewCarRecordList.length,
                                   separatorBuilder: (_, __) =>
-                                      const SizedBox(width: 10.0),
+                                      SizedBox(width: 10.0),
                                   itemBuilder: (context, listViewIndex) {
                                     final listViewCarRecord =
                                         listViewCarRecordList[listViewIndex];
@@ -199,7 +210,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                               },
                             ),
                           ),
-                        ].divide(const SizedBox(height: 12.0)),
+                        ].divide(SizedBox(height: 12.0)),
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
@@ -249,17 +260,17 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         'Key2pd_${columnIndex}_of_${columnCarRecordList.length}'),
                                     carParam: columnCarRecord,
                                   );
-                                }).divide(const SizedBox(height: 10.0)),
+                                }).divide(SizedBox(height: 10.0)),
                               );
                             },
                           ),
                         ],
                       ),
-                    ].divide(const SizedBox(height: 10.0)),
+                    ].divide(SizedBox(height: 10.0)),
                   ),
                 ),
               ),
-            ].divide(const SizedBox(height: 30.0)),
+            ].divide(SizedBox(height: 30.0)),
           ),
         ),
       ),

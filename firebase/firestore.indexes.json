@@ -1,3 +1,22 @@
 {
-  "indexes": []
+  "indexes": [
+    {
+      "collectionGroup": "trip",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "carBorrower",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "carOwner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
 }

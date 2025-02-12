@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -75,7 +76,7 @@ class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget> {
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: EdgeInsets.all(12.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -112,7 +113,7 @@ class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget> {
                                   ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   4.0, 8.0, 4.0, 8.0),
                               child: Container(
                                 decoration: BoxDecoration(
@@ -120,7 +121,7 @@ class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget> {
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(8.0),
                                   child: Text(
                                     valueOrDefault<String>(
                                       widget.tribData?.status?.name,
@@ -170,87 +171,63 @@ class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget> {
                                 letterSpacing: 0.0,
                               ),
                         ),
-                        StreamBuilder<UsersRecord>(
-                          stream: UsersRecord.getDocument(
-                              widget.tribData!.carOwner!),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-
-                            final rowUsersRecord = snapshot.data!;
-
-                            return Row(
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Icon(
-                                      Icons.person_outline,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 20.0,
-                                    ),
-                                    Text(
-                                      valueOrDefault<String>(
-                                        rowUsersRecord.displayName,
-                                        'Ahmed',
-                                      ),
+                                Icon(
+                                  Icons.person_outline,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 20.0,
+                                ),
+                                StreamBuilder<UsersRecord>(
+                                  stream: UsersRecord.getDocument(
+                                      widget.tribData?.carOwner ==
+                                              currentUserReference
+                                          ? widget.tribData!.carBorrower!
+                                          : widget.tribData!.carOwner!),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+
+                                    final textUsersRecord = snapshot.data!;
+
+                                    return Text(
+                                      textUsersRecord.displayName,
                                       style: FlutterFlowTheme.of(context)
                                           .bodySmall
                                           .override(
                                             fontFamily: 'Open Sans',
                                             letterSpacing: 0.0,
                                           ),
-                                    ),
-                                  ].divide(const SizedBox(width: 8.0)),
+                                    );
+                                  },
                                 ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Icon(
-                                      Icons.email,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 20.0,
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Text(
-                                        valueOrDefault<String>(
-                                          rowUsersRecord.email,
-                                          'owner@example.com',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodySmall
-                                            .override(
-                                              fontFamily: 'Open Sans',
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                    ),
-                                  ].divide(const SizedBox(width: 8.0)),
-                                ),
-                              ].divide(const SizedBox(width: 16.0)),
-                            );
-                          },
+                              ].divide(SizedBox(width: 8.0)),
+                            ),
+                          ].divide(SizedBox(width: 16.0)),
                         ),
-                      ].divide(const SizedBox(height: 8.0)),
+                      ].divide(SizedBox(height: 8.0)),
                     ),
                   ),
-                ].divide(const SizedBox(width: 10.0)),
+                ].divide(SizedBox(width: 10.0)),
               ),
             ),
           ),

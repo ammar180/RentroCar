@@ -10,9 +10,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class UsersRecord extends FirestoreRecord {
   UsersRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 
@@ -46,20 +46,10 @@ class UsersRecord extends FirestoreRecord {
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
-  // "location" field.
-  DocumentReference? _location;
-  DocumentReference? get location => _location;
-  bool hasLocation() => _location != null;
-
   // "is_verified" field.
   bool? _isVerified;
   bool get isVerified => _isVerified ?? false;
   bool hasIsVerified() => _isVerified != null;
-
-  // "uverfication_data" field.
-  DocumentReference? _uverficationData;
-  DocumentReference? get uverficationData => _uverficationData;
-  bool hasUverficationData() => _uverficationData != null;
 
   // "owned_cars" field.
   List<DocumentReference>? _ownedCars;
@@ -78,9 +68,7 @@ class UsersRecord extends FirestoreRecord {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
-    _location = snapshotData['location'] as DocumentReference?;
     _isVerified = snapshotData['is_verified'] as bool?;
-    _uverficationData = snapshotData['uverfication_data'] as DocumentReference?;
     _ownedCars = getDataList(snapshotData['owned_cars']);
     _lovedCars = getDataList(snapshotData['loved_cars']);
   }
@@ -125,9 +113,7 @@ Map<String, dynamic> createUsersRecordData({
   String? uid,
   DateTime? createdTime,
   String? phoneNumber,
-  DocumentReference? location,
   bool? isVerified,
-  DocumentReference? uverficationData,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -137,9 +123,7 @@ Map<String, dynamic> createUsersRecordData({
       'uid': uid,
       'created_time': createdTime,
       'phone_number': phoneNumber,
-      'location': location,
       'is_verified': isVerified,
-      'uverfication_data': uverficationData,
     }.withoutNulls,
   );
 
@@ -158,9 +142,7 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
-        e1?.location == e2?.location &&
         e1?.isVerified == e2?.isVerified &&
-        e1?.uverficationData == e2?.uverficationData &&
         listEquality.equals(e1?.ownedCars, e2?.ownedCars) &&
         listEquality.equals(e1?.lovedCars, e2?.lovedCars);
   }
@@ -173,9 +155,7 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.uid,
         e?.createdTime,
         e?.phoneNumber,
-        e?.location,
         e?.isVerified,
-        e?.uverficationData,
         e?.ownedCars,
         e?.lovedCars
       ]);

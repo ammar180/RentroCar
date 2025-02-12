@@ -4,6 +4,8 @@ enum Status {
   pending,
   accepted,
   rejected,
+  notConfirmed,
+  payDone,
 }
 
 extension FFEnumExtensions<T extends Enum> on T {

@@ -1,7 +1,9 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
 import '/car_management/borrowed_car_card/borrowed_car_card_widget.dart';
 import '/car_management/componants/my_car_card/my_car_card_widget.dart';
+import '/components/alert_dialog_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -90,7 +92,7 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -99,7 +101,7 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,99 +115,171 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                                   letterSpacing: 0.0,
                                 ),
                           ),
-                          FFButtonWidget(
-                            onPressed: () async {
-                              context.pushNamed('AddingNewCarPage');
-                            },
-                            text: 'Add New Car',
-                            icon: const Icon(
-                              Icons.add,
-                              size: 15.0,
-                            ),
-                            options: FFButtonOptions(
-                              height: 40.0,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 16.0, 0.0),
-                              iconAlignment: IconAlignment.start,
-                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: const Color(0x00FFFFFF),
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Open Sans',
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                              elevation: 0.0,
-                              borderRadius: BorderRadius.circular(8.0),
+                          Builder(
+                            builder: (context) => FFButtonWidget(
+                              onPressed: () async {
+                                if (valueOrDefault<bool>(
+                                    currentUserDocument?.isVerified, false)) {
+                                  context.pushNamed('AddingNewCarPage');
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (dialogContext) {
+                                      return Dialog(
+                                        elevation: 0,
+                                        insetPadding: EdgeInsets.zero,
+                                        backgroundColor: Colors.transparent,
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            FocusScope.of(dialogContext)
+                                                .unfocus();
+                                            FocusManager.instance.primaryFocus
+                                                ?.unfocus();
+                                          },
+                                          child: AlertDialogWidget(
+                                            title: 'Worning',
+                                            description:
+                                                'Please verify your self first and Try to add car again',
+                                            confirmButton: 'Go To verfication',
+                                            confirmCallback: () async {},
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ).then((value) => safeSetState(
+                                      () => _model.dialogResult = value));
+
+                                  if (_model.dialogResult!) {
+                                    context.pushNamed('edit_profile');
+                                  }
+                                }
+
+                                safeSetState(() {});
+                              },
+                              text: 'Add New Car',
+                              icon: Icon(
+                                Icons.add,
+                                size: 15.0,
+                              ),
+                              options: FFButtonOptions(
+                                height: 40.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                iconAlignment: IconAlignment.start,
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: Color(0x00FFFFFF),
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Open Sans',
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                elevation: 0.0,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    Container(
-                      height: 215.5,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: StreamBuilder<List<CarRecord>>(
-                        stream: queryCarRecord(
-                          queryBuilder: (carRecord) => carRecord.where(
-                            'car_owner',
-                            isEqualTo: currentUserReference,
-                          ),
+                    StreamBuilder<List<CarRecord>>(
+                      stream: queryCarRecord(
+                        queryBuilder: (carRecord) => carRecord.where(
+                          'car_owner',
+                          isEqualTo: currentUserReference,
                         ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    FlutterFlowTheme.of(context).primary,
-                                  ),
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  FlutterFlowTheme.of(context).primary,
                                 ),
                               ),
-                            );
-                          }
-                          List<CarRecord> myCarsListViewCarRecordList =
-                              snapshot.data!;
-
-                          return ListView.separated(
-                            padding: EdgeInsets.zero,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: myCarsListViewCarRecordList.length,
-                            separatorBuilder: (_, __) => const SizedBox(width: 10.0),
-                            itemBuilder: (context, myCarsListViewIndex) {
-                              final myCarsListViewCarRecord =
-                                  myCarsListViewCarRecordList[
-                                      myCarsListViewIndex];
-                              return wrapWithModel(
-                                model: _model.myCarCardModels.getModel(
-                                  myCarsListViewIndex.toString(),
-                                  myCarsListViewIndex,
-                                ),
-                                updateCallback: () => safeSetState(() {}),
-                                child: MyCarCardWidget(
-                                  key: Key(
-                                    'Key6dw_${myCarsListViewIndex.toString()}',
-                                  ),
-                                  carData: myCarsListViewCarRecord,
-                                ),
-                              );
-                            },
+                            ),
                           );
-                        },
-                      ),
+                        }
+                        List<CarRecord> myCarsContainerCarRecordList =
+                            snapshot.data!;
+
+                        return Container(
+                          height: 215.5,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          child: Builder(
+                            builder: (context) {
+                              if (myCarsContainerCarRecordList.isNotEmpty) {
+                                return Builder(
+                                  builder: (context) {
+                                    final myCarVar =
+                                        myCarsContainerCarRecordList.toList();
+
+                                    return ListView.separated(
+                                      padding: EdgeInsets.zero,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: myCarVar.length,
+                                      separatorBuilder: (_, __) =>
+                                          SizedBox(width: 10.0),
+                                      itemBuilder: (context, myCarVarIndex) {
+                                        final myCarVarItem =
+                                            myCarVar[myCarVarIndex];
+                                        return MyCarCardWidget(
+                                          key: Key(
+                                              'Keyxfy_${myCarVarIndex}_of_${myCarVar.length}'),
+                                          carData: myCarVarItem,
+                                        );
+                                      },
+                                    );
+                                  },
+                                );
+                              } else {
+                                return Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 20.0, 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 100.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                    ),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Text(
+                                      'You Didn\'t upload any Car yet!',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Open Sans',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        );
+                      },
                     ),
-                  ].divide(const SizedBox(height: 10.0)),
+                  ].divide(SizedBox(height: 10.0)),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -224,17 +298,17 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                           ),
                           FFButtonWidget(
                             onPressed: () async {
-                              context.pushNamed('AddingNewCarPage');
+                              context.pushNamed('home');
                             },
                             text: 'Rent Now!',
                             options: FFButtonOptions(
                               height: 40.0,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 16.0, 0.0),
                               iconAlignment: IconAlignment.start,
-                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              color: const Color(0x00FFFFFF),
+                              color: Color(0x00FFFFFF),
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
@@ -251,10 +325,19 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                       ),
                       StreamBuilder<List<TripRecord>>(
                         stream: queryTripRecord(
-                          queryBuilder: (tripRecord) => tripRecord.where(
-                            'carBorrower',
-                            isEqualTo: currentUserReference,
-                          ),
+                          queryBuilder: (tripRecord) => tripRecord
+                              .where(
+                                'carBorrower',
+                                isEqualTo: currentUserReference,
+                              )
+                              .where(
+                                'status',
+                                isNotEqualTo: Status.rejected.serialize(),
+                              )
+                              .where(
+                                'carOwner',
+                                isEqualTo: currentUserReference,
+                              ),
                         ),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
@@ -280,23 +363,59 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             itemCount: listViewTripRecordList.length,
-                            separatorBuilder: (_, __) => const SizedBox(height: 10.0),
+                            separatorBuilder: (_, __) => SizedBox(height: 10.0),
                             itemBuilder: (context, listViewIndex) {
                               final listViewTripRecord =
                                   listViewTripRecordList[listViewIndex];
-                              return BorrowedCarCardWidget(
-                                key: Key(
-                                    'Keyrja_${listViewIndex}_of_${listViewTripRecordList.length}'),
-                                tribData: listViewTripRecord,
+                              return InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  if (listViewTripRecord.carOwner ==
+                                      currentUserReference) {
+                                    context.pushNamed(
+                                      'ownerBookingSammary',
+                                      queryParameters: {
+                                        'tripDocument': serializeParam(
+                                          listViewTripRecord,
+                                          ParamType.Document,
+                                        ),
+                                      }.withoutNulls,
+                                      extra: <String, dynamic>{
+                                        'tripDocument': listViewTripRecord,
+                                      },
+                                    );
+                                  } else {
+                                    context.pushNamed(
+                                      'booking_summary',
+                                      queryParameters: {
+                                        'tripDocument': serializeParam(
+                                          listViewTripRecord,
+                                          ParamType.Document,
+                                        ),
+                                      }.withoutNulls,
+                                      extra: <String, dynamic>{
+                                        'tripDocument': listViewTripRecord,
+                                      },
+                                    );
+                                  }
+                                },
+                                child: BorrowedCarCardWidget(
+                                  key: Key(
+                                      'Keyrja_${listViewIndex}_of_${listViewTripRecordList.length}'),
+                                  tribData: listViewTripRecord,
+                                ),
                               );
                             },
                           );
                         },
                       ),
-                    ].divide(const SizedBox(height: 10.0)),
+                    ].divide(SizedBox(height: 10.0)),
                   ),
                 ),
-              ].divide(const SizedBox(height: 30.0)),
+              ].divide(SizedBox(height: 30.0)),
             ),
           ),
         ),

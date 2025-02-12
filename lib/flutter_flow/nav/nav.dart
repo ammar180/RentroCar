@@ -77,13 +77,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const SignUpPageWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : SignUpPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const SignUpPageWidget(),
+              appStateNotifier.loggedIn ? NavBarPage() : SignUpPageWidget(),
         ),
         FFRoute(
           name: 'LoginPage',
@@ -98,46 +98,46 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'SignUpPage',
           path: '/signUpPage',
-          builder: (context, params) => const SignUpPageWidget(),
+          builder: (context, params) => SignUpPageWidget(),
         ),
         FFRoute(
           name: 'onboarding',
           path: '/onboarding',
-          builder: (context, params) => const OnboardingWidget(),
+          builder: (context, params) => OnboardingWidget(),
         ),
         FFRoute(
           name: 'profile',
           path: '/profile',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'profile')
-              : const ProfileWidget(),
+              ? NavBarPage(initialPage: 'profile')
+              : ProfileWidget(),
         ),
         FFRoute(
           name: 'home',
           path: '/home',
           builder: (context, params) =>
-              params.isEmpty ? const NavBarPage(initialPage: 'home') : const HomeWidget(),
+              params.isEmpty ? NavBarPage(initialPage: 'home') : HomeWidget(),
         ),
         FFRoute(
           name: 'MyCars',
           path: '/myCars',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'MyCars')
-              : const MyCarsWidget(),
+              ? NavBarPage(initialPage: 'MyCars')
+              : MyCarsWidget(),
         ),
         FFRoute(
           name: 'Favorite',
           path: '/favorite',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'Favorite')
-              : const FavoriteWidget(),
+              ? NavBarPage(initialPage: 'Favorite')
+              : FavoriteWidget(),
         ),
         FFRoute(
           name: 'Notifications',
           path: '/notifications',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'Notifications')
-              : const NotificationsWidget(),
+              ? NavBarPage(initialPage: 'Notifications')
+              : NotificationsWidget(),
         ),
         FFRoute(
           name: 'cardetails',
@@ -155,24 +155,53 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'AddingNewCarPage',
           path: '/addingNewCarPage',
-          builder: (context, params) => const AddingNewCarPageWidget(),
+          builder: (context, params) => AddingNewCarPageWidget(),
         ),
         FFRoute(
           name: 'edit_profile',
           path: '/editProfile',
-          builder: (context, params) => const EditProfileWidget(),
+          builder: (context, params) => EditProfileWidget(),
         ),
         FFRoute(
           name: 'booking_summary',
           path: '/bookingSummary',
+          asyncParams: {
+            'tripDocument': getDoc(['trip'], TripRecord.fromSnapshot),
+            'bookedCar': getDoc(['car'], CarRecord.fromSnapshot),
+          },
           builder: (context, params) => BookingSummaryWidget(
-            borrowerdCarReference: params.getParam(
-              'borrowerdCarReference',
-              ParamType.DocumentReference,
-              isList: false,
-              collectionNamePath: ['car'],
+            tripDocument: params.getParam(
+              'tripDocument',
+              ParamType.Document,
+            ),
+            bookedCar: params.getParam(
+              'bookedCar',
+              ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'ownerBookingSammary',
+          path: '/ownerBookingSammary',
+          asyncParams: {
+            'tripDocument': getDoc(['trip'], TripRecord.fromSnapshot),
+            'bookedCar': getDoc(['car'], CarRecord.fromSnapshot),
+          },
+          builder: (context, params) => OwnerBookingSammaryWidget(
+            tripDocument: params.getParam(
+              'tripDocument',
+              ParamType.Document,
+            ),
+            bookedCar: params.getParam(
+              'bookedCar',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'preparingInterview',
+          path: '/preparingInterview',
+          builder: (context, params) => PreparingInterviewWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -406,7 +435,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

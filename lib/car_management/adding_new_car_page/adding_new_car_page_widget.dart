@@ -68,8 +68,8 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 400.0.ms,
-            begin: const Offset(3.0, 3.0),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(3.0, 3.0),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -88,8 +88,8 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
             curve: Curves.bounceOut,
             delay: 300.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(0.6, 0.6),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(0.6, 0.6),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -108,8 +108,8 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
             curve: Curves.easeInOut,
             delay: 350.0.ms,
             duration: 400.0.ms,
-            begin: const Offset(0.0, 30.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 30.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -128,8 +128,8 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
             curve: Curves.easeInOut,
             delay: 400.0.ms,
             duration: 400.0.ms,
-            begin: const Offset(0.0, 30.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 30.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -148,8 +148,8 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
             curve: Curves.bounceOut,
             delay: 300.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.6, 0.6),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(0.6, 0.6),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -197,251 +197,253 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                   letterSpacing: 0.0,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
         body: SafeArea(
           top: true,
-          child: SizedBox(
+          child: Container(
             width: double.infinity,
             child: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
                   child: PageView(
                     controller: _model.addingNewCarStepsController ??=
                         PageController(initialPage: 0),
                     scrollDirection: Axis.horizontal,
                     children: [
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 0.0, 20.0, 0.0),
                         child: Column(
-                          mainAxisSize: MainAxisSize.max,
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Column(
                               mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Add Car to Application',
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineSmall
-                                      .override(
-                                        fontFamily: 'Open Sans',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                                Text(
-                                  'Here few steps to add new car into application to be available for rent.',
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Open Sans',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: const Color(0x193961F1),
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
+                                Column(
                                   mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.info,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 24.0,
-                                        ),
-                                        Flexible(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Car Info',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                              Text(
-                                                'Your lessees will use this data to identify your car at pickup.',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ].divide(const SizedBox(height: 2.0)),
+                                    Text(
+                                      'Add Car to Application',
+                                      style: FlutterFlowTheme.of(context)
+                                          .headlineSmall
+                                          .override(
+                                            fontFamily: 'Open Sans',
+                                            letterSpacing: 0.0,
                                           ),
-                                        ),
-                                      ].divide(const SizedBox(width: 10.0)),
                                     ),
-                                    Divider(
-                                      thickness: 2.0,
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.photo,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 24.0,
-                                        ),
-                                        Flexible(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Car Photo',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                              Text(
-                                                'Take good, clear photos to attract the attention of lessees and increase the chance of renting your car.',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ].divide(const SizedBox(height: 2.0)),
+                                    Text(
+                                      'Here few steps to add new car into application to be available for rent.',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Open Sans',
+                                            letterSpacing: 0.0,
                                           ),
-                                        ),
-                                      ].divide(const SizedBox(width: 10.0)),
                                     ),
-                                    Divider(
-                                      thickness: 2.0,
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.price_check_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 24.0,
-                                        ),
-                                        Flexible(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Car Pricing & Availability',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                              Text(
-                                                'Here you will set car pricing for day and available days for rent',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ].divide(const SizedBox(height: 2.0)),
-                                          ),
-                                        ),
-                                      ].divide(const SizedBox(width: 10.0)),
-                                    ),
-                                  ].divide(const SizedBox(height: 12.0)),
+                                  ],
                                 ),
-                              ),
-                            ),
-                            Align(
-                              alignment: const AlignmentDirectional(0.0, 1.0),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 200.0, 0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    await _model.addingNewCarStepsController
-                                        ?.nextPage(
-                                      duration: const Duration(milliseconds: 300),
-                                      curve: Curves.ease,
-                                    );
-                                  },
-                                  text: 'Continue',
-                                  options: FFButtonOptions(
-                                    width: double.infinity,
-                                    height: 42.7,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 16.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Open Sans',
-                                          color: Colors.white,
-                                          letterSpacing: 0.0,
+                                Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: Color(0x193961F1),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Icon(
+                                              Icons.info,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              size: 24.0,
+                                            ),
+                                            Flexible(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Car Info',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Open Sans',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                  Text(
+                                                    'Your lessees will use this data to identify your car at pickup.',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelLarge
+                                                        .override(
+                                                          fontFamily:
+                                                              'Open Sans',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ].divide(SizedBox(height: 2.0)),
+                                              ),
+                                            ),
+                                          ].divide(SizedBox(width: 10.0)),
                                         ),
-                                    elevation: 0.0,
-                                    borderRadius: BorderRadius.circular(10.0),
+                                        Divider(
+                                          thickness: 2.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Icon(
+                                              Icons.photo,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              size: 24.0,
+                                            ),
+                                            Flexible(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Car Photo',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Open Sans',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                  Text(
+                                                    'Take good, clear photos to attract the attention of lessees and increase the chance of renting your car.',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelLarge
+                                                        .override(
+                                                          fontFamily:
+                                                              'Open Sans',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ].divide(SizedBox(height: 2.0)),
+                                              ),
+                                            ),
+                                          ].divide(SizedBox(width: 10.0)),
+                                        ),
+                                        Divider(
+                                          thickness: 2.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Icon(
+                                              Icons.price_check_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              size: 24.0,
+                                            ),
+                                            Flexible(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Car Pricing & Availability',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Open Sans',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                  Text(
+                                                    'Here you will set car pricing for day and available days for rent',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelLarge
+                                                        .override(
+                                                          fontFamily:
+                                                              'Open Sans',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ].divide(SizedBox(height: 2.0)),
+                                              ),
+                                            ),
+                                          ].divide(SizedBox(width: 10.0)),
+                                        ),
+                                      ].divide(SizedBox(height: 12.0)),
+                                    ),
                                   ),
                                 ),
+                              ].divide(SizedBox(height: 10.0)),
+                            ),
+                            FFButtonWidget(
+                              onPressed: () async {
+                                await _model.addingNewCarStepsController
+                                    ?.nextPage(
+                                  duration: Duration(milliseconds: 300),
+                                  curve: Curves.ease,
+                                );
+                              },
+                              text: 'Continue',
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 42.7,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Open Sans',
+                                      color: Colors.white,
+                                      letterSpacing: 0.0,
+                                    ),
+                                elevation: 0.0,
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
-                          ].divide(const SizedBox(height: 10.0)),
+                          ].divide(SizedBox(height: 10.0)),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 24.0),
                         child: SingleChildScrollView(
                           primary: false,
@@ -473,7 +475,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                           letterSpacing: 0.0,
                                         ),
                                   ),
-                                ].divide(const SizedBox(height: 8.0)),
+                                ].divide(SizedBox(height: 8.0)),
                               ),
                               Material(
                                 color: Colors.transparent,
@@ -491,7 +493,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                     key: _model.formKey1,
                                     autovalidateMode: AutovalidateMode.disabled,
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           20.0, 20.0, 20.0, 20.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -552,7 +554,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     ),
                                                     focusedBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -563,7 +565,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     ),
                                                     errorBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -574,7 +576,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     ),
                                                     focusedErrorBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -642,7 +644,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     ),
                                                     focusedBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -653,7 +655,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     ),
                                                     errorBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -664,7 +666,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     ),
                                                     focusedErrorBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -686,8 +688,6 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                         letterSpacing: 0.0,
                                                       ),
                                                   minLines: 1,
-                                                  keyboardType:
-                                                      TextInputType.number,
                                                   validator: _model
                                                       .carModelTextControllerValidator
                                                       .asValidator(context),
@@ -734,7 +734,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     ),
                                                     focusedBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -745,7 +745,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     ),
                                                     errorBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -756,7 +756,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     ),
                                                     focusedErrorBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -785,7 +785,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       .asValidator(context),
                                                 ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                           Container(
                                             child: TextFormField(
@@ -829,7 +829,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                 ),
                                                 focusedBorder:
                                                     OutlineInputBorder(
-                                                  borderSide: const BorderSide(
+                                                  borderSide: BorderSide(
                                                     color: Color(0x00000000),
                                                     width: 1.0,
                                                   ),
@@ -838,7 +838,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                           8.0),
                                                 ),
                                                 errorBorder: OutlineInputBorder(
-                                                  borderSide: const BorderSide(
+                                                  borderSide: BorderSide(
                                                     color: Color(0x00000000),
                                                     width: 1.0,
                                                   ),
@@ -848,7 +848,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                 ),
                                                 focusedErrorBorder:
                                                     OutlineInputBorder(
-                                                  borderSide: const BorderSide(
+                                                  borderSide: BorderSide(
                                                     color: Color(0x00000000),
                                                     width: 1.0,
                                                   ),
@@ -875,7 +875,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                   .asValidator(context),
                                             ),
                                           ),
-                                        ].divide(const SizedBox(height: 16.0)),
+                                        ].divide(SizedBox(height: 16.0)),
                                       ),
                                     ),
                                   ),
@@ -890,7 +890,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                   }
                                   await _model.addingNewCarStepsController
                                       ?.nextPage(
-                                    duration: const Duration(milliseconds: 300),
+                                    duration: Duration(milliseconds: 300),
                                     curve: Curves.ease,
                                   );
                                 },
@@ -898,8 +898,8 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                 options: FFButtonOptions(
                                   width: double.infinity,
                                   height: 56.0,
-                                  padding: const EdgeInsets.all(8.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsets.all(8.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
@@ -914,12 +914,12 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
-                            ].divide(const SizedBox(height: 24.0)),
+                            ].divide(SizedBox(height: 24.0)),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             24.0, 24.0, 24.0, 0.0),
                         child: SingleChildScrollView(
                           primary: false,
@@ -951,7 +951,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                           letterSpacing: 0.0,
                                         ),
                                   ),
-                                ].divide(const SizedBox(height: 8.0)),
+                                ].divide(SizedBox(height: 8.0)),
                               ),
                               Form(
                                 key: _model.formKey2,
@@ -971,14 +971,14 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                       borderRadius: BorderRadius.circular(16.0),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           20.0, 20.0, 20.0, 20.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     12.0, 0.0, 12.0, 0.0),
                                             child: Text(
                                               'Vehicle Images',
@@ -993,12 +993,12 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     12.0, 0.0, 12.0, 0.0),
                                             child: GridView(
                                               padding: EdgeInsets.zero,
                                               gridDelegate:
-                                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
                                                 crossAxisCount: 3,
                                                 crossAxisSpacing: 12.0,
                                                 mainAxisSpacing: 12.0,
@@ -1131,7 +1131,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       visible: !_model
                                                           .isDataUploading1,
                                                       child: Padding(
-                                                        padding: const EdgeInsets.all(
+                                                        padding: EdgeInsets.all(
                                                             16.0),
                                                         child: Column(
                                                           mainAxisSize:
@@ -1295,7 +1295,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       visible: !_model
                                                           .isDataUploading2,
                                                       child: Padding(
-                                                        padding: const EdgeInsets.all(
+                                                        padding: EdgeInsets.all(
                                                             16.0),
                                                         child: Column(
                                                           mainAxisSize:
@@ -1459,7 +1459,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       visible: _model.uploadedFileUrl3 ==
                                                               '',
                                                       child: Padding(
-                                                        padding: const EdgeInsets.all(
+                                                        padding: EdgeInsets.all(
                                                             16.0),
                                                         child: Column(
                                                           mainAxisSize:
@@ -1623,7 +1623,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       visible: !_model
                                                           .isDataUploading4,
                                                       child: Padding(
-                                                        padding: const EdgeInsets.all(
+                                                        padding: EdgeInsets.all(
                                                             16.0),
                                                         child: Column(
                                                           mainAxisSize:
@@ -1787,7 +1787,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       visible: !_model
                                                           .isDataUploading5,
                                                       child: Padding(
-                                                        padding: const EdgeInsets.all(
+                                                        padding: EdgeInsets.all(
                                                             16.0),
                                                         child: Column(
                                                           mainAxisSize:
@@ -1847,7 +1847,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.all(16.0),
+                                                        EdgeInsets.all(16.0),
                                                     child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -1887,7 +1887,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                               ],
                                             ),
                                           ),
-                                        ].divide(const SizedBox(height: 16.0)),
+                                        ].divide(SizedBox(height: 16.0)),
                                       ),
                                     ),
                                   ),
@@ -1907,7 +1907,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                     borderRadius: BorderRadius.circular(16.0),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         20.0, 20.0, 20.0, 20.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -1944,7 +1944,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                         ),
                                               ),
                                             ),
-                                          ].divide(const SizedBox(width: 12.0)),
+                                          ].divide(SizedBox(width: 12.0)),
                                         ),
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -1969,7 +1969,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                         ),
                                               ),
                                             ),
-                                          ].divide(const SizedBox(width: 12.0)),
+                                          ].divide(SizedBox(width: 12.0)),
                                         ),
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -1994,7 +1994,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                         ),
                                               ),
                                             ),
-                                          ].divide(const SizedBox(width: 12.0)),
+                                          ].divide(SizedBox(width: 12.0)),
                                         ),
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -2019,9 +2019,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                         ),
                                               ),
                                             ),
-                                          ].divide(const SizedBox(width: 12.0)),
+                                          ].divide(SizedBox(width: 12.0)),
                                         ),
-                                      ].divide(const SizedBox(height: 12.0)),
+                                      ].divide(SizedBox(height: 12.0)),
                                     ),
                                   ),
                                 ),
@@ -2038,7 +2038,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                   }
                                   await _model.addingNewCarStepsController
                                       ?.nextPage(
-                                    duration: const Duration(milliseconds: 300),
+                                    duration: Duration(milliseconds: 300),
                                     curve: Curves.ease,
                                   );
                                 },
@@ -2046,8 +2046,8 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                 options: FFButtonOptions(
                                   width: MediaQuery.sizeOf(context).width * 1.0,
                                   height: 56.0,
-                                  padding: const EdgeInsets.all(8.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsets.all(8.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
@@ -2062,7 +2062,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
-                            ].divide(const SizedBox(height: 24.0)),
+                            ].divide(SizedBox(height: 24.0)),
                           ),
                         ),
                       ),
@@ -2070,7 +2070,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                         key: _model.formKey3,
                         autovalidateMode: AutovalidateMode.disabled,
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 24.0),
                           child: SingleChildScrollView(
                             primary: false,
@@ -2102,7 +2102,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                             letterSpacing: 0.0,
                                           ),
                                     ),
-                                  ].divide(const SizedBox(height: 8.0)),
+                                  ].divide(SizedBox(height: 8.0)),
                                 ),
                                 Material(
                                   color: Colors.transparent,
@@ -2119,7 +2119,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                       borderRadius: BorderRadius.circular(16.0),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           20.0, 20.0, 20.0, 20.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -2180,7 +2180,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     ),
                                                     focusedBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -2191,7 +2191,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     ),
                                                     errorBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -2202,7 +2202,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     ),
                                                     focusedErrorBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -2231,11 +2231,11 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       .asValidator(context),
                                                 ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(1.0, 1.0),
+                                                AlignmentDirectional(1.0, 1.0),
                                             child: Text(
                                               'EGP/DAY',
                                               style:
@@ -2247,7 +2247,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       ),
                                             ),
                                           ),
-                                        ].divide(const SizedBox(height: 16.0)),
+                                        ].divide(SizedBox(height: 16.0)),
                                       ),
                                     ),
                                   ),
@@ -2267,7 +2267,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                       borderRadius: BorderRadius.circular(16.0),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           20.0, 20.0, 20.0, 20.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -2317,7 +2317,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     BorderRadius.circular(8.0),
                                               ),
                                               focusedBorder: OutlineInputBorder(
-                                                borderSide: const BorderSide(
+                                                borderSide: BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
@@ -2325,7 +2325,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     BorderRadius.circular(8.0),
                                               ),
                                               errorBorder: OutlineInputBorder(
-                                                borderSide: const BorderSide(
+                                                borderSide: BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
@@ -2334,7 +2334,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                               ),
                                               focusedErrorBorder:
                                                   OutlineInputBorder(
-                                                borderSide: const BorderSide(
+                                                borderSide: BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
@@ -2358,7 +2358,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                 .textController6Validator
                                                 .asValidator(context),
                                           ),
-                                        ].divide(const SizedBox(height: 16.0)),
+                                        ].divide(SizedBox(height: 16.0)),
                                       ),
                                     ),
                                   ),
@@ -2401,7 +2401,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                       });
                                       await _model.addingNewCarStepsController
                                           ?.nextPage(
-                                        duration: const Duration(milliseconds: 300),
+                                        duration: Duration(milliseconds: 300),
                                         curve: Curves.ease,
                                       );
                                     } else {
@@ -2409,13 +2409,13 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                         context: context,
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
-                                            title: const Text('Feild'),
-                                            content: const Text('Validation Field'),
+                                            title: Text('Feild'),
+                                            content: Text('Validation Field'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext),
-                                                child: const Text('Ok'),
+                                                child: Text('Ok'),
                                               ),
                                             ],
                                           );
@@ -2429,8 +2429,8 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                   options: FFButtonOptions(
                                     width: double.infinity,
                                     height: 56.0,
-                                    padding: const EdgeInsets.all(8.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsets.all(8.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -2445,7 +2445,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                 ),
-                              ].divide(const SizedBox(height: 24.0)),
+                              ].divide(SizedBox(height: 24.0)),
                             ),
                           ),
                         ),
@@ -2466,9 +2466,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                     FlutterFlowTheme.of(context)
                                         .secondaryBackground
                                   ],
-                                  stops: const [0.0, 0.5, 1.0],
-                                  begin: const AlignmentDirectional(-1.0, -1.0),
-                                  end: const AlignmentDirectional(1.0, 1.0),
+                                  stops: [0.0, 0.5, 1.0],
+                                  begin: AlignmentDirectional(-1.0, -1.0),
+                                  end: AlignmentDirectional(1.0, 1.0),
                                 ),
                               ),
                               child: Container(
@@ -2477,13 +2477,13 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
-                                      const Color(0x00FFFFFF),
+                                      Color(0x00FFFFFF),
                                       FlutterFlowTheme.of(context)
                                           .secondaryBackground
                                     ],
-                                    stops: const [0.0, 1.0],
-                                    begin: const AlignmentDirectional(0.0, -1.0),
-                                    end: const AlignmentDirectional(0, 1.0),
+                                    stops: [0.0, 1.0],
+                                    begin: AlignmentDirectional(0.0, -1.0),
+                                    end: AlignmentDirectional(0, 1.0),
                                   ),
                                 ),
                                 child: Column(
@@ -2499,7 +2499,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                         shape: BoxShape.circle,
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                        padding: EdgeInsets.all(8.0),
                                         child: Image.network(
                                           'https://cdn-icons-png.flaticon.com/512/15190/15190698.png',
                                           width: 100.0,
@@ -2510,7 +2510,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                     ).animateOnPageLoad(animationsMap[
                                         'containerOnPageLoadAnimation2']!),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 44.0, 0.0, 0.0),
                                       child: Text(
                                         'Done',
@@ -2524,7 +2524,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                           'textOnPageLoadAnimation1']!),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           44.0, 8.0, 44.0, 0.0),
                                       child: Text(
                                         'Car Added Successfully, but you have to validate your car with documents to make it avilable for rent! ',
@@ -2545,16 +2545,16 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                 'containerOnPageLoadAnimation1']!),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 24.0, 16.0, 44.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Expanded(
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 0.0, 16.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
@@ -2565,10 +2565,10 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                           width: 230.0,
                                           height: 52.0,
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
@@ -2581,7 +2581,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     letterSpacing: 0.0,
                                                   ),
                                           elevation: 3.0,
-                                          borderSide: const BorderSide(
+                                          borderSide: BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -2602,10 +2602,10 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                   ),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(0.0, 1.0),
+                  alignment: AlignmentDirectional(0.0, 1.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                     child: smooth_page_indicator.SmoothPageIndicator(
                       controller: _model.addingNewCarStepsController ??=
                           PageController(initialPage: 0),
@@ -2614,7 +2614,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                       onDotClicked: (i) async {
                         await _model.addingNewCarStepsController!.animateToPage(
                           i,
-                          duration: const Duration(milliseconds: 500),
+                          duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
                         safeSetState(() {});

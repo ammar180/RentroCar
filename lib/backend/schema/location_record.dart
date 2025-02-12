@@ -9,9 +9,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class LocationRecord extends FirestoreRecord {
   LocationRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 
@@ -30,10 +30,16 @@ class LocationRecord extends FirestoreRecord {
   String get government => _government ?? '';
   bool hasGovernment() => _government != null;
 
+  // "user" field.
+  DocumentReference? _user;
+  DocumentReference? get user => _user;
+  bool hasUser() => _user != null;
+
   void _initializeFields() {
     _street = snapshotData['street'] as String?;
     _city = snapshotData['city'] as String?;
     _government = snapshotData['government'] as String?;
+    _user = snapshotData['user'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -74,12 +80,14 @@ Map<String, dynamic> createLocationRecordData({
   String? street,
   String? city,
   String? government,
+  DocumentReference? user,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'street': street,
       'city': city,
       'government': government,
+      'user': user,
     }.withoutNulls,
   );
 
@@ -93,12 +101,13 @@ class LocationRecordDocumentEquality implements Equality<LocationRecord> {
   bool equals(LocationRecord? e1, LocationRecord? e2) {
     return e1?.street == e2?.street &&
         e1?.city == e2?.city &&
-        e1?.government == e2?.government;
+        e1?.government == e2?.government &&
+        e1?.user == e2?.user;
   }
 
   @override
   int hash(LocationRecord? e) =>
-      const ListEquality().hash([e?.street, e?.city, e?.government]);
+      const ListEquality().hash([e?.street, e?.city, e?.government, e?.user]);
 
   @override
   bool isValidKey(Object? o) => o is LocationRecord;

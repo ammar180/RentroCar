@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'cardetails_widget.dart' show CardetailsWidget;
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class CardetailsModel extends FlutterFlowModel<CardetailsWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  final formKey = GlobalKey<FormState>();
   // State field(s) for PageView widget.
   PageController? pageViewController;
 
@@ -21,6 +23,8 @@ class CardetailsModel extends FlutterFlowModel<CardetailsWidget> {
       : 0;
   DateTime? datePicked1;
   DateTime? datePicked2;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  TripRecord? createdTrip;
 
   @override
   void initState(BuildContext context) {}

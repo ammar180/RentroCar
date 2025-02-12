@@ -22,8 +22,10 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController3;
   String? Function(BuildContext, String?)? textController3Validator;
-  // State field(s) for PlacePicker widget.
-  FFPlace placePickerValue = const FFPlace();
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode3;
+  TextEditingController? textController4;
+  String? Function(BuildContext, String?)? textController4Validator;
 
   @override
   void initState(BuildContext context) {}
@@ -38,5 +40,8 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
 
     textFieldFocusNode2?.dispose();
     textController3?.dispose();
+
+    textFieldFocusNode3?.dispose();
+    textController4?.dispose();
   }
 }

@@ -9,9 +9,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class UserVerficationRecord extends FirestoreRecord {
   UserVerficationRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 
@@ -20,8 +20,14 @@ class UserVerficationRecord extends FirestoreRecord {
   String get ssnId => _ssnId ?? '';
   bool hasSsnId() => _ssnId != null;
 
+  // "userRef" field.
+  DocumentReference? _userRef;
+  DocumentReference? get userRef => _userRef;
+  bool hasUserRef() => _userRef != null;
+
   void _initializeFields() {
     _ssnId = snapshotData['ssn_id'] as String?;
+    _userRef = snapshotData['userRef'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -60,10 +66,12 @@ class UserVerficationRecord extends FirestoreRecord {
 
 Map<String, dynamic> createUserVerficationRecordData({
   String? ssnId,
+  DocumentReference? userRef,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'ssn_id': ssnId,
+      'userRef': userRef,
     }.withoutNulls,
   );
 
@@ -76,11 +84,12 @@ class UserVerficationRecordDocumentEquality
 
   @override
   bool equals(UserVerficationRecord? e1, UserVerficationRecord? e2) {
-    return e1?.ssnId == e2?.ssnId;
+    return e1?.ssnId == e2?.ssnId && e1?.userRef == e2?.userRef;
   }
 
   @override
-  int hash(UserVerficationRecord? e) => const ListEquality().hash([e?.ssnId]);
+  int hash(UserVerficationRecord? e) =>
+      const ListEquality().hash([e?.ssnId, e?.userRef]);
 
   @override
   bool isValidKey(Object? o) => o is UserVerficationRecord;

@@ -13,8 +13,8 @@ class AlertDialogWidget extends StatefulWidget {
     String? confirmButton,
     String? cancelButton,
     this.confirmCallback,
-  })  : confirmButton = confirmButton ?? 'Confirm',
-        cancelButton = cancelButton ?? 'Cancel';
+  })  : this.confirmButton = confirmButton ?? 'Confirm',
+        this.cancelButton = cancelButton ?? 'Cancel';
 
   final String? title;
   final String? description;
@@ -53,9 +53,9 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: const AlignmentDirectional(0.0, 0.0),
+      alignment: AlignmentDirectional(0.0, 0.0),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 12.0),
+        padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 12.0),
         child: Material(
           color: Colors.transparent,
           elevation: 5.0,
@@ -64,7 +64,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
           ),
           child: Container(
             width: 340.0,
-            constraints: const BoxConstraints(
+            constraints: BoxConstraints(
               maxWidth: 530.0,
             ),
             decoration: BoxDecoration(
@@ -72,7 +72,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
               borderRadius: BorderRadius.circular(24.0),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -101,7 +101,9 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       FFButtonWidget(
-                        onPressed: () async {},
+                        onPressed: () async {
+                          Navigator.pop(context, false);
+                        },
                         text: valueOrDefault<String>(
                           widget.cancelButton,
                           'Cancel',
@@ -109,9 +111,9 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                         options: FFButtonOptions(
                           width: 140.0,
                           height: 50.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).alternate,
                           textStyle: FlutterFlowTheme.of(context)
@@ -132,6 +134,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
+                          Navigator.pop(context, true);
                           await widget.confirmCallback?.call();
                         },
                         text: valueOrDefault<String>(
@@ -141,9 +144,9 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                         options: FFButtonOptions(
                           width: 140.0,
                           height: 50.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).accent1,
                           textStyle:
@@ -162,7 +165,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                       ),
                     ],
                   ),
-                ].divide(const SizedBox(height: 16.0)),
+                ].divide(SizedBox(height: 16.0)),
               ),
             ),
           ),
