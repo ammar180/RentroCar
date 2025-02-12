@@ -93,11 +93,12 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                               (currentUserDocument?.lovedCars.toList() ?? [])
                                   .toList();
 
-                          return ListView.builder(
+                          return ListView.separated(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             itemCount: lovedCarRef.length,
+                            separatorBuilder: (_, __) => SizedBox(height: 10.0),
                             itemBuilder: (context, lovedCarRefIndex) {
                               final lovedCarRefItem =
                                   lovedCarRef[lovedCarRefIndex];

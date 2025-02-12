@@ -202,6 +202,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'preparingInterview',
           path: '/preparingInterview',
           builder: (context, params) => PreparingInterviewWidget(),
+        ),
+        FFRoute(
+          name: 'verficationDataForm',
+          path: '/verficationDataForm',
+          builder: (context, params) => VerficationDataFormWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

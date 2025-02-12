@@ -66,12 +66,7 @@ class _CheckoutDialogWidgetState extends State<CheckoutDialogWidget> {
               ),
             )
           ],
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(0.0),
-            bottomRight: Radius.circular(0.0),
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
-          ),
+          borderRadius: BorderRadius.circular(20.0),
           border: Border.all(
             color: FlutterFlowTheme.of(context).primaryText,
             width: 1.0,

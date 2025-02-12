@@ -25,6 +25,8 @@ class CardetailsModel extends FlutterFlowModel<CardetailsWidget> {
   DateTime? datePicked2;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   TripRecord? createdTrip;
+  // Stores action output result for [Alert Dialog - Custom Dialog] action in Button widget.
+  bool? dialogResut;
 
   @override
   void initState(BuildContext context) {}

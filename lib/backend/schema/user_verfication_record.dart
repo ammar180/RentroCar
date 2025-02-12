@@ -15,19 +15,19 @@ class UserVerficationRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "ssn_id" field.
-  String? _ssnId;
-  String get ssnId => _ssnId ?? '';
-  bool hasSsnId() => _ssnId != null;
-
   // "userRef" field.
   DocumentReference? _userRef;
   DocumentReference? get userRef => _userRef;
   bool hasUserRef() => _userRef != null;
 
+  // "ssn_id" field.
+  String? _ssnId;
+  String get ssnId => _ssnId ?? '';
+  bool hasSsnId() => _ssnId != null;
+
   void _initializeFields() {
-    _ssnId = snapshotData['ssn_id'] as String?;
     _userRef = snapshotData['userRef'] as DocumentReference?;
+    _ssnId = snapshotData['ssn_id'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -65,13 +65,13 @@ class UserVerficationRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createUserVerficationRecordData({
-  String? ssnId,
   DocumentReference? userRef,
+  String? ssnId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'ssn_id': ssnId,
       'userRef': userRef,
+      'ssn_id': ssnId,
     }.withoutNulls,
   );
 
@@ -84,12 +84,12 @@ class UserVerficationRecordDocumentEquality
 
   @override
   bool equals(UserVerficationRecord? e1, UserVerficationRecord? e2) {
-    return e1?.ssnId == e2?.ssnId && e1?.userRef == e2?.userRef;
+    return e1?.userRef == e2?.userRef && e1?.ssnId == e2?.ssnId;
   }
 
   @override
   int hash(UserVerficationRecord? e) =>
-      const ListEquality().hash([e?.ssnId, e?.userRef]);
+      const ListEquality().hash([e?.userRef, e?.ssnId]);
 
   @override
   bool isValidKey(Object? o) => o is UserVerficationRecord;

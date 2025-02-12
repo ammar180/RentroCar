@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
+import '/components/alert_dialog_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -766,43 +767,26 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                             ),
                           ],
                         ),
-                        FFButtonWidget(
-                          onPressed: () async {
-                            if (_model.formKey.currentState == null ||
-                                !_model.formKey.currentState!.validate()) {
-                              return;
-                            }
-                            if (_model.datePicked1 == null) {
-                              return;
-                            }
-                            if (_model.datePicked2 == null) {
-                              return;
-                            }
+                        Builder(
+                          builder: (context) => FFButtonWidget(
+                            onPressed: () async {
+                              if (valueOrDefault<bool>(
+                                  currentUserDocument?.isVerified, false)) {
+                                if (_model.formKey.currentState == null ||
+                                    !_model.formKey.currentState!.validate()) {
+                                  return;
+                                }
+                                if (_model.datePicked1 == null) {
+                                  return;
+                                }
+                                if (_model.datePicked2 == null) {
+                                  return;
+                                }
 
-                            var tripRecordReference =
-                                TripRecord.collection.doc();
-                            await tripRecordReference.set(createTripRecordData(
-                              startDate: _model.startDate,
-                              endDate: _model.endDate,
-                              carOwner: widget.car?.carOwner,
-                              carBorrower: currentUserReference,
-                              totalPrice: valueOrDefault<int>(
-                                    functions.calculateDaysCount(
-                                        valueOrDefault<int>(
-                                          _model.startDate?.secondsSinceEpoch,
-                                          0,
-                                        ),
-                                        valueOrDefault<int>(
-                                          _model.endDate?.secondsSinceEpoch,
-                                          0,
-                                        )),
-                                    0,
-                                  ) *
-                                  widget.car!.rentalFare,
-                              status: Status.notConfirmed,
-                            ));
-                            _model.createdTrip = TripRecord.getDocumentFromData(
-                                createTripRecordData(
+                                var tripRecordReference =
+                                    TripRecord.collection.doc();
+                                await tripRecordReference
+                                    .set(createTripRecordData(
                                   startDate: _model.startDate,
                                   endDate: _model.endDate,
                                   carOwner: widget.car?.carOwner,
@@ -822,48 +806,99 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                       ) *
                                       widget.car!.rentalFare,
                                   status: Status.notConfirmed,
-                                ),
-                                tripRecordReference);
+                                ));
+                                _model.createdTrip =
+                                    TripRecord.getDocumentFromData(
+                                        createTripRecordData(
+                                          startDate: _model.startDate,
+                                          endDate: _model.endDate,
+                                          carOwner: widget.car?.carOwner,
+                                          carBorrower: currentUserReference,
+                                          totalPrice: valueOrDefault<int>(
+                                                functions.calculateDaysCount(
+                                                    valueOrDefault<int>(
+                                                      _model.startDate
+                                                          ?.secondsSinceEpoch,
+                                                      0,
+                                                    ),
+                                                    valueOrDefault<int>(
+                                                      _model.endDate
+                                                          ?.secondsSinceEpoch,
+                                                      0,
+                                                    )),
+                                                0,
+                                              ) *
+                                              widget.car!.rentalFare,
+                                          status: Status.notConfirmed,
+                                        ),
+                                        tripRecordReference);
 
-                            context.pushNamed(
-                              'booking_summary',
-                              queryParameters: {
-                                'tripDocument': serializeParam(
-                                  _model.createdTrip,
-                                  ParamType.Document,
-                                ),
-                                'bookedCar': serializeParam(
-                                  widget.car,
-                                  ParamType.Document,
-                                ),
-                              }.withoutNulls,
-                              extra: <String, dynamic>{
-                                'tripDocument': _model.createdTrip,
-                                'bookedCar': widget.car,
-                              },
-                            );
+                                context.pushNamed(
+                                  'booking_summary',
+                                  queryParameters: {
+                                    'tripDocument': serializeParam(
+                                      _model.createdTrip,
+                                      ParamType.Document,
+                                    ),
+                                    'bookedCar': serializeParam(
+                                      widget.car,
+                                      ParamType.Document,
+                                    ),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    'tripDocument': _model.createdTrip,
+                                    'bookedCar': widget.car,
+                                  },
+                                );
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (dialogContext) {
+                                    return Dialog(
+                                      elevation: 0,
+                                      insetPadding: EdgeInsets.zero,
+                                      backgroundColor: Colors.transparent,
+                                      alignment: AlignmentDirectional(0.0, 0.0)
+                                          .resolve(Directionality.of(context)),
+                                      child: AlertDialogWidget(
+                                        title: 'Worning',
+                                        description:
+                                            'Please verify your self first and Try to add car again',
+                                        confirmButton: 'Go To verfication',
+                                        confirmCallback: () async {},
+                                      ),
+                                    );
+                                  },
+                                ).then((value) => safeSetState(
+                                    () => _model.dialogResut = value));
 
-                            safeSetState(() {});
-                          },
-                          text: 'Book Now',
-                          options: FFButtonOptions(
-                            width: 190.0,
-                            height: double.infinity,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 0.0, 16.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Open Sans',
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  letterSpacing: 0.0,
-                                ),
-                            elevation: 0.0,
-                            borderRadius: BorderRadius.circular(10.0),
+                                if (_model.dialogResut!) {
+                                  context.pushNamed('edit_profile');
+                                }
+                              }
+
+                              safeSetState(() {});
+                            },
+                            text: 'Book Now',
+                            options: FFButtonOptions(
+                              width: 190.0,
+                              height: double.infinity,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).primary,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    letterSpacing: 0.0,
+                                  ),
+                              elevation: 0.0,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
                           ),
                         ),
                       ],

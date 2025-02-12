@@ -18,3 +18,5 @@ export '/create_request/owner_booking_sammary/owner_booking_sammary_widget.dart'
     show OwnerBookingSammaryWidget;
 export '/create_request/preparing_interview/preparing_interview_widget.dart'
     show PreparingInterviewWidget;
+export '/auth/verfication_data_form/verfication_data_form_widget.dart'
+    show VerficationDataFormWidget;

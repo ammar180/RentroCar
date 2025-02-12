@@ -626,7 +626,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Text(
-                                      'Renter Info',
+                                      'Renting Info',
                                       style: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .override(
