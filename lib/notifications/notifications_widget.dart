@@ -46,45 +46,36 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Row(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/rentrocar-logo.jpg',
-                        width: 40.0,
-                        height: 40.0,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Text(
-                      'RentroCar',
-                      style:
-                          FlutterFlowTheme.of(context).headlineSmall.override(
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.asset(
+                            'assets/images/rentrocar-logo.jpg',
+                            width: 40.0,
+                            height: 40.0,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Text(
+                          'RentroCar',
+                          style: FlutterFlowTheme.of(context)
+                              .headlineSmall
+                              .override(
                                 fontFamily: 'Roboto Mono',
                                 letterSpacing: 0.0,
                               ),
-                    ),
-                  ].divide(SizedBox(width: 10.0)),
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Your Renting Requests',
-                        style: FlutterFlowTheme.of(context).titleLarge.override(
-                              fontFamily: 'Open Sans',
-                              letterSpacing: 0.0,
-                            ),
-                      ),
+                        ),
+                      ].divide(SizedBox(width: 10.0)),
                     ),
                     StreamBuilder<List<TripRecord>>(
                       stream: queryTripRecord(
@@ -113,123 +104,207 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                             ),
                           );
                         }
-                        List<TripRecord> listViewTripRecordList =
+                        List<TripRecord> containerTripRecordList =
                             snapshot.data!;
 
-                        return ListView.builder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: listViewTripRecordList.length,
-                          itemBuilder: (context, listViewIndex) {
-                            final listViewTripRecord =
-                                listViewTripRecordList[listViewIndex];
-                            return StreamBuilder<UsersRecord>(
-                              stream: UsersRecord.getDocument(
-                                  listViewTripRecord.carBorrower!),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          FlutterFlowTheme.of(context).primary,
-                                        ),
-                                      ),
+                        return Container(
+                          height: MediaQuery.sizeOf(context).height * 0.8,
+                          decoration: BoxDecoration(),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Your Renting Requests',
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      fontFamily: 'Open Sans',
+                                      letterSpacing: 0.0,
                                     ),
-                                  );
-                                }
+                              ),
+                              Builder(
+                                builder: (context) {
+                                  if (containerTripRecordList.isNotEmpty) {
+                                    return Builder(
+                                      builder: (context) {
+                                        final containerVar =
+                                            containerTripRecordList.toList();
 
-                                final listTileUsersRecord = snapshot.data!;
+                                        return ListView.builder(
+                                          padding: EdgeInsets.zero,
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.vertical,
+                                          itemCount: containerVar.length,
+                                          itemBuilder:
+                                              (context, containerVarIndex) {
+                                            final containerVarItem =
+                                                containerVar[containerVarIndex];
+                                            return StreamBuilder<UsersRecord>(
+                                              stream: UsersRecord.getDocument(
+                                                  containerVarItem
+                                                      .carBorrower!),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        valueColor:
+                                                            AlwaysStoppedAnimation<
+                                                                Color>(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
 
-                                return InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.pushNamed(
-                                      'ownerBookingSammary',
-                                      queryParameters: {
-                                        'tripDocument': serializeParam(
-                                          listViewTripRecord,
-                                          ParamType.Document,
-                                        ),
-                                      }.withoutNulls,
-                                      extra: <String, dynamic>{
-                                        'tripDocument': listViewTripRecord,
+                                                final listTileUsersRecord =
+                                                    snapshot.data!;
+
+                                                return InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    context.pushNamed(
+                                                      'ownerBookingSammary',
+                                                      queryParameters: {
+                                                        'tripDocument':
+                                                            serializeParam(
+                                                          containerVarItem,
+                                                          ParamType.Document,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'tripDocument':
+                                                            containerVarItem,
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Material(
+                                                    color: Colors.transparent,
+                                                    child: ListTile(
+                                                      title: Text(
+                                                        '${listTileUsersRecord.displayName} - ${formatNumber(
+                                                          containerVarItem
+                                                              .totalPrice,
+                                                          formatType:
+                                                              FormatType.custom,
+                                                          format: 'EGP #',
+                                                          locale: '',
+                                                        )}',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleLarge
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                      subtitle: Text(
+                                                        'from: (${dateTimeFormat(
+                                                          "MMMEd",
+                                                          containerVarItem
+                                                              .startDate,
+                                                          locale:
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .languageCode,
+                                                        )}) to: (${dateTimeFormat(
+                                                          "MMMEd",
+                                                          containerVarItem
+                                                              .endDate,
+                                                          locale:
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .languageCode,
+                                                        )})',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                      trailing: Icon(
+                                                        Icons
+                                                            .arrow_forward_ios_rounded,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        size: 24.0,
+                                                      ),
+                                                      tileColor: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      dense: false,
+                                                      contentPadding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  12.0,
+                                                                  0.0,
+                                                                  12.0,
+                                                                  0.0),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                        );
                                       },
                                     );
-                                  },
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    child: ListTile(
-                                      title: Text(
-                                        '${listTileUsersRecord.displayName} - ${formatNumber(
-                                          listViewTripRecord.totalPrice,
-                                          formatType: FormatType.custom,
-                                          format: 'EGP #',
-                                          locale: '',
-                                        )}',
+                                  } else {
+                                    return Align(
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Text(
+                                        'You Didn\'t have any notifications',
                                         style: FlutterFlowTheme.of(context)
-                                            .titleLarge
+                                            .bodyLarge
                                             .override(
                                               fontFamily: 'Open Sans',
                                               letterSpacing: 0.0,
                                             ),
                                       ),
-                                      subtitle: Text(
-                                        'from: (${dateTimeFormat(
-                                          "MMMEd",
-                                          listViewTripRecord.startDate,
-                                          locale: FFLocalizations.of(context)
-                                              .languageCode,
-                                        )}) to: (${dateTimeFormat(
-                                          "MMMEd",
-                                          listViewTripRecord.endDate,
-                                          locale: FFLocalizations.of(context)
-                                              .languageCode,
-                                        )})',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .override(
-                                              fontFamily: 'Open Sans',
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                      trailing: Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 24.0,
-                                      ),
-                                      tileColor: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      dense: false,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              12.0, 0.0, 12.0, 0.0),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
+                                    );
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
                         );
                       },
                     ),
-                  ],
+                  ].divide(SizedBox(height: 20.0)),
                 ),
-              ].divide(SizedBox(height: 20.0)),
-            ),
+              ),
+            ],
           ),
         ),
       ),

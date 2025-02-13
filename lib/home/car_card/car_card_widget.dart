@@ -116,15 +116,26 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                 ToggleIcon(
                   onPressed: () async {
                     safeSetState(() => _model.loved = !_model.loved);
-                    await currentUserReference!.update({
-                      ...mapToFirestore(
-                        {
-                          'loved_cars':
-                              FieldValue.arrayUnion([widget.car?.reference]),
-                        },
-                      ),
-                    });
-                                    },
+                    if (_model.loved) {
+                      await currentUserReference!.update({
+                        ...mapToFirestore(
+                          {
+                            'loved_cars':
+                                FieldValue.arrayUnion([widget.car?.reference]),
+                          },
+                        ),
+                      });
+                    } else {
+                      await currentUserReference!.update({
+                        ...mapToFirestore(
+                          {
+                            'loved_cars': FieldValue.arrayRemove(
+                                [widget.car?.reference]),
+                          },
+                        ),
+                      });
+                    }
+                  },
                   value: _model.loved,
                   onIcon: Icon(
                     Icons.favorite,

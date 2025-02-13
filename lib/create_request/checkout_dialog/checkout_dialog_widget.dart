@@ -53,7 +53,7 @@ class _CheckoutDialogWidgetState extends State<CheckoutDialogWidget> {
       padding: EdgeInsets.all(12.0),
       child: Container(
         width: 413.6,
-        height: 500.0,
+        height: 518.9,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: [

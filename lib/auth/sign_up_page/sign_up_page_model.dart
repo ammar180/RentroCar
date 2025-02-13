@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'sign_up_page_widget.dart' show SignUpPageWidget;
 import 'package:flutter/material.dart';
@@ -30,6 +31,8 @@ class SignUpPageModel extends FlutterFlowModel<SignUpPageWidget> {
   late bool signupConfirmPasswrodFieldVisibility;
   String? Function(BuildContext, String?)?
       signupConfirmPasswrodFieldTextControllerValidator;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  LocationRecord? createdLocation;
 
   @override
   void initState(BuildContext context) {

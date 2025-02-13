@@ -590,15 +590,27 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           ),
                           photoUrl:
                               'https://th.bing.com/th/id/OIP.iGXXTQ2_jBkxPfeH-_jRJQHaHa?rs=1&pid=ImgDetMain',
+                          isVerified: false,
                         ));
 
-                    await LocationRecord.collection
-                        .doc()
-                        .set(createLocationRecordData(
-                          street: '',
-                        ));
+                    var locationRecordReference =
+                        LocationRecord.collection.doc();
+                    await locationRecordReference.set(createLocationRecordData(
+                      user: currentUserReference,
+                    ));
+                    _model.createdLocation = LocationRecord.getDocumentFromData(
+                        createLocationRecordData(
+                          user: currentUserReference,
+                        ),
+                        locationRecordReference);
+
+                    await currentUserReference!.update(createUsersRecordData(
+                      location: _model.createdLocation?.reference,
+                    ));
 
                     context.pushNamedAuth('edit_profile', context.mounted);
+
+                    safeSetState(() {});
                   },
                   text: 'Sign Up',
                   options: FFButtonOptions(

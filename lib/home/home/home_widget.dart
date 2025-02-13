@@ -78,6 +78,19 @@ class _HomeWidgetState extends State<HomeWidget> {
                 child: TextFormField(
                   controller: _model.searchBarFieldTextController,
                   focusNode: _model.searchBarFieldFocusNode,
+                  onFieldSubmitted: (_) async {
+                    _model.carsCollection = await queryCarRecordOnce(
+                      queryBuilder: (carRecord) => carRecord.where(
+                        'make',
+                        isEqualTo: _model.searchBarFieldTextController.text,
+                      ),
+                    );
+                    _model.searchedCars =
+                        _model.carsCollection!.toList().cast<CarRecord>();
+                    safeSetState(() {});
+
+                    safeSetState(() {});
+                  },
                   autofocus: false,
                   textCapitalization: TextCapitalization.none,
                   textInputAction: TextInputAction.search,
@@ -142,133 +155,146 @@ class _HomeWidgetState extends State<HomeWidget> {
                       .asValidator(context),
                 ),
               ),
-              Container(
-                height: MediaQuery.sizeOf(context).height * 0.73,
-                decoration: BoxDecoration(),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            'Most Popular Cars',
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Open Sans',
-                                  letterSpacing: 0.0,
-                                ),
+              StreamBuilder<List<CarRecord>>(
+                stream: queryCarRecord(
+                  queryBuilder: (carRecord) => carRecord.orderBy('rate'),
+                  limit: 10,
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primary,
                           ),
-                          Container(
-                            height: 232.99,
-                            decoration: BoxDecoration(),
-                            child: StreamBuilder<List<CarRecord>>(
-                              stream: queryCarRecord(
-                                limit: 10,
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          FlutterFlowTheme.of(context).primary,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-                                List<CarRecord> listViewCarRecordList =
-                                    snapshot.data!;
-
-                                return ListView.separated(
-                                  padding: EdgeInsets.zero,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: listViewCarRecordList.length,
-                                  separatorBuilder: (_, __) =>
-                                      SizedBox(width: 10.0),
-                                  itemBuilder: (context, listViewIndex) {
-                                    final listViewCarRecord =
-                                        listViewCarRecordList[listViewIndex];
-                                    return CarCardWidget(
-                                      key: Key(
-                                          'Keymm9_${listViewIndex}_of_${listViewCarRecordList.length}'),
-                                      car: listViewCarRecord,
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        ].divide(SizedBox(height: 12.0)),
+                        ),
                       ),
-                      Column(
+                    );
+                  }
+                  List<CarRecord> containerCarRecordList = snapshot.data!;
+
+                  return Container(
+                    height: MediaQuery.sizeOf(context).height * 0.705,
+                    decoration: BoxDecoration(),
+                    child: SingleChildScrollView(
+                      child: Column(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Top Rated Cars',
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Open Sans',
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                          StreamBuilder<List<CarRecord>>(
-                            stream: queryCarRecord(
-                              queryBuilder: (carRecord) =>
-                                  carRecord.orderBy('rate'),
-                              limit: 10,
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
-                                      ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(
+                                'Most Popular Cars',
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      fontFamily: 'Open Sans',
+                                      letterSpacing: 0.0,
                                     ),
+                              ),
+                              Container(
+                                height: 232.99,
+                                decoration: BoxDecoration(),
+                                child: StreamBuilder<List<CarRecord>>(
+                                  stream: queryCarRecord(
+                                    limit: 10,
                                   ),
-                                );
-                              }
-                              List<CarRecord> columnCarRecordList =
-                                  snapshot.data!;
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<CarRecord> listViewCarRecordList =
+                                        snapshot.data!;
 
-                              return Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: List.generate(
-                                    columnCarRecordList.length, (columnIndex) {
-                                  final columnCarRecord =
-                                      columnCarRecordList[columnIndex];
-                                  return CarCardBigWidget(
-                                    key: Key(
-                                        'Key2pd_${columnIndex}_of_${columnCarRecordList.length}'),
-                                    carParam: columnCarRecord,
-                                  );
-                                }).divide(SizedBox(height: 10.0)),
-                              );
-                            },
+                                    return ListView.separated(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: listViewCarRecordList.length,
+                                      separatorBuilder: (_, __) =>
+                                          SizedBox(width: 10.0),
+                                      itemBuilder: (context, listViewIndex) {
+                                        final listViewCarRecord =
+                                            listViewCarRecordList[
+                                                listViewIndex];
+                                        return CarCardWidget(
+                                          key: Key(
+                                              'Keymm9_${listViewIndex}_of_${listViewCarRecordList.length}'),
+                                          car: listViewCarRecord,
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ].divide(SizedBox(height: 12.0)),
                           ),
-                        ],
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Align(
+                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                child: Text(
+                                  'Top Rated Cars',
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleLarge
+                                      .override(
+                                        fontFamily: 'Open Sans',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                              Builder(
+                                builder: (context) {
+                                  final carDocument =
+                                      (_model.searchedCars.isNotEmpty
+                                              ? _model.searchedCars
+                                              : containerCarRecordList)
+                                          .toList();
+
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: List.generate(carDocument.length,
+                                        (carDocumentIndex) {
+                                      final carDocumentItem =
+                                          carDocument[carDocumentIndex];
+                                      return CarCardBigWidget(
+                                        key: Key(
+                                            'Key2pd_${carDocumentIndex}_of_${carDocument.length}'),
+                                        carParam: carDocumentItem,
+                                      );
+                                    }).divide(SizedBox(height: 10.0)),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ].divide(SizedBox(height: 10.0)),
                       ),
-                    ].divide(SizedBox(height: 10.0)),
-                  ),
-                ),
+                    ),
+                  );
+                },
               ),
             ].divide(SizedBox(height: 30.0)),
           ),

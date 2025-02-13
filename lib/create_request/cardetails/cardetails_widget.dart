@@ -777,9 +777,49 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                   return;
                                 }
                                 if (_model.datePicked1 == null) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'please define start date',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondary,
+                                    ),
+                                  );
                                   return;
                                 }
                                 if (_model.datePicked2 == null) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'please define end date',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondary,
+                                    ),
+                                  );
                                   return;
                                 }
 
@@ -806,6 +846,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                       ) *
                                       widget.car!.rentalFare,
                                   status: Status.notConfirmed,
+                                  borrowedCar: widget.car?.reference,
                                 ));
                                 _model.createdTrip =
                                     TripRecord.getDocumentFromData(
@@ -830,6 +871,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                               ) *
                                               widget.car!.rentalFare,
                                           status: Status.notConfirmed,
+                                          borrowedCar: widget.car?.reference,
                                         ),
                                         tripRecordReference);
 
@@ -873,7 +915,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                     () => _model.dialogResut = value));
 
                                 if (_model.dialogResut!) {
-                                  context.pushNamed('edit_profile');
+                                  context.pushNamed('profile');
                                 }
                               }
 

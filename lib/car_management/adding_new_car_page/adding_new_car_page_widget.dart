@@ -1098,9 +1098,11 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       }
                                                     }
 
-                                                    _model.addToPhotosList(
+                                                    _model.insertAtIndexInPhotosList(
+                                                        0,
                                                         _model
                                                             .uploadedFileUrl1);
+                                                    safeSetState(() {});
                                                   },
                                                   child: Container(
                                                     width: 100.0,
@@ -1262,9 +1264,11 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       }
                                                     }
 
-                                                    _model.addToPhotosList(
+                                                    _model.insertAtIndexInPhotosList(
+                                                        1,
                                                         _model
                                                             .uploadedFileUrl2);
+                                                    safeSetState(() {});
                                                   },
                                                   child: Container(
                                                     width: 100.0,
@@ -1426,9 +1430,11 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       }
                                                     }
 
-                                                    _model.addToPhotosList(
+                                                    _model.insertAtIndexInPhotosList(
+                                                        2,
                                                         _model
                                                             .uploadedFileUrl3);
+                                                    safeSetState(() {});
                                                   },
                                                   child: Container(
                                                     width: 100.0,
@@ -1590,7 +1596,8 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       }
                                                     }
 
-                                                    _model.addToPhotosList(
+                                                    _model.insertAtIndexInPhotosList(
+                                                        3,
                                                         _model
                                                             .uploadedFileUrl4);
                                                   },
@@ -1653,6 +1660,8 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .secondaryText,
+                                                                    fontSize:
+                                                                        10.0,
                                                                     letterSpacing:
                                                                         0.0,
                                                                   ),
@@ -1754,9 +1763,11 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       }
                                                     }
 
-                                                    _model.addToPhotosList(
+                                                    _model.insertAtIndexInPhotosList(
+                                                        4,
                                                         _model
                                                             .uploadedFileUrl5);
+                                                    safeSetState(() {});
                                                   },
                                                   child: Container(
                                                     width: 100.0,
@@ -1827,60 +1838,157 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                     ),
                                                   ),
                                                 ),
-                                                Container(
-                                                  width: 100.0,
-                                                  height: 100.0,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12.0),
-                                                    border: Border.all(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 2.0,
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    // uploadImageAction
+                                                    final selectedMedia =
+                                                        await selectMediaWithSourceBottomSheet(
+                                                      context: context,
+                                                      maxWidth: 200.00,
+                                                      allowPhoto: true,
+                                                    );
+                                                    if (selectedMedia != null &&
+                                                        selectedMedia.every((m) =>
+                                                            validateFileFormat(
+                                                                m.storagePath,
+                                                                context))) {
+                                                      safeSetState(() => _model
+                                                              .isDataUploading6 =
+                                                          true);
+                                                      var selectedUploadedFiles =
+                                                          <FFUploadedFile>[];
+
+                                                      var downloadUrls =
+                                                          <String>[];
+                                                      try {
+                                                        selectedUploadedFiles =
+                                                            selectedMedia
+                                                                .map((m) =>
+                                                                    FFUploadedFile(
+                                                                      name: m
+                                                                          .storagePath
+                                                                          .split(
+                                                                              '/')
+                                                                          .last,
+                                                                      bytes: m
+                                                                          .bytes,
+                                                                      height: m
+                                                                          .dimensions
+                                                                          ?.height,
+                                                                      width: m
+                                                                          .dimensions
+                                                                          ?.width,
+                                                                      blurHash:
+                                                                          m.blurHash,
+                                                                    ))
+                                                                .toList();
+
+                                                        downloadUrls =
+                                                            (await Future.wait(
+                                                          selectedMedia.map(
+                                                            (m) async =>
+                                                                await uploadData(
+                                                                    m.storagePath,
+                                                                    m.bytes),
+                                                          ),
+                                                        ))
+                                                                .where((u) =>
+                                                                    u != null)
+                                                                .map((u) => u!)
+                                                                .toList();
+                                                      } finally {
+                                                        _model.isDataUploading6 =
+                                                            false;
+                                                      }
+                                                      if (selectedUploadedFiles
+                                                                  .length ==
+                                                              selectedMedia
+                                                                  .length &&
+                                                          downloadUrls.length ==
+                                                              selectedMedia
+                                                                  .length) {
+                                                        safeSetState(() {
+                                                          _model.uploadedLocalFile6 =
+                                                              selectedUploadedFiles
+                                                                  .first;
+                                                          _model.uploadedFileUrl6 =
+                                                              downloadUrls
+                                                                  .first;
+                                                        });
+                                                      } else {
+                                                        safeSetState(() {});
+                                                        return;
+                                                      }
+                                                    }
+
+                                                    _model.insertAtIndexInPhotosList(
+                                                        6,
+                                                        _model
+                                                            .uploadedFileUrl6);
+                                                  },
+                                                  child: Container(
+                                                    width: 100.0,
+                                                    height: 100.0,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0),
+                                                      border: Border.all(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        width: 2.0,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.all(16.0),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Icon(
-                                                          Icons.add_a_photo,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          size: 32.0,
-                                                        ),
-                                                        Text(
-                                                          'Trunk',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodySmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Open Sans',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                              ),
-                                                        ),
-                                                      ],
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsets.all(16.0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.add_a_photo,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryText,
+                                                            size: 32.0,
+                                                          ),
+                                                          Text(
+                                                            'Trunk',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodySmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -2365,65 +2473,41 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                 ),
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    _model.isValid = true;
                                     if (_model.formKey3.currentState == null ||
                                         !_model.formKey3.currentState!
                                             .validate()) {
-                                      safeSetState(
-                                          () => _model.isValid = false);
                                       return;
                                     }
-                                    if (_model.isValid != null) {
-                                      await CarRecord.collection.doc().set({
-                                        ...createCarRecordData(
-                                          model: _model
-                                              .carModelTextController.text,
-                                          make:
-                                              _model.carMakeTextController.text,
-                                          rentalFare: double.tryParse(_model
-                                              .carPriceTextController.text),
-                                          isAvailable: false,
-                                          isVisible: false,
-                                          availableDays: int.tryParse(
-                                              _model.textController6.text),
-                                          rate: 0.0,
-                                          carOwner: currentUserReference,
-                                          description:
-                                              _model.textController4.text,
-                                          year: int.tryParse(_model
-                                              .carYearTextController.text),
-                                        ),
-                                        ...mapToFirestore(
-                                          {
-                                            'carPhotos': _model.photosList,
-                                          },
-                                        ),
-                                      });
-                                      await _model.addingNewCarStepsController
-                                          ?.nextPage(
-                                        duration: Duration(milliseconds: 300),
-                                        curve: Curves.ease,
-                                      );
-                                    } else {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text('Feild'),
-                                            content: Text('Validation Field'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    }
 
-                                    safeSetState(() {});
+                                    await CarRecord.collection.doc().set({
+                                      ...createCarRecordData(
+                                        model:
+                                            _model.carModelTextController.text,
+                                        make: _model.carMakeTextController.text,
+                                        rentalFare: double.tryParse(
+                                            _model.carPriceTextController.text),
+                                        isAvailable: false,
+                                        isVisible: false,
+                                        availableDays: int.tryParse(
+                                            _model.textController6.text),
+                                        rate: 0.0,
+                                        carOwner: currentUserReference,
+                                        description:
+                                            _model.textController4.text,
+                                        year: int.tryParse(
+                                            _model.carYearTextController.text),
+                                      ),
+                                      ...mapToFirestore(
+                                        {
+                                          'carPhotos': _model.photosList,
+                                        },
+                                      ),
+                                    });
+                                    await _model.addingNewCarStepsController
+                                        ?.nextPage(
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.ease,
+                                    );
                                   },
                                   text: 'Save Car Data',
                                   options: FFButtonOptions(

@@ -73,70 +73,101 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                     ),
                   ].divide(SizedBox(width: 10.0)),
                 ),
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Most Popular Cars',
+                Container(
+                  width: double.infinity,
+                  height: MediaQuery.sizeOf(context).height * 0.809,
+                  decoration: BoxDecoration(),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Your Favorite Cars',
                         style: FlutterFlowTheme.of(context).titleLarge.override(
                               fontFamily: 'Open Sans',
                               letterSpacing: 0.0,
                             ),
                       ),
-                    ),
-                    AuthUserStreamWidget(
-                      builder: (context) => Builder(
-                        builder: (context) {
-                          final lovedCarRef =
-                              (currentUserDocument?.lovedCars.toList() ?? [])
-                                  .toList();
+                      Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Builder(
+                          builder: (context) {
+                            if ((currentUserDocument?.lovedCars.toList() ?? [])
+                                .isNotEmpty) {
+                              return Builder(
+                                builder: (context) {
+                                  final lovedCarRef = (currentUserDocument
+                                              ?.lovedCars
+                                              .toList() ??
+                                          [])
+                                      .toList();
 
-                          return ListView.separated(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: lovedCarRef.length,
-                            separatorBuilder: (_, __) => SizedBox(height: 10.0),
-                            itemBuilder: (context, lovedCarRefIndex) {
-                              final lovedCarRefItem =
-                                  lovedCarRef[lovedCarRefIndex];
-                              return StreamBuilder<CarRecord>(
-                                stream: CarRecord.getDocument(lovedCarRefItem),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }
+                                  return ListView.separated(
+                                    padding: EdgeInsets.zero,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: lovedCarRef.length,
+                                    separatorBuilder: (_, __) =>
+                                        SizedBox(height: 10.0),
+                                    itemBuilder: (context, lovedCarRefIndex) {
+                                      final lovedCarRefItem =
+                                          lovedCarRef[lovedCarRefIndex];
+                                      return StreamBuilder<CarRecord>(
+                                        stream: CarRecord.getDocument(
+                                            lovedCarRefItem),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50.0,
+                                                height: 50.0,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                          Color>(
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }
 
-                                  final carCardCarRecord = snapshot.data!;
+                                          final carCardCarRecord =
+                                              snapshot.data!;
 
-                                  return CarCardWidget(
-                                    key: Key(
-                                        'Keyakb_${lovedCarRefIndex}_of_${lovedCarRef.length}'),
-                                    car: carCardCarRecord,
+                                          return CarCardWidget(
+                                            key: Key(
+                                                'Keyakb_${lovedCarRefIndex}_of_${lovedCarRef.length}'),
+                                            car: carCardCarRecord,
+                                          );
+                                        },
+                                      );
+                                    },
                                   );
                                 },
                               );
-                            },
-                          );
-                        },
+                            } else {
+                              return Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Text(
+                                  'You Didn\'t have any loved cars',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: 'Open Sans',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              );
+                            }
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ].divide(SizedBox(height: 10.0)),
+                  ),
                 ),
               ].divide(SizedBox(height: 20.0)),
             ),

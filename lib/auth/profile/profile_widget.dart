@@ -102,7 +102,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 child: Image.network(
                                   valueOrDefault<String>(
                                     currentUserPhoto,
-                                    'https://media.licdn.com/dms/image/v2/D4D03AQGrMxQArD5Oyg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718349134705?e=1744243200&v=beta&t=BTOxEv4PlRVOL3ZXaiixGfoLmLZWi5tirVzYDtFojMY',
+                                    'https://th.bing.com/th/id/OIP.iGXXTQ2_jBkxPfeH-_jRJQHaHa?rs=1&pid=ImgDetMain',
                                   ),
                                   fit: BoxFit.cover,
                                 ),
@@ -297,7 +297,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ),
                 ),
-                if (valueOrDefault<bool>(
+                if (!valueOrDefault<bool>(
                     currentUserDocument?.isVerified, false))
                   Padding(
                     padding:

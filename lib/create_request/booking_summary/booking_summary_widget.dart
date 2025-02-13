@@ -90,6 +90,15 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
             1026.0,
           ) +
           FFAppConstants.insuranceDeposit;
+      if (widget.bookedCar != null) {
+        _model.carDoc = widget.bookedCar;
+        safeSetState(() {});
+      } else {
+        _model.retrievedBorrowedCar =
+            await CarRecord.getDocumentOnce(widget.tripDocument!.borrowedCar!);
+        _model.carDoc = _model.retrievedBorrowedCar;
+        safeSetState(() {});
+      }
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -196,226 +205,95 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    child: Builder(
-                      builder: (context) {
-                        if (widget.bookedCar != null) {
-                          return Padding(
-                            padding: EdgeInsets.all(12.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  child: Image.network(
-                                    valueOrDefault<String>(
-                                      widget.bookedCar?.carPhotos.firstOrNull,
-                                      'https://images.unsplash.com/photo-1510903117032-f1596c327647?w=800&h=800',
-                                    ),
-                                    width: 100.0,
-                                    height: 100.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        valueOrDefault<String>(
-                                          '${widget.bookedCar?.make} ${widget.bookedCar?.model}',
-                                          'BYD F3',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineSmall
-                                            .override(
-                                              fontFamily: 'Open Sans',
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Icon(
-                                            Icons.star_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            size: 20.0,
-                                          ),
-                                          Text(
-                                            formatNumber(
-                                              widget.bookedCar!.rate,
-                                              formatType: FormatType.custom,
-                                              format: '#.#',
-                                              locale: '',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Open Sans',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                          Text(
-                                            '(139 trips)',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodySmall
-                                                .override(
-                                                  fontFamily: 'Open Sans',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                        ].divide(SizedBox(width: 8.0)),
-                                      ),
-                                      Text(
-                                        formatNumber(
-                                          widget.bookedCar!.rentalFare,
-                                          formatType: FormatType.custom,
-                                          format: 'EGP # / day',
-                                          locale: '',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .titleMedium
-                                            .override(
-                                              fontFamily: 'Open Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                    ].divide(SizedBox(height: 8.0)),
-                                  ),
-                                ),
-                              ].divide(SizedBox(width: 16.0)),
+                    child: Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0),
+                            child: Image.network(
+                              valueOrDefault<String>(
+                                widget.bookedCar?.carPhotos.firstOrNull,
+                                'https://images.unsplash.com/photo-1510903117032-f1596c327647?w=800&h=800',
+                              ),
+                              width: 100.0,
+                              height: 100.0,
+                              fit: BoxFit.cover,
                             ),
-                          );
-                        } else {
-                          return Padding(
-                            padding: EdgeInsets.all(12.0),
-                            child: StreamBuilder<CarRecord>(
-                              stream: CarRecord.getDocument(
-                                  widget.tripDocument!.borrowedCar!),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          FlutterFlowTheme.of(context).primary,
-                                        ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  valueOrDefault<String>(
+                                    '${_model.carDoc?.make} ${_model.carDoc?.model}',
+                                    'BYD F3',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineSmall
+                                      .override(
+                                        fontFamily: 'Open Sans',
+                                        letterSpacing: 0.0,
                                       ),
-                                    ),
-                                  );
-                                }
-
-                                final rowCarRecord = snapshot.data!;
-
-                                return Row(
+                                ),
+                                Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      child: Image.network(
-                                        valueOrDefault<String>(
-                                          rowCarRecord.carPhotos.firstOrNull,
-                                          'https://images.unsplash.com/photo-1510903117032-f1596c327647?w=800&h=800',
-                                        ),
-                                        width: 100.0,
-                                        height: 100.0,
-                                        fit: BoxFit.cover,
-                                      ),
+                                    Icon(
+                                      Icons.star_rounded,
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      size: 20.0,
                                     ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            valueOrDefault<String>(
-                                              '${rowCarRecord.make} ${rowCarRecord.model}',
-                                              'BYD F3',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .headlineSmall
-                                                .override(
-                                                  fontFamily: 'Open Sans',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Icon(
-                                                Icons.star_rounded,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                size: 20.0,
-                                              ),
-                                              Text(
-                                                rowCarRecord.rate.toString(),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                              Text(
-                                                '(139 trips)',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodySmall
-                                                    .override(
-                                                      fontFamily: 'Open Sans',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                              ),
-                                            ].divide(SizedBox(width: 8.0)),
-                                          ),
-                                          Text(
-                                            formatNumber(
-                                              rowCarRecord.rentalFare,
-                                              formatType: FormatType.custom,
-                                              format: 'EGP #/ day',
-                                              locale: '',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleMedium
-                                                .override(
-                                                  fontFamily: 'Open Sans',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                        ].divide(SizedBox(height: 8.0)),
+                                    Text(
+                                      valueOrDefault<String>(
+                                        _model.carDoc?.rate.toString(),
+                                        '0.0',
                                       ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Open Sans',
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
-                                  ].divide(SizedBox(width: 16.0)),
-                                );
-                              },
+                                    Text(
+                                      '(139 trips)',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodySmall
+                                          .override(
+                                            fontFamily: 'Open Sans',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ].divide(SizedBox(width: 8.0)),
+                                ),
+                                Text(
+                                  formatNumber(
+                                    _model.carDoc!.rentalFare,
+                                    formatType: FormatType.custom,
+                                    format: 'EGP #/day',
+                                    locale: '',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .override(
+                                        fontFamily: 'Open Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ].divide(SizedBox(height: 8.0)),
                             ),
-                          );
-                        }
-                      },
+                          ),
+                        ].divide(SizedBox(width: 16.0)),
+                      ),
                     ),
                   ),
                 ),
@@ -724,8 +602,6 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                     Builder(
                                       builder: (context) => FFButtonWidget(
                                         onPressed: () async {
-                                          await launchURL(
-                                              'https://api.whatsapp.com/send?autoload=1&app_absent=0&phone=2${columnUsersRecord.phoneNumber}&text');
                                           await showDialog(
                                             context: context,
                                             builder: (dialogContext) {
@@ -892,7 +768,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                '${widget.bookedCar?.rentalFare.toString()}  × ${functions.calculateDaysCount(widget.tripDocument!.startDate!.secondsSinceEpoch, widget.tripDocument!.endDate!.secondsSinceEpoch).toString()} days',
+                                '${_model.carDoc?.rentalFare.toString()}  × ${functions.calculateDaysCount(widget.tripDocument!.startDate!.secondsSinceEpoch, widget.tripDocument!.endDate!.secondsSinceEpoch).toString()} days',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(

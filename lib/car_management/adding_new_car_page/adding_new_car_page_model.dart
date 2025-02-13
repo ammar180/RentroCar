@@ -97,6 +97,11 @@ class AddingNewCarPageModel extends FlutterFlowModel<AddingNewCarPageWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl5 = '';
 
+  bool isDataUploading6 = false;
+  FFUploadedFile uploadedLocalFile6 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl6 = '';
+
   // State field(s) for car_price widget.
   FocusNode? carPriceFocusNode;
   TextEditingController? carPriceTextController;
@@ -120,9 +125,6 @@ class AddingNewCarPageModel extends FlutterFlowModel<AddingNewCarPageWidget> {
 
     return null;
   }
-
-  // Stores action output result for [Validate Form] action in Button widget.
-  bool? isValid;
 
   @override
   void initState(BuildContext context) {

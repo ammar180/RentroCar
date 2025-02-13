@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/schema/enums/enums.dart';
 import '/car_management/borrowed_car_card/borrowed_car_card_widget.dart';
 import '/car_management/componants/my_car_card/my_car_card_widget.dart';
 import '/components/alert_dialog_widget.dart';
@@ -154,7 +153,7 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                                       () => _model.dialogResult = value));
 
                                   if (_model.dialogResult!) {
-                                    context.pushNamed('edit_profile');
+                                    context.pushNamed('profile');
                                   }
                                 }
 
@@ -325,19 +324,17 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                       ),
                       StreamBuilder<List<TripRecord>>(
                         stream: queryTripRecord(
-                          queryBuilder: (tripRecord) => tripRecord
-                              .where(
-                                'carBorrower',
-                                isEqualTo: currentUserReference,
-                              )
-                              .where(
-                                'status',
-                                isNotEqualTo: Status.rejected.serialize(),
-                              )
-                              .where(
-                                'carOwner',
-                                isEqualTo: currentUserReference,
-                              ),
+                          queryBuilder: (tripRecord) =>
+                              tripRecord.where(Filter.or(
+                            Filter(
+                              'carBorrower',
+                              isEqualTo: currentUserReference,
+                            ),
+                            Filter(
+                              'carOwner',
+                              isEqualTo: currentUserReference,
+                            ),
+                          )),
                         ),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
@@ -354,61 +351,96 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                               ),
                             );
                           }
-                          List<TripRecord> listViewTripRecordList =
+                          List<TripRecord> containerTripRecordList =
                               snapshot.data!;
 
-                          return ListView.separated(
-                            padding: EdgeInsets.zero,
-                            primary: false,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: listViewTripRecordList.length,
-                            separatorBuilder: (_, __) => SizedBox(height: 10.0),
-                            itemBuilder: (context, listViewIndex) {
-                              final listViewTripRecord =
-                                  listViewTripRecordList[listViewIndex];
-                              return InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  if (listViewTripRecord.carOwner ==
-                                      currentUserReference) {
-                                    context.pushNamed(
-                                      'ownerBookingSammary',
-                                      queryParameters: {
-                                        'tripDocument': serializeParam(
-                                          listViewTripRecord,
-                                          ParamType.Document,
-                                        ),
-                                      }.withoutNulls,
-                                      extra: <String, dynamic>{
-                                        'tripDocument': listViewTripRecord,
-                                      },
-                                    );
-                                  } else {
-                                    context.pushNamed(
-                                      'booking_summary',
-                                      queryParameters: {
-                                        'tripDocument': serializeParam(
-                                          listViewTripRecord,
-                                          ParamType.Document,
-                                        ),
-                                      }.withoutNulls,
-                                      extra: <String, dynamic>{
-                                        'tripDocument': listViewTripRecord,
-                                      },
-                                    );
-                                  }
-                                },
-                                child: BorrowedCarCardWidget(
-                                  key: Key(
-                                      'Keyrja_${listViewIndex}_of_${listViewTripRecordList.length}'),
-                                  tribData: listViewTripRecord,
-                                ),
-                              );
-                            },
+                          return Container(
+                            decoration: BoxDecoration(),
+                            child: Builder(
+                              builder: (context) {
+                                if (containerTripRecordList.isNotEmpty) {
+                                  return Builder(
+                                    builder: (context) {
+                                      final containerVar =
+                                          containerTripRecordList.toList();
+
+                                      return ListView.separated(
+                                        padding: EdgeInsets.zero,
+                                        primary: false,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: containerVar.length,
+                                        separatorBuilder: (_, __) =>
+                                            SizedBox(height: 10.0),
+                                        itemBuilder:
+                                            (context, containerVarIndex) {
+                                          final containerVarItem =
+                                              containerVar[containerVarIndex];
+                                          return InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              if (containerVarItem.carOwner ==
+                                                  currentUserReference) {
+                                                context.pushNamed(
+                                                  'ownerBookingSammary',
+                                                  queryParameters: {
+                                                    'tripDocument':
+                                                        serializeParam(
+                                                      containerVarItem,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'tripDocument':
+                                                        containerVarItem,
+                                                  },
+                                                );
+                                              } else {
+                                                context.pushNamed(
+                                                  'booking_summary',
+                                                  queryParameters: {
+                                                    'tripDocument':
+                                                        serializeParam(
+                                                      containerVarItem,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'tripDocument':
+                                                        containerVarItem,
+                                                  },
+                                                );
+                                              }
+                                            },
+                                            child: BorrowedCarCardWidget(
+                                              key: Key(
+                                                  'Keyrja_${containerVarIndex}_of_${containerVar.length}'),
+                                              tribData: containerVarItem,
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  return Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Text(
+                                      'You didn\'t have any requestes',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Open Sans',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
                           );
                         },
                       ),

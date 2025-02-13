@@ -274,56 +274,55 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 0.0),
-              child: Material(
-                color: Colors.transparent,
-                elevation: 2.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                child: Container(
-                  width: MediaQuery.sizeOf(context).width * 1.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).accent4,
-                    borderRadius: BorderRadius.circular(16.0),
+              child: StreamBuilder<List<LocationRecord>>(
+                stream: queryLocationRecord(
+                  queryBuilder: (locationRecord) => locationRecord.where(
+                    'user',
+                    isEqualTo: currentUserReference,
                   ),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
-                    child: StreamBuilder<List<LocationRecord>>(
-                      stream: queryLocationRecord(
-                        queryBuilder: (locationRecord) => locationRecord.where(
-                          'user',
-                          isEqualTo: currentUserReference,
+                  singleRecord: true,
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primary,
+                          ),
                         ),
-                        singleRecord: true,
                       ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                        List<LocationRecord> columnLocationRecordList =
-                            snapshot.data!;
-                        // Return an empty Container when the item does not exist.
-                        if (snapshot.data!.isEmpty) {
-                          return Container();
-                        }
-                        final columnLocationRecord =
-                            columnLocationRecordList.isNotEmpty
-                                ? columnLocationRecordList.first
-                                : null;
+                    );
+                  }
+                  List<LocationRecord> containerLocationRecordList =
+                      snapshot.data!;
+                  // Return an empty Container when the item does not exist.
+                  if (snapshot.data!.isEmpty) {
+                    return Container();
+                  }
+                  final containerLocationRecord =
+                      containerLocationRecordList.isNotEmpty
+                          ? containerLocationRecordList.first
+                          : null;
 
-                        return Column(
+                  return Material(
+                    color: Colors.transparent,
+                    elevation: 2.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).accent4,
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            20.0, 20.0, 20.0, 20.0),
+                        child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Text(
@@ -340,8 +339,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             TextFormField(
                               controller: _model.textController2 ??=
                                   TextEditingController(
-                                text: columnLocationRecord != null
-                                    ? columnLocationRecord.government
+                                text: containerLocationRecord != null
+                                    ? containerLocationRecord.government
                                     : '',
                               ),
                               focusNode: _model.textFieldFocusNode1,
@@ -407,8 +406,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             TextFormField(
                               controller: _model.textController3 ??=
                                   TextEditingController(
-                                text: columnLocationRecord != null
-                                    ? columnLocationRecord.city
+                                text: containerLocationRecord != null
+                                    ? containerLocationRecord.city
                                     : '',
                               ),
                               focusNode: _model.textFieldFocusNode2,
@@ -474,8 +473,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             TextFormField(
                               controller: _model.textController4 ??=
                                   TextEditingController(
-                                text: columnLocationRecord != null
-                                    ? columnLocationRecord.street
+                                text: containerLocationRecord != null
+                                    ? containerLocationRecord.street
                                     : '',
                               ),
                               focusNode: _model.textFieldFocusNode3,
@@ -539,11 +538,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   .asValidator(context),
                             ),
                           ].divide(SizedBox(height: 16.0)),
-                        );
-                      },
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ),
             Align(
@@ -554,14 +553,26 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                   onPressed: () async {
                     await currentUserReference!.update(createUsersRecordData(
                       displayName: _model.yourNameTextController.text,
-                      photoUrl: _model.uploadedFileUrl,
+                      photoUrl: valueOrDefault<String>(
+                        () {
+                          if (_model.uploadedFileUrl != '') {
+                            return _model.uploadedFileUrl;
+                          } else if (currentUserPhoto != '') {
+                            return currentUserPhoto;
+                          } else {
+                            return 'https://th.bing.com/th/id/OIP.iGXXTQ2_jBkxPfeH-_jRJQHaHa?rs=1&pid=ImgDetMain';
+                          }
+                        }(),
+                        'https://th.bing.com/th/id/OIP.iGXXTQ2_jBkxPfeH-_jRJQHaHa?rs=1&pid=ImgDetMain',
+                      ),
                     ));
 
-                    await LocationRecord.collection
-                        .doc()
-                        .set(createLocationRecordData(
-                          user: currentUserReference,
-                        ));
+                    await currentUserDocument!.location!
+                        .update(createLocationRecordData(
+                      government: _model.textController2.text,
+                      city: _model.textController3.text,
+                      street: _model.textController4.text,
+                    ));
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
@@ -578,6 +589,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         backgroundColor: FlutterFlowTheme.of(context).success,
                       ),
                     );
+
+                    context.pushNamed('profile');
                   },
                   text: 'Save Changes',
                   options: FFButtonOptions(
