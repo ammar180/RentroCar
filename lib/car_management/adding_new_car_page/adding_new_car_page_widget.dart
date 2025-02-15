@@ -191,7 +191,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
             },
           ),
           title: Text(
-            'Adding New',
+            FFLocalizations.of(context).getText(
+              '9yk1kz2v' /* Adding New */,
+            ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Open Sans',
                   letterSpacing: 0.0,
@@ -210,236 +212,299 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
                   child: PageView(
+                    physics: const NeverScrollableScrollPhysics(),
                     controller: _model.addingNewCarStepsController ??=
                         PageController(initialPage: 0),
                     scrollDirection: Axis.horizontal,
                     children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 0.0, 20.0, 0.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Add Car to Application',
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineSmall
-                                          .override(
-                                            fontFamily: 'Open Sans',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    Text(
-                                      'Here few steps to add new car into application to be available for rent.',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Open Sans',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                                Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: Color(0x193961F1),
-                                    borderRadius: BorderRadius.circular(20.0),
+                      Align(
+                        alignment: AlignmentDirectional(0.0, -1.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 0.0, 20.0, 0.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        FFLocalizations.of(context).getText(
+                                          '0novlqxu' /* Add Car to Application */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .headlineSmall
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      Text(
+                                        FFLocalizations.of(context).getText(
+                                          '8lwawmib' /* Here few steps to add new car ... */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ],
                                   ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(16.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                  Align(
+                                    alignment: AlignmentDirectional(0.0, 1.0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x193961F1),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(16.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            Icon(
-                                              Icons.info,
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Icon(
+                                                  Icons.info,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  size: 24.0,
+                                                ),
+                                                Flexible(
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'm03o91l7' /* Car Info */,
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                      Text(
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'znu4039o' /* Your lessees will use this dat... */,
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelLarge
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                    ].divide(
+                                                        SizedBox(height: 2.0)),
+                                                  ),
+                                                ),
+                                              ].divide(SizedBox(width: 10.0)),
+                                            ),
+                                            Divider(
+                                              thickness: 2.0,
                                               color:
                                                   FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Icon(
+                                                  Icons.photo,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .primary,
-                                              size: 24.0,
-                                            ),
-                                            Flexible(
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Car Info',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          letterSpacing: 0.0,
+                                                  size: 24.0,
+                                                ),
+                                                Flexible(
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          '0jngmpdi' /* Car Photo */,
                                                         ),
-                                                  ),
-                                                  Text(
-                                                    'Your lessees will use this data to identify your car at pickup.',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          letterSpacing: 0.0,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                      Text(
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          '0m1y2h5w' /* Take good, clear photos to att... */,
                                                         ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelLarge
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                    ].divide(
+                                                        SizedBox(height: 2.0)),
                                                   ),
-                                                ].divide(SizedBox(height: 2.0)),
-                                              ),
+                                                ),
+                                              ].divide(SizedBox(width: 10.0)),
                                             ),
-                                          ].divide(SizedBox(width: 10.0)),
-                                        ),
-                                        Divider(
-                                          thickness: 2.0,
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Icon(
-                                              Icons.photo,
+                                            Divider(
+                                              thickness: 2.0,
                                               color:
                                                   FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Icon(
+                                                  Icons.price_check_rounded,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .primary,
-                                              size: 24.0,
-                                            ),
-                                            Flexible(
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Car Photo',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          letterSpacing: 0.0,
+                                                  size: 24.0,
+                                                ),
+                                                Flexible(
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'kkarr8xe' /* Car Pricing & Availability */,
                                                         ),
-                                                  ),
-                                                  Text(
-                                                    'Take good, clear photos to attract the attention of lessees and increase the chance of renting your car.',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          letterSpacing: 0.0,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                      Text(
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'uo9xsafm' /* Here you will set car pricing ... */,
                                                         ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelLarge
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                    ].divide(
+                                                        SizedBox(height: 2.0)),
                                                   ),
-                                                ].divide(SizedBox(height: 2.0)),
-                                              ),
+                                                ),
+                                              ].divide(SizedBox(width: 10.0)),
                                             ),
-                                          ].divide(SizedBox(width: 10.0)),
+                                          ].divide(SizedBox(height: 12.0)),
                                         ),
-                                        Divider(
-                                          thickness: 2.0,
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Icon(
-                                              Icons.price_check_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 24.0,
-                                            ),
-                                            Flexible(
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Car Pricing & Availability',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  Text(
-                                                    'Here you will set car pricing for day and available days for rent',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                ].divide(SizedBox(height: 2.0)),
-                                              ),
-                                            ),
-                                          ].divide(SizedBox(width: 10.0)),
-                                        ),
-                                      ].divide(SizedBox(height: 12.0)),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ].divide(SizedBox(height: 10.0)),
-                            ),
-                            FFButtonWidget(
-                              onPressed: () async {
-                                await _model.addingNewCarStepsController
-                                    ?.nextPage(
-                                  duration: Duration(milliseconds: 300),
-                                  curve: Curves.ease,
-                                );
-                              },
-                              text: 'Continue',
-                              options: FFButtonOptions(
-                                width: double.infinity,
-                                height: 42.7,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Open Sans',
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                    ),
-                                elevation: 0.0,
-                                borderRadius: BorderRadius.circular(10.0),
+                                ].divide(SizedBox(height: 10.0)),
                               ),
-                            ),
-                          ].divide(SizedBox(height: 10.0)),
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  await _model.addingNewCarStepsController
+                                      ?.nextPage(
+                                    duration: Duration(milliseconds: 300),
+                                    curve: Curves.ease,
+                                  );
+                                },
+                                text: FFLocalizations.of(context).getText(
+                                  '5l86kk9u' /* Continue */,
+                                ),
+                                options: FFButtonOptions(
+                                  width: double.infinity,
+                                  height: 42.7,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Open Sans',
+                                        color: Colors.white,
+                                        letterSpacing: 0.0,
+                                      ),
+                                  elevation: 0.0,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ),
+                            ].divide(SizedBox(height: 10.0)),
+                          ),
                         ),
                       ),
                       Padding(
@@ -456,7 +521,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Car Info',
+                                    FFLocalizations.of(context).getText(
+                                      'cig1crwh' /* Car Info */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .headlineSmall
                                         .override(
@@ -465,7 +532,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                         ),
                                   ),
                                   Text(
-                                    'Your lessees will use this data to identify your car at pickup.',
+                                    FFLocalizations.of(context).getText(
+                                      'ojhcprsj' /* Your lessees will use this dat... */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -499,7 +568,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Text(
-                                            'General Info',
+                                            FFLocalizations.of(context).getText(
+                                              'cfi7e2uz' /* General Info */,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .titleMedium
                                                 .override(
@@ -522,7 +593,12 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                   autofocus: false,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'Make',
+                                                    labelText:
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                      'dymz3coh' /* Make */,
+                                                    ),
                                                     labelStyle: FlutterFlowTheme
                                                             .of(context)
                                                         .bodyMedium
@@ -612,7 +688,12 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                   autofocus: false,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'Model',
+                                                    labelText:
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                      'kky89t6f' /* Model */,
+                                                    ),
                                                     labelStyle: FlutterFlowTheme
                                                             .of(context)
                                                         .bodyMedium
@@ -702,7 +783,12 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                   autofocus: false,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'Year',
+                                                    labelText:
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                      'im94iqq0' /* Year */,
+                                                    ),
                                                     labelStyle: FlutterFlowTheme
                                                             .of(context)
                                                         .bodyMedium
@@ -796,7 +882,11 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                               autofocus: false,
                                               obscureText: false,
                                               decoration: InputDecoration(
-                                                labelText: 'Description',
+                                                labelText:
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                  's4u9tmm7' /* Description */,
+                                                ),
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -806,7 +896,10 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                           letterSpacing: 0.0,
                                                         ),
                                                 hintText:
-                                                    'Add any additional details about your car (optional)',
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                  'rmejaxpf' /* Add any additional details abo... */,
+                                                ),
                                                 hintStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -894,7 +987,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                     curve: Curves.ease,
                                   );
                                 },
-                                text: 'Next',
+                                text: FFLocalizations.of(context).getText(
+                                  'u5quvaeg' /* Next */,
+                                ),
                                 options: FFButtonOptions(
                                   width: double.infinity,
                                   height: 56.0,
@@ -932,7 +1027,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Upload Car Photos',
+                                    FFLocalizations.of(context).getText(
+                                      'wl9cm9ii' /* Upload Car Photos */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .headlineMedium
                                         .override(
@@ -941,7 +1038,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                         ),
                                   ),
                                   Text(
-                                    'Add clear photos to help lessees identify your car',
+                                    FFLocalizations.of(context).getText(
+                                      'hzg84nbd' /* Add clear photos to help lesse... */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -981,7 +1080,10 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     12.0, 0.0, 12.0, 0.0),
                                             child: Text(
-                                              'Vehicle Images',
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'sxrg1mmt' /* Vehicle Images */,
+                                              ),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .titleMedium
@@ -1153,7 +1255,11 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                               size: 32.0,
                                                             ),
                                                             Text(
-                                                              'Front',
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                '3i9kw1ug' /* Front */,
+                                                              ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodySmall
@@ -1319,7 +1425,11 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                               size: 32.0,
                                                             ),
                                                             Text(
-                                                              'Back',
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'dr45yl3y' /* Back */,
+                                                              ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodySmall
@@ -1485,7 +1595,11 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                               size: 32.0,
                                                             ),
                                                             Text(
-                                                              'Left Side',
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'vdi2pld0' /* Left Side */,
+                                                              ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodySmall
@@ -1650,7 +1764,11 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                               size: 32.0,
                                                             ),
                                                             Text(
-                                                              'Right Side',
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'hc9fudng' /* Right Side */,
+                                                              ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodySmall
@@ -1818,7 +1936,11 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                               size: 32.0,
                                                             ),
                                                             Text(
-                                                              'Interior',
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'iv1xp6x2' /* Interior */,
+                                                              ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodySmall
@@ -1973,7 +2095,11 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                             size: 32.0,
                                                           ),
                                                           Text(
-                                                            'Trunk',
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              'nibc2e2s' /* Trunk */,
+                                                            ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodySmall
@@ -2021,7 +2147,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Text(
-                                          'Photo Guidelines',
+                                          FFLocalizations.of(context).getText(
+                                            'a44qowgm' /* Photo Guidelines */,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .titleMedium
                                               .override(
@@ -2041,7 +2169,10 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                             ),
                                             Expanded(
                                               child: Text(
-                                                'Make sure photos are clear and well-lit',
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  '71v652ug' /* Make sure photos are clear and... */,
+                                                ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -2066,7 +2197,10 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                             ),
                                             Expanded(
                                               child: Text(
-                                                'Show all sides of the car clearly',
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'ok0jl7c1' /* Show all sides of the car clea... */,
+                                                ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -2091,7 +2225,10 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                             ),
                                             Expanded(
                                               child: Text(
-                                                'Include interior shots showing seats and dashboard',
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'lbrck4p5' /* Include interior shots showing... */,
+                                                ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -2116,7 +2253,10 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                             ),
                                             Expanded(
                                               child: Text(
-                                                'Avoid blurry or dark images',
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  '2e8mw8fb' /* Avoid blurry or dark images */,
+                                                ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -2150,7 +2290,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                     curve: Curves.ease,
                                   );
                                 },
-                                text: 'Continue',
+                                text: FFLocalizations.of(context).getText(
+                                  '1dn0nuwq' /* Continue */,
+                                ),
                                 options: FFButtonOptions(
                                   width: MediaQuery.sizeOf(context).width * 1.0,
                                   height: 56.0,
@@ -2191,7 +2333,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Car Pricing & Availability',
+                                      FFLocalizations.of(context).getText(
+                                        'gyptige1' /* Car Pricing & Availability */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .headlineSmall
                                           .override(
@@ -2200,7 +2344,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                           ),
                                     ),
                                     Text(
-                                      'Here you will set car pricing for day and available days for rent',
+                                      FFLocalizations.of(context).getText(
+                                        '0gslohsr' /* Here you will set car pricing ... */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -2233,7 +2379,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Text(
-                                            'Pricing Info',
+                                            FFLocalizations.of(context).getText(
+                                              'aufbc55t' /* Pricing Info */,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .titleMedium
                                                 .override(
@@ -2256,7 +2404,12 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                   autofocus: false,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'car price',
+                                                    labelText:
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                      'iwp63g95' /* car price */,
+                                                    ),
                                                     labelStyle: FlutterFlowTheme
                                                             .of(context)
                                                         .bodyMedium
@@ -2345,7 +2498,10 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                             alignment:
                                                 AlignmentDirectional(1.0, 1.0),
                                             child: Text(
-                                              'EGP/DAY',
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                '97txl07x' /* EGP/DAY */,
+                                              ),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -2381,7 +2537,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Text(
-                                            'Car Availabilty',
+                                            FFLocalizations.of(context).getText(
+                                              'teemipsf' /* Car Availabilty */,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .titleMedium
                                                 .override(
@@ -2399,7 +2557,11 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                             autofocus: false,
                                             obscureText: false,
                                             decoration: InputDecoration(
-                                              labelText: 'Maximum Rent days',
+                                              labelText:
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                'aq49ullp' /* Maximum Rent days */,
+                                              ),
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -2509,7 +2671,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                       curve: Curves.ease,
                                     );
                                   },
-                                  text: 'Save Car Data',
+                                  text: FFLocalizations.of(context).getText(
+                                    'sojtl19k' /* Save Car Data */,
+                                  ),
                                   options: FFButtonOptions(
                                     width: double.infinity,
                                     height: 56.0,
@@ -2575,8 +2739,8 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                      width: 120.0,
-                                      height: 120.0,
+                                      width: 114.62,
+                                      height: 114.62,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .accent4,
@@ -2588,7 +2752,7 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                           'https://cdn-icons-png.flaticon.com/512/15190/15190698.png',
                                           width: 100.0,
                                           height: 100.0,
-                                          fit: BoxFit.fitHeight,
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
                                     ).animateOnPageLoad(animationsMap[
@@ -2597,7 +2761,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 44.0, 0.0, 0.0),
                                       child: Text(
-                                        'Done',
+                                        FFLocalizations.of(context).getText(
+                                          'ahqswmr6' /* Done */,
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .displaySmall
                                             .override(
@@ -2611,7 +2777,9 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           44.0, 8.0, 44.0, 0.0),
                                       child: Text(
-                                        'Car Added Successfully, but you have to validate your car with documents to make it avilable for rent! ',
+                                        FFLocalizations.of(context).getText(
+                                          '5fdgc0yp' /* Car Added Successfully, but yo... */,
+                                        ),
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
                                             .labelMedium
@@ -2621,6 +2789,49 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                             ),
                                       ).animateOnPageLoad(animationsMap[
                                           'textOnPageLoadAnimation2']!),
+                                    ),
+                                    Align(
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          await launchURL(
+                                              'https://api.whatsapp.com/send?autoload=1&app_absent=0&phone=2${FFAppConstants.appPhoneNumber}&text');
+                                        },
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'ktznn26t' /* Please Contact Whatsapp */,
+                                        ),
+                                        icon: Icon(
+                                          Icons.chat_bubble,
+                                          size: 15.0,
+                                        ),
+                                        options: FFButtonOptions(
+                                          width: 284.64,
+                                          height: 52.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: Color(0xFF37BE4A),
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Open Sans',
+                                                    color: Colors.white,
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          elevation: 3.0,
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -2644,7 +2855,10 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                         onPressed: () async {
                                           context.pushNamed('MyCars');
                                         },
-                                        text: 'Back to My Cars',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          '6i1pt04i' /* Back To My cars */,
+                                        ),
                                         options: FFButtonOptions(
                                           width: 230.0,
                                           height: 52.0,

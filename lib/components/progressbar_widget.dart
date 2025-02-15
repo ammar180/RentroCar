@@ -54,7 +54,9 @@ class _ProgressbarWidgetState extends State<ProgressbarWidget> {
           progressColor: FlutterFlowTheme.of(context).primary,
           backgroundColor: FlutterFlowTheme.of(context).accent4,
           center: Text(
-            '50%',
+            FFLocalizations.of(context).getText(
+              '3uuwhd0m' /* 50% */,
+            ),
             style: FlutterFlowTheme.of(context).headlineSmall.override(
                   fontFamily: 'Open Sans',
                   letterSpacing: 0.0,

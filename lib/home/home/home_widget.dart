@@ -58,14 +58,16 @@ class _HomeWidgetState extends State<HomeWidget> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.asset(
-                      'assets/images/rentrocar-logo.jpg',
+                      'assets/images/rentrocar-log.png',
                       width: 40.0,
                       height: 40.0,
                       fit: BoxFit.fill,
                     ),
                   ),
                   Text(
-                    'RentroCar',
+                    FFLocalizations.of(context).getText(
+                      'es5hjj8s' /* RentroCar */,
+                    ),
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
                           fontFamily: 'Roboto Mono',
                           letterSpacing: 0.0,
@@ -80,10 +82,15 @@ class _HomeWidgetState extends State<HomeWidget> {
                   focusNode: _model.searchBarFieldFocusNode,
                   onFieldSubmitted: (_) async {
                     _model.carsCollection = await queryCarRecordOnce(
-                      queryBuilder: (carRecord) => carRecord.where(
-                        'make',
-                        isEqualTo: _model.searchBarFieldTextController.text,
-                      ),
+                      queryBuilder: (carRecord) => carRecord
+                          .where(
+                            'make',
+                            isEqualTo: _model.searchBarFieldTextController.text,
+                          )
+                          .where(
+                            'isVisible',
+                            isEqualTo: true,
+                          ),
                     );
                     _model.searchedCars =
                         _model.carsCollection!.toList().cast<CarRecord>();
@@ -97,7 +104,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     isDense: true,
-                    hintText: 'Search any Car....',
+                    hintText: FFLocalizations.of(context).getText(
+                      '10oubq9w' /* Search any Car.... */,
+                    ),
                     hintStyle: FlutterFlowTheme.of(context).labelSmall.override(
                           fontFamily: 'Open Sans',
                           letterSpacing: 0.0,
@@ -191,7 +200,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Text(
-                                'Most Popular Cars',
+                                FFLocalizations.of(context).getText(
+                                  '51if56xb' /* Most Popular Cars */,
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .titleLarge
                                     .override(
@@ -204,6 +215,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 decoration: BoxDecoration(),
                                 child: StreamBuilder<List<CarRecord>>(
                                   stream: queryCarRecord(
+                                    queryBuilder: (carRecord) =>
+                                        carRecord.where(
+                                      'isVisible',
+                                      isEqualTo: true,
+                                    ),
                                     limit: 10,
                                   ),
                                   builder: (context, snapshot) {
@@ -256,7 +272,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                               Align(
                                 alignment: AlignmentDirectional(-1.0, 0.0),
                                 child: Text(
-                                  'Top Rated Cars',
+                                  FFLocalizations.of(context).getText(
+                                    'uddkj6ai' /* Top Rated Cars */,
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .titleLarge
                                       .override(
@@ -268,10 +286,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                               Builder(
                                 builder: (context) {
                                   final carDocument =
-                                      (_model.searchedCars.isNotEmpty
-                                              ? _model.searchedCars
-                                              : containerCarRecordList)
-                                          .toList();
+                                      _model.searchedCars.isNotEmpty
+                                          ? _model.searchedCars
+                                          : containerCarRecordList
+                                              .where((e) => e.isVisible)
+                                              .toList();
 
                                   return Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -288,7 +307,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   );
                                 },
                               ),
-                            ],
+                            ].divide(SizedBox(height: 10.0)),
                           ),
                         ].divide(SizedBox(height: 10.0)),
                       ),

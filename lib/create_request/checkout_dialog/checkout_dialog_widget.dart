@@ -1,5 +1,3 @@
-import '/backend/backend.dart';
-import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_credit_card_form.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -13,11 +11,9 @@ class CheckoutDialogWidget extends StatefulWidget {
   const CheckoutDialogWidget({
     super.key,
     required this.totalRent,
-    required this.tripRef,
   });
 
   final double? totalRent;
-  final DocumentReference? tripRef;
 
   @override
   State<CheckoutDialogWidget> createState() => _CheckoutDialogWidgetState();
@@ -74,277 +70,272 @@ class _CheckoutDialogWidgetState extends State<CheckoutDialogWidget> {
         ),
         child: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-                      child: FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 30.0,
-                        borderWidth: 1.0,
-                        buttonSize: 44.0,
-                        icon: Icon(
-                          Icons.close,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 24.0,
-                        ),
-                        onPressed: () async {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Checkout',
-                            style: FlutterFlowTheme.of(context)
-                                .headlineSmall
-                                .override(
-                                  fontFamily: 'Open Sans',
-                                  letterSpacing: 0.0,
-                                ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                        child: FlutterFlowIconButton(
+                          borderColor: Colors.transparent,
+                          borderRadius: 30.0,
+                          borderWidth: 1.0,
+                          buttonSize: 44.0,
+                          icon: Icon(
+                            Icons.close,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 24.0,
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 4.0, 0.0, 0.0),
-                            child: Text(
-                              'Fill in the information below to apply your rental request.',
+                          onPressed: () async {
+                            Navigator.pop(context, false);
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              FFLocalizations.of(context).getText(
+                                'bwlvo4r7' /* Checkout */,
+                              ),
                               style: FlutterFlowTheme.of(context)
-                                  .labelMedium
+                                  .headlineSmall
                                   .override(
                                     fontFamily: 'Open Sans',
                                     letterSpacing: 0.0,
                                   ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Divider(
-                height: 24.0,
-                thickness: 2.0,
-                color: FlutterFlowTheme.of(context).primaryBackground,
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-                      child: FlutterFlowCreditCardForm(
-                        formKey: _model.creditCardFormKey,
-                        creditCardModel: _model.creditCardInfo,
-                        obscureNumber: true,
-                        obscureCvv: false,
-                        spacing: 10.0,
-                        textStyle:
-                            FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Open Sans',
-                                  letterSpacing: 0.0,
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 4.0, 0.0, 0.0),
+                              child: Text(
+                                FFLocalizations.of(context).getText(
+                                  'ggps9kt3' /* Fill in the information below ... */,
                                 ),
-                        inputDecoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 12.0, 16.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Total',
                                 style: FlutterFlowTheme.of(context)
-                                    .titleMedium
+                                    .labelMedium
                                     .override(
                                       fontFamily: 'Open Sans',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
                                       letterSpacing: 0.0,
                                     ),
                               ),
-                              FlutterFlowIconButton(
-                                borderColor: Colors.transparent,
-                                borderRadius: 30.0,
-                                borderWidth: 1.0,
-                                buttonSize: 36.0,
-                                icon: Icon(
-                                  Icons.info_outlined,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 18.0,
-                                ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                },
-                              ),
-                            ],
-                          ),
-                          Text(
-                            formatNumber(
-                              widget.totalRent,
-                              formatType: FormatType.custom,
-                              format: 'EGP #',
-                              locale: '',
                             ),
-                            style: FlutterFlowTheme.of(context)
-                                .displaySmall
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: 24.0,
+                  thickness: 2.0,
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            12.0, 0.0, 12.0, 0.0),
+                        child: FlutterFlowCreditCardForm(
+                          formKey: _model.creditCardFormKey,
+                          creditCardModel: _model.creditCardInfo,
+                          obscureNumber: true,
+                          obscureCvv: false,
+                          spacing: 10.0,
+                          textStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Open Sans',
+                                    letterSpacing: 0.0,
+                                  ),
+                          inputDecoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            12.0, 4.0, 12.0, 16.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  FFLocalizations.of(context).getText(
+                                    'wvdtg50n' /* Total */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .override(
+                                        fontFamily: 'Open Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                                FlutterFlowIconButton(
+                                  borderColor: Colors.transparent,
+                                  borderRadius: 30.0,
+                                  borderWidth: 1.0,
+                                  buttonSize: 36.0,
+                                  icon: Icon(
+                                    Icons.info_outlined,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 18.0,
+                                  ),
+                                  onPressed: () {
+                                    print('IconButton pressed ...');
+                                  },
+                                ),
+                              ],
+                            ),
+                            Text(
+                              formatNumber(
+                                widget.totalRent,
+                                formatType: FormatType.custom,
+                                format: 'EGP #',
+                                locale: '',
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .displaySmall
+                                  .override(
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            Navigator.pop(context, true);
+                          },
+                          text: FFLocalizations.of(context).getText(
+                            'h1rvft3t' /* Pay now with credit card */,
+                          ),
+                          icon: Icon(
+                            Icons.credit_card_rounded,
+                            size: 30.0,
+                          ),
+                          options: FFButtonOptions(
+                            width: 270.0,
+                            height: 50.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
                                 .override(
-                                  fontFamily: 'Open Sans',
-                                  color: FlutterFlowTheme.of(context).primary,
+                                  fontFamily: 'Outfit',
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  fontSize: 16.0,
                                   letterSpacing: 0.0,
+                                  fontWeight: FontWeight.normal,
                                 ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          await widget.tripRef!.update(createTripRecordData(
-                            status: Status.payDone,
-                          ));
-                          Navigator.pop(context);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'pay done successfully, now you can contact car owner',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .override(
-                                      fontFamily: 'Open Sans',
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                              duration: Duration(milliseconds: 4000),
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).success,
+                            elevation: 2.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
                             ),
-                          );
-                        },
-                        text: 'Pay now with credit card',
-                        icon: Icon(
-                          Icons.credit_card_rounded,
-                          size: 30.0,
-                        ),
-                        options: FFButtonOptions(
-                          width: 270.0,
-                          height: 50.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Outfit',
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                          elevation: 2.0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-                      child: Text(
-                        'Or use an option below',
-                        style:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Open Sans',
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                        child: Text(
+                          FFLocalizations.of(context).getText(
+                            'k7omxv10' /* Or use an option below */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Open Sans',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                        child: FFButtonWidget(
+                          onPressed: () {
+                            print('Button pressed ...');
+                          },
+                          text: FFLocalizations.of(context).getText(
+                            'wa559isa' /* Pay with digital wallet */,
+                          ),
+                          icon: Icon(
+                            Icons.wallet_outlined,
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            size: 30.0,
+                          ),
+                          options: FFButtonOptions(
+                            width: 270.0,
+                            height: 50.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  fontSize: 16.0,
                                   letterSpacing: 0.0,
+                                  fontWeight: FontWeight.normal,
                                 ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-                      child: FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
-                        },
-                        text: 'Pay with digital wallet',
-                        icon: Icon(
-                          Icons.wallet_outlined,
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          size: 30.0,
-                        ),
-                        options: FFButtonOptions(
-                          width: 270.0,
-                          height: 50.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Outfit',
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                          elevation: 2.0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
+                            elevation: 2.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

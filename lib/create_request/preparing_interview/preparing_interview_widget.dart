@@ -64,7 +64,9 @@ class _PreparingInterviewWidgetState extends State<PreparingInterviewWidget> {
                       ),
                     ),
                     Text(
-                      'RentroCar',
+                      FFLocalizations.of(context).getText(
+                        'm1twnkew' /* RentroCar */,
+                      ),
                       style:
                           FlutterFlowTheme.of(context).headlineSmall.override(
                                 fontFamily: 'Roboto Mono',
@@ -79,7 +81,9 @@ class _PreparingInterviewWidgetState extends State<PreparingInterviewWidget> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Important Nots for preparing clinet',
+                        FFLocalizations.of(context).getText(
+                          '3qa1rshn' /* Important Nots for preparing c... */,
+                        ),
                         style: FlutterFlowTheme.of(context).titleLarge.override(
                               fontFamily: 'Open Sans',
                               letterSpacing: 0.0,
@@ -91,7 +95,9 @@ class _PreparingInterviewWidgetState extends State<PreparingInterviewWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Borrowing Agreement Contract:',
+                          FFLocalizations.of(context).getText(
+                            'isbj3gcq' /* Borrowing Agreement Contract: */,
+                          ),
                           style:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Open Sans',
@@ -99,7 +105,7 @@ class _PreparingInterviewWidgetState extends State<PreparingInterviewWidget> {
                                   ),
                         ),
                         FlutterFlowPdfViewer(
-                          assetPath: 'assets/pdfs/Borrowing_Agreement.pdf',
+                          assetPath: 'assets/pdfs/spnzn__.pdf',
                           height: 426.72,
                           horizontalScroll: false,
                         ),
@@ -111,7 +117,9 @@ class _PreparingInterviewWidgetState extends State<PreparingInterviewWidget> {
                                   'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/rentro-car-74c8w5/assets/3byf3wcsjk1s/Borrowing_Agreement.pdf',
                             );
                           },
-                          text: 'Download contract',
+                          text: FFLocalizations.of(context).getText(
+                            'tu2wic38' /* Download contract */,
+                          ),
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 40.0,

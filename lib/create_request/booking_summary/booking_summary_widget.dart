@@ -141,7 +141,9 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
               ),
             ),
             title: Text(
-              'Request Car Booking',
+              FFLocalizations.of(context).getText(
+                'l2y21fj2' /* Request Car Booking */,
+              ),
               style: FlutterFlowTheme.of(context).titleMedium.override(
                     fontFamily: 'Open Sans',
                     letterSpacing: 0.0,
@@ -214,7 +216,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                             borderRadius: BorderRadius.circular(12.0),
                             child: Image.network(
                               valueOrDefault<String>(
-                                widget.bookedCar?.carPhotos.firstOrNull,
+                                _model.carDoc?.carPhotos.firstOrNull,
                                 'https://images.unsplash.com/photo-1510903117032-f1596c327647?w=800&h=800',
                               ),
                               width: 100.0,
@@ -261,7 +263,9 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                           ),
                                     ),
                                     Text(
-                                      '(139 trips)',
+                                      FFLocalizations.of(context).getText(
+                                        'cvm7wbhl' /* (139 trips) */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodySmall
                                           .override(
@@ -305,7 +309,9 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                       onPressed: () async {
                         context.pushNamed('preparingInterview');
                       },
-                      text: 'Show Contract !',
+                      text: FFLocalizations.of(context).getText(
+                        'fc7im0nm' /* Show Contract ! */,
+                      ),
                       options: FFButtonOptions(
                         width: MediaQuery.sizeOf(context).width * 1.0,
                         height: 40.0,
@@ -338,7 +344,9 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            'Trip Dates',
+                            FFLocalizations.of(context).getText(
+                              'vxd7c4hl' /* Trip Dates */,
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .titleMedium
                                 .override(
@@ -355,7 +363,9 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Start Date',
+                                    FFLocalizations.of(context).getText(
+                                      '5fye0g88' /* Start Date */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodySmall
                                         .override(
@@ -414,7 +424,9 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'End Date',
+                                    FFLocalizations.of(context).getText(
+                                      'w3g7b8sb' /* End Date */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodySmall
                                         .override(
@@ -505,7 +517,9 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  'Renting and Contact Info (payed only)',
+                                  FFLocalizations.of(context).getText(
+                                    'jmsewga5' /* Renting and Contact Info (paye... */,
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .titleMedium
                                       .override(
@@ -636,7 +650,10 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                             },
                                           );
                                         },
-                                        text: 'Contact Now',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'eykmvk2k' /* Contact Now */,
+                                        ),
                                         icon: Icon(
                                           Icons.wechat_sharp,
                                           size: 15.0,
@@ -755,7 +772,9 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            'Payment Summary',
+                            FFLocalizations.of(context).getText(
+                              'c40xcu24' /* Payment Summary */,
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .titleMedium
                                 .override(
@@ -795,7 +814,9 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'servise price: 25% (first 6 months)',
+                                FFLocalizations.of(context).getText(
+                                  '0uiw4ih2' /* servise price: 25% (first 6 mo... */,
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -824,7 +845,11 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'insurance deposit\n (back after renting ends):',
+                                FFLocalizations.of(context).getText(
+                                  'qcmvnnhs' /* insurance deposit
+ (back after... */
+                                  ,
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -854,7 +879,9 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Total Amount',
+                                FFLocalizations.of(context).getText(
+                                  'pelmye2g' /* Total Amount */,
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .titleMedium
                                     .override(
@@ -911,7 +938,9 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
 
                         context.pushNamed('MyCars');
                       },
-                      text: 'Confirm Booking',
+                      text: FFLocalizations.of(context).getText(
+                        'h5calqtm' /* Confirm Booking */,
+                      ),
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 56.0,
@@ -953,14 +982,51 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                   },
                                   child: CheckoutDialogWidget(
                                     totalRent: _model.fullPrice,
-                                    tripRef: widget.tripDocument!.reference,
                                   ),
                                 ),
                               );
                             },
-                          );
+                          ).then((value) =>
+                              safeSetState(() => _model.isPayDone = value));
+
+                          if (_model.isPayDone!) {
+                            await widget.tripDocument!.reference
+                                .update(createTripRecordData(
+                              status: Status.payDone,
+                            ));
+
+                            await widget.tripDocument!.borrowedCar!
+                                .update(createCarRecordData(
+                              isAvailable: false,
+                              availableDate: widget.tripDocument?.endDate,
+                            ));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'pay done successfully, now you can contact car owner',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: 'Open Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .alternate,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).success,
+                              ),
+                            );
+                          }
+
+                          safeSetState(() {});
+
+                          safeSetState(() {});
                         },
-                        text: 'Pay Now!',
+                        text: FFLocalizations.of(context).getText(
+                          'e0rqboja' /* Pay Now! */,
+                        ),
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 41.79,

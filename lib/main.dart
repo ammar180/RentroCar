@@ -97,6 +97,7 @@ class _MyAppState extends State<MyApp> {
       locale: _locale,
       supportedLocales: const [
         Locale('en'),
+        Locale('ar'),
       ],
       theme: ThemeData(
         brightness: Brightness.light,
@@ -165,7 +166,9 @@ class _NavBarPageState extends State<NavBarPage> {
               FFIcons.kprofileLight,
               size: 24.0,
             ),
-            label: 'Profile',
+            label: FFLocalizations.of(context).getText(
+              'a87mw1kb' /* Profile */,
+            ),
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -173,7 +176,9 @@ class _NavBarPageState extends State<NavBarPage> {
               FFIcons.kcarLight,
               size: 24.0,
             ),
-            label: 'My Car',
+            label: FFLocalizations.of(context).getText(
+              '40zv2ebw' /* My Car */,
+            ),
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -181,7 +186,9 @@ class _NavBarPageState extends State<NavBarPage> {
               FFIcons.khomeLight,
               size: 24.0,
             ),
-            label: 'Home',
+            label: FFLocalizations.of(context).getText(
+              'fhhcambw' /* Home */,
+            ),
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -189,7 +196,9 @@ class _NavBarPageState extends State<NavBarPage> {
               FFIcons.kfavoritLignt,
               size: 24.0,
             ),
-            label: 'Favorite',
+            label: FFLocalizations.of(context).getText(
+              'xqno34ji' /* Favorite */,
+            ),
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -197,7 +206,9 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.notifications_sharp,
               size: 24.0,
             ),
-            label: 'Notification',
+            label: FFLocalizations.of(context).getText(
+              'hy7ixldw' /* Notification */,
+            ),
             tooltip: '',
           )
         ],

@@ -68,7 +68,9 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
           ),
         ),
         title: Text(
-          'Car Details',
+          FFLocalizations.of(context).getText(
+            'vv3zklwa' /* Car Details */,
+          ),
           style: FlutterFlowTheme.of(context).bodyLarge.override(
                 fontFamily: 'Open Sans',
                 letterSpacing: 0.0,
@@ -102,7 +104,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
 
             return Column(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
                   child: Builder(
@@ -120,34 +122,29 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
 
                       return Container(
                         width: double.infinity,
-                        height: 251.0,
+                        height: 200.0,
                         child: Stack(
                           children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 40.0),
-                              child: PageView.builder(
-                                controller: _model.pageViewController ??=
-                                    PageController(
-                                        initialPage: max(
-                                            0, min(0, carPhotos.length - 1))),
-                                scrollDirection: Axis.horizontal,
-                                itemCount: carPhotos.length,
-                                itemBuilder: (context, carPhotosIndex) {
-                                  final carPhotosItem =
-                                      carPhotos[carPhotosIndex];
-                                  return ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.network(
-                                      valueOrDefault<String>(
-                                        carPhotosItem,
-                                        'https://files.friendycar.com/uploads/cars/35749/2tTXTMuft8KgNNvNZpR7JSAu1cUQnTM7sxc8uAWA.jpg',
-                                      ),
-                                      fit: BoxFit.fitWidth,
+                            PageView.builder(
+                              controller: _model.pageViewController ??=
+                                  PageController(
+                                      initialPage:
+                                          max(0, min(0, carPhotos.length - 1))),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: carPhotos.length,
+                              itemBuilder: (context, carPhotosIndex) {
+                                final carPhotosItem = carPhotos[carPhotosIndex];
+                                return ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.network(
+                                    valueOrDefault<String>(
+                                      carPhotosItem,
+                                      'https://files.friendycar.com/uploads/cars/35749/2tTXTMuft8KgNNvNZpR7JSAu1cUQnTM7sxc8uAWA.jpg',
                                     ),
-                                  );
-                                },
-                              ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                );
+                              },
                             ),
                             Align(
                               alignment: AlignmentDirectional(0.0, 1.0),
@@ -218,7 +215,9 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                         size: 30.0,
                                       ),
                                       Text(
-                                        'Car Owner',
+                                        FFLocalizations.of(context).getText(
+                                          'cwxcgtfp' /* Car Owner */,
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .titleMedium
                                             .override(
@@ -338,7 +337,10 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                                       ),
                                                 ),
                                                 Text(
-                                                  '. 5 Trips',
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    '3xaavowb' /* . 5 Trips */,
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .labelSmall
@@ -382,7 +384,9 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Trip Dates',
+                                      FFLocalizations.of(context).getText(
+                                        '5o72yn0k' /* Trip Dates */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .override(
@@ -672,7 +676,9 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Description',
+                                    FFLocalizations.of(context).getText(
+                                      'lbttlx0b' /* Description */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .titleMedium
                                         .override(
@@ -769,159 +775,181 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                         ),
                         Builder(
                           builder: (context) => FFButtonWidget(
-                            onPressed: () async {
-                              if (valueOrDefault<bool>(
-                                  currentUserDocument?.isVerified, false)) {
-                                if (_model.formKey.currentState == null ||
-                                    !_model.formKey.currentState!.validate()) {
-                                  return;
-                                }
-                                if (_model.datePicked1 == null) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'please define start date',
-                                        style: FlutterFlowTheme.of(context)
-                                            .titleMedium
-                                            .override(
-                                              fontFamily: 'Open Sans',
-                                              color:
+                            onPressed: !widget.car!.isAvailable
+                                ? null
+                                : () async {
+                                    if (valueOrDefault<bool>(
+                                        currentUserDocument?.isVerified,
+                                        false)) {
+                                      if (_model.formKey.currentState == null ||
+                                          !_model.formKey.currentState!
+                                              .validate()) {
+                                        return;
+                                      }
+                                      if (_model.datePicked1 == null) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'please define start date',
+                                              style:
                                                   FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              letterSpacing: 0.0,
+                                                      .titleMedium
+                                                      .override(
+                                                        fontFamily: 'Open Sans',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
-                                      ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
-                                    ),
-                                  );
-                                  return;
-                                }
-                                if (_model.datePicked2 == null) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'please define end date',
-                                        style: FlutterFlowTheme.of(context)
-                                            .titleMedium
-                                            .override(
-                                              fontFamily: 'Open Sans',
-                                              color:
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+                                        return;
+                                      }
+                                      if (_model.datePicked2 == null) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'please define end date',
+                                              style:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                              letterSpacing: 0.0,
+                                                      .titleMedium
+                                                      .override(
+                                                        fontFamily: 'Open Sans',
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
-                                      ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
-                                    ),
-                                  );
-                                  return;
-                                }
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+                                        return;
+                                      }
 
-                                var tripRecordReference =
-                                    TripRecord.collection.doc();
-                                await tripRecordReference
-                                    .set(createTripRecordData(
-                                  startDate: _model.startDate,
-                                  endDate: _model.endDate,
-                                  carOwner: widget.car?.carOwner,
-                                  carBorrower: currentUserReference,
-                                  totalPrice: valueOrDefault<int>(
-                                        functions.calculateDaysCount(
-                                            valueOrDefault<int>(
-                                              _model
-                                                  .startDate?.secondsSinceEpoch,
+                                      var tripRecordReference =
+                                          TripRecord.collection.doc();
+                                      await tripRecordReference
+                                          .set(createTripRecordData(
+                                        startDate: _model.startDate,
+                                        endDate: _model.endDate,
+                                        carOwner: widget.car?.carOwner,
+                                        carBorrower: currentUserReference,
+                                        totalPrice: valueOrDefault<int>(
+                                              functions.calculateDaysCount(
+                                                  valueOrDefault<int>(
+                                                    _model.startDate
+                                                        ?.secondsSinceEpoch,
+                                                    0,
+                                                  ),
+                                                  valueOrDefault<int>(
+                                                    _model.endDate
+                                                        ?.secondsSinceEpoch,
+                                                    0,
+                                                  )),
                                               0,
+                                            ) *
+                                            widget.car!.rentalFare,
+                                        status: Status.notConfirmed,
+                                        borrowedCar: widget.car?.reference,
+                                      ));
+                                      _model.createdTrip =
+                                          TripRecord.getDocumentFromData(
+                                              createTripRecordData(
+                                                startDate: _model.startDate,
+                                                endDate: _model.endDate,
+                                                carOwner: widget.car?.carOwner,
+                                                carBorrower:
+                                                    currentUserReference,
+                                                totalPrice: valueOrDefault<int>(
+                                                      functions
+                                                          .calculateDaysCount(
+                                                              valueOrDefault<
+                                                                  int>(
+                                                                _model.startDate
+                                                                    ?.secondsSinceEpoch,
+                                                                0,
+                                                              ),
+                                                              valueOrDefault<
+                                                                  int>(
+                                                                _model.endDate
+                                                                    ?.secondsSinceEpoch,
+                                                                0,
+                                                              )),
+                                                      0,
+                                                    ) *
+                                                    widget.car!.rentalFare,
+                                                status: Status.notConfirmed,
+                                                borrowedCar:
+                                                    widget.car?.reference,
+                                              ),
+                                              tripRecordReference);
+
+                                      context.pushNamed(
+                                        'booking_summary',
+                                        queryParameters: {
+                                          'tripDocument': serializeParam(
+                                            _model.createdTrip,
+                                            ParamType.Document,
+                                          ),
+                                          'bookedCar': serializeParam(
+                                            widget.car,
+                                            ParamType.Document,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'tripDocument': _model.createdTrip,
+                                          'bookedCar': widget.car,
+                                        },
+                                      );
+                                    } else {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (dialogContext) {
+                                          return Dialog(
+                                            elevation: 0,
+                                            insetPadding: EdgeInsets.zero,
+                                            backgroundColor: Colors.transparent,
+                                            alignment: AlignmentDirectional(
+                                                    0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                            child: AlertDialogWidget(
+                                              title: 'Worning',
+                                              description:
+                                                  'Please verify your self first and Try to add car again',
+                                              confirmButton:
+                                                  'Go To verfication',
+                                              confirmCallback: () async {},
                                             ),
-                                            valueOrDefault<int>(
-                                              _model.endDate?.secondsSinceEpoch,
-                                              0,
-                                            )),
-                                        0,
-                                      ) *
-                                      widget.car!.rentalFare,
-                                  status: Status.notConfirmed,
-                                  borrowedCar: widget.car?.reference,
-                                ));
-                                _model.createdTrip =
-                                    TripRecord.getDocumentFromData(
-                                        createTripRecordData(
-                                          startDate: _model.startDate,
-                                          endDate: _model.endDate,
-                                          carOwner: widget.car?.carOwner,
-                                          carBorrower: currentUserReference,
-                                          totalPrice: valueOrDefault<int>(
-                                                functions.calculateDaysCount(
-                                                    valueOrDefault<int>(
-                                                      _model.startDate
-                                                          ?.secondsSinceEpoch,
-                                                      0,
-                                                    ),
-                                                    valueOrDefault<int>(
-                                                      _model.endDate
-                                                          ?.secondsSinceEpoch,
-                                                      0,
-                                                    )),
-                                                0,
-                                              ) *
-                                              widget.car!.rentalFare,
-                                          status: Status.notConfirmed,
-                                          borrowedCar: widget.car?.reference,
-                                        ),
-                                        tripRecordReference);
+                                          );
+                                        },
+                                      ).then((value) => safeSetState(
+                                          () => _model.dialogResut = value));
 
-                                context.pushNamed(
-                                  'booking_summary',
-                                  queryParameters: {
-                                    'tripDocument': serializeParam(
-                                      _model.createdTrip,
-                                      ParamType.Document,
-                                    ),
-                                    'bookedCar': serializeParam(
-                                      widget.car,
-                                      ParamType.Document,
-                                    ),
-                                  }.withoutNulls,
-                                  extra: <String, dynamic>{
-                                    'tripDocument': _model.createdTrip,
-                                    'bookedCar': widget.car,
+                                      if (_model.dialogResut!) {
+                                        context.pushNamed('profile');
+                                      }
+                                    }
+
+                                    safeSetState(() {});
                                   },
-                                );
-                              } else {
-                                await showDialog(
-                                  context: context,
-                                  builder: (dialogContext) {
-                                    return Dialog(
-                                      elevation: 0,
-                                      insetPadding: EdgeInsets.zero,
-                                      backgroundColor: Colors.transparent,
-                                      alignment: AlignmentDirectional(0.0, 0.0)
-                                          .resolve(Directionality.of(context)),
-                                      child: AlertDialogWidget(
-                                        title: 'Worning',
-                                        description:
-                                            'Please verify your self first and Try to add car again',
-                                        confirmButton: 'Go To verfication',
-                                        confirmCallback: () async {},
-                                      ),
-                                    );
-                                  },
-                                ).then((value) => safeSetState(
-                                    () => _model.dialogResut = value));
-
-                                if (_model.dialogResut!) {
-                                  context.pushNamed('profile');
-                                }
-                              }
-
-                              safeSetState(() {});
-                            },
-                            text: 'Book Now',
+                            text: FFLocalizations.of(context).getText(
+                              'kgpg6jbe' /* Book Now */,
+                            ),
                             options: FFButtonOptions(
                               width: 190.0,
                               height: double.infinity,
@@ -940,6 +968,8 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                   ),
                               elevation: 0.0,
                               borderRadius: BorderRadius.circular(10.0),
+                              disabledColor:
+                                  FlutterFlowTheme.of(context).secondaryText,
                             ),
                           ),
                         ),

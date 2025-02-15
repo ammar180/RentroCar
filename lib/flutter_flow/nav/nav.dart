@@ -77,13 +77,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? NavBarPage() : SignUpPageWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : OnboardingWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? NavBarPage() : SignUpPageWidget(),
+              appStateNotifier.loggedIn ? NavBarPage() : OnboardingWidget(),
         ),
         FFRoute(
           name: 'LoginPage',
@@ -377,7 +377,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/signUpPage';
+            return '/onboarding';
           }
           return null;
         },
@@ -394,8 +394,8 @@ class FFRoute {
               ? Container(
                   color: Colors.transparent,
                   child: Image.asset(
-                    'assets/images/rentrocar-logo.jpg',
-                    fit: BoxFit.fitWidth,
+                    'assets/images/WhatsApp_Image_2025-02-15_at_16.56.17_c980b10f.jpg',
+                    fit: BoxFit.contain,
                   ),
                 )
               : page;

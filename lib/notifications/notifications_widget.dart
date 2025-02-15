@@ -60,14 +60,16 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.asset(
-                            'assets/images/rentrocar-logo.jpg',
+                            'assets/images/rentrocar-log.png',
                             width: 40.0,
                             height: 40.0,
                             fit: BoxFit.fill,
                           ),
                         ),
                         Text(
-                          'RentroCar',
+                          FFLocalizations.of(context).getText(
+                            '8fwidv58' /* RentroCar */,
+                          ),
                           style: FlutterFlowTheme.of(context)
                               .headlineSmall
                               .override(
@@ -77,229 +79,240 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                         ),
                       ].divide(SizedBox(width: 10.0)),
                     ),
-                    StreamBuilder<List<TripRecord>>(
-                      stream: queryTripRecord(
-                        queryBuilder: (tripRecord) => tripRecord
-                            .where(
-                              'carOwner',
-                              isEqualTo: currentUserReference,
-                            )
-                            .where(
-                              'status',
-                              isEqualTo: Status.pending.serialize(),
+                    Container(
+                      height: MediaQuery.sizeOf(context).height * 0.8,
+                      decoration: BoxDecoration(),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            FFLocalizations.of(context).getText(
+                              'mkkb7air' /* Your Renting Requests */,
                             ),
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
+                            style: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  letterSpacing: 0.0,
                                 ),
-                              ),
-                            ),
-                          );
-                        }
-                        List<TripRecord> containerTripRecordList =
-                            snapshot.data!;
-
-                        return Container(
-                          height: MediaQuery.sizeOf(context).height * 0.8,
-                          decoration: BoxDecoration(),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Your Renting Requests',
-                                style: FlutterFlowTheme.of(context)
-                                    .titleLarge
-                                    .override(
-                                      fontFamily: 'Open Sans',
-                                      letterSpacing: 0.0,
+                          ),
+                          Flexible(
+                            child: StreamBuilder<List<TripRecord>>(
+                              stream: queryTripRecord(
+                                queryBuilder: (tripRecord) => tripRecord
+                                    .where(
+                                      'carOwner',
+                                      isEqualTo: currentUserReference,
+                                    )
+                                    .where(
+                                      'status',
+                                      isEqualTo: Status.pending.serialize(),
                                     ),
                               ),
-                              Builder(
-                                builder: (context) {
-                                  if (containerTripRecordList.isNotEmpty) {
-                                    return Builder(
-                                      builder: (context) {
-                                        final containerVar =
-                                            containerTripRecordList.toList();
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          FlutterFlowTheme.of(context).primary,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                List<TripRecord>
+                                    conditionalBuilderTripRecordList =
+                                    snapshot.data!;
 
-                                        return ListView.builder(
-                                          padding: EdgeInsets.zero,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.vertical,
-                                          itemCount: containerVar.length,
-                                          itemBuilder:
-                                              (context, containerVarIndex) {
-                                            final containerVarItem =
-                                                containerVar[containerVarIndex];
-                                            return StreamBuilder<UsersRecord>(
-                                              stream: UsersRecord.getDocument(
-                                                  containerVarItem
-                                                      .carBorrower!),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50.0,
-                                                      height: 50.0,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        valueColor:
-                                                            AlwaysStoppedAnimation<
-                                                                Color>(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
+                                return Builder(
+                                  builder: (context) {
+                                    if (conditionalBuilderTripRecordList
+                                        .isNotEmpty) {
+                                      return Builder(
+                                        builder: (context) {
+                                          final containerVar =
+                                              conditionalBuilderTripRecordList
+                                                  .toList();
+
+                                          return ListView.builder(
+                                            padding: EdgeInsets.zero,
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.vertical,
+                                            itemCount: containerVar.length,
+                                            itemBuilder:
+                                                (context, containerVarIndex) {
+                                              final containerVarItem =
+                                                  containerVar[
+                                                      containerVarIndex];
+                                              return StreamBuilder<UsersRecord>(
+                                                stream: UsersRecord.getDocument(
+                                                    containerVarItem
+                                                        .carBorrower!),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50.0,
+                                                        height: 50.0,
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          valueColor:
+                                                              AlwaysStoppedAnimation<
+                                                                  Color>(
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+
+                                                  final listTileUsersRecord =
+                                                      snapshot.data!;
+
+                                                  return InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      context.pushNamed(
+                                                        'ownerBookingSammary',
+                                                        queryParameters: {
+                                                          'tripDocument':
+                                                              serializeParam(
+                                                            containerVarItem,
+                                                            ParamType.Document,
+                                                          ),
+                                                        }.withoutNulls,
+                                                        extra: <String,
+                                                            dynamic>{
+                                                          'tripDocument':
+                                                              containerVarItem,
+                                                        },
+                                                      );
+                                                    },
+                                                    child: Material(
+                                                      color: Colors.transparent,
+                                                      child: ListTile(
+                                                        title: Text(
+                                                          '${listTileUsersRecord.displayName} - ${formatNumber(
+                                                            containerVarItem
+                                                                .totalPrice,
+                                                            formatType:
+                                                                FormatType
+                                                                    .custom,
+                                                            format: 'EGP #',
+                                                            locale: '',
+                                                          )}',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .titleLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Open Sans',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
+                                                        subtitle: Text(
+                                                          'from: (${dateTimeFormat(
+                                                            "MMMEd",
+                                                            containerVarItem
+                                                                .startDate,
+                                                            locale: FFLocalizations
+                                                                    .of(context)
+                                                                .languageCode,
+                                                          )}) to: (${dateTimeFormat(
+                                                            "MMMEd",
+                                                            containerVarItem
+                                                                .endDate,
+                                                            locale: FFLocalizations
+                                                                    .of(context)
+                                                                .languageCode,
+                                                          )})',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Open Sans',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
+                                                        trailing: Icon(
+                                                          Icons
+                                                              .arrow_forward_ios_rounded,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 24.0,
+                                                        ),
+                                                        tileColor: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        dense: false,
+                                                        contentPadding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    12.0,
+                                                                    0.0,
+                                                                    12.0,
+                                                                    0.0),
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
                                                         ),
                                                       ),
                                                     ),
                                                   );
-                                                }
-
-                                                final listTileUsersRecord =
-                                                    snapshot.data!;
-
-                                                return InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    context.pushNamed(
-                                                      'ownerBookingSammary',
-                                                      queryParameters: {
-                                                        'tripDocument':
-                                                            serializeParam(
-                                                          containerVarItem,
-                                                          ParamType.Document,
-                                                        ),
-                                                      }.withoutNulls,
-                                                      extra: <String, dynamic>{
-                                                        'tripDocument':
-                                                            containerVarItem,
-                                                      },
-                                                    );
-                                                  },
-                                                  child: Material(
-                                                    color: Colors.transparent,
-                                                    child: ListTile(
-                                                      title: Text(
-                                                        '${listTileUsersRecord.displayName} - ${formatNumber(
-                                                          containerVarItem
-                                                              .totalPrice,
-                                                          formatType:
-                                                              FormatType.custom,
-                                                          format: 'EGP #',
-                                                          locale: '',
-                                                        )}',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Open Sans',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                      ),
-                                                      subtitle: Text(
-                                                        'from: (${dateTimeFormat(
-                                                          "MMMEd",
-                                                          containerVarItem
-                                                              .startDate,
-                                                          locale:
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .languageCode,
-                                                        )}) to: (${dateTimeFormat(
-                                                          "MMMEd",
-                                                          containerVarItem
-                                                              .endDate,
-                                                          locale:
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .languageCode,
-                                                        )})',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Open Sans',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                      ),
-                                                      trailing: Icon(
-                                                        Icons
-                                                            .arrow_forward_ios_rounded,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        size: 24.0,
-                                                      ),
-                                                      tileColor: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      dense: false,
-                                                      contentPadding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  12.0,
-                                                                  0.0,
-                                                                  12.0,
-                                                                  0.0),
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
-                                        );
-                                      },
-                                    );
-                                  } else {
-                                    return Align(
-                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                      child: Text(
-                                        'You Didn\'t have any notifications',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .override(
-                                              fontFamily: 'Open Sans',
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                    );
-                                  }
-                                },
-                              ),
-                            ],
+                                                },
+                                              );
+                                            },
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      return Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Text(
+                                          FFLocalizations.of(context).getText(
+                                            'e0xrxvnc' /* You Didn't have any notificati... */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily: 'Open Sans',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                );
+                              },
+                            ),
                           ),
-                        );
-                      },
+                        ].divide(SizedBox(height: 10.0)),
+                      ),
                     ),
                   ].divide(SizedBox(height: 20.0)),
                 ),

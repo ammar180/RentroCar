@@ -14,7 +14,9 @@ class VerficationDataFormModel
   String? Function(BuildContext, String?)? textController1Validator;
   String? _textController1Validator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'License Number: is required';
+      return FFLocalizations.of(context).getText(
+        'qkjmang9' /* License Number: is required */,
+      );
     }
 
     return null;
@@ -27,7 +29,9 @@ class VerficationDataFormModel
   String? Function(BuildContext, String?)? textController2Validator;
   String? _textController2Validator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Issuance Date: is required';
+      return FFLocalizations.of(context).getText(
+        '4yw5jrsr' /* Issuance Date: is required */,
+      );
     }
 
     return null;
@@ -40,7 +44,9 @@ class VerficationDataFormModel
   String? Function(BuildContext, String?)? textController3Validator;
   String? _textController3Validator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Expiration Date: is required';
+      return FFLocalizations.of(context).getText(
+        'rh0foxss' /* Expiration Date: is required */,
+      );
     }
 
     return null;

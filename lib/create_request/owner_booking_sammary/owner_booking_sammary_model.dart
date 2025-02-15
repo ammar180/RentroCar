@@ -13,6 +13,8 @@ class OwnerBookingSammaryModel
 
   // Stores action output result for [Backend Call - Read Document] action in ownerBookingSammary widget.
   CarRecord? retrievedBorrowedCar;
+  // Stores action output result for [Alert Dialog - Custom Dialog] action in Button widget.
+  bool? locationConfirmed;
 
   @override
   void initState(BuildContext context) {}

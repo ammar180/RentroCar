@@ -34,11 +34,15 @@ class AddingNewCarPageModel extends FlutterFlowModel<AddingNewCarPageWidget> {
   String? Function(BuildContext, String?)? carMakeTextControllerValidator;
   String? _carMakeTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Make is required';
+      return FFLocalizations.of(context).getText(
+        '5kmswqqi' /* Make is required */,
+      );
     }
 
     if (val.length > 20) {
-      return 'Top long name';
+      return FFLocalizations.of(context).getText(
+        'jw96cj79' /* Top long name */,
+      );
     }
 
     return null;
@@ -50,7 +54,9 @@ class AddingNewCarPageModel extends FlutterFlowModel<AddingNewCarPageWidget> {
   String? Function(BuildContext, String?)? carModelTextControllerValidator;
   String? _carModelTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Model is required';
+      return FFLocalizations.of(context).getText(
+        '8fpfq0ql' /* Model is required */,
+      );
     }
 
     return null;
@@ -62,7 +68,9 @@ class AddingNewCarPageModel extends FlutterFlowModel<AddingNewCarPageWidget> {
   String? Function(BuildContext, String?)? carYearTextControllerValidator;
   String? _carYearTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Year is required';
+      return FFLocalizations.of(context).getText(
+        'aadz9oyu' /* Year is required */,
+      );
     }
 
     return null;
@@ -108,7 +116,9 @@ class AddingNewCarPageModel extends FlutterFlowModel<AddingNewCarPageWidget> {
   String? Function(BuildContext, String?)? carPriceTextControllerValidator;
   String? _carPriceTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'car price is required';
+      return FFLocalizations.of(context).getText(
+        'foervws1' /* car price is required */,
+      );
     }
 
     return null;
@@ -120,7 +130,9 @@ class AddingNewCarPageModel extends FlutterFlowModel<AddingNewCarPageWidget> {
   String? Function(BuildContext, String?)? textController6Validator;
   String? _textController6Validator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Maximum Rent days is required';
+      return FFLocalizations.of(context).getText(
+        'cc5wskvk' /* Maximum Rent days is required */,
+      );
     }
 
     return null;

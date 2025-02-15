@@ -228,7 +228,9 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                               size: 24.0,
                             ),
                             Text(
-                              'N/A',
+                              FFLocalizations.of(context).getText(
+                                'wgakql1z' /* N/A */,
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .bodySmall
                                   .override(
@@ -250,9 +252,9 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                             Text(
                               formatNumber(
                                 widget.car!.rentalFare,
-                                formatType: FormatType.custom,
-                                format: 'EGP # / day',
-                                locale: '',
+                                formatType: FormatType.decimal,
+                                decimalType: DecimalType.periodDecimal,
+                                currency: 'EGP ',
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium

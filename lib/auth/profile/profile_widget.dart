@@ -1,7 +1,9 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'profile_model.dart';
 export 'profile_model.dart';
@@ -42,7 +44,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         automaticallyImplyLeading: false,
         title: Text(
-          'Profile',
+          FFLocalizations.of(context).getText(
+            'jwhmvryj' /* Profile */,
+          ),
           style: FlutterFlowTheme.of(context).displaySmall.override(
                 fontFamily: 'Open Sans',
                 letterSpacing: 0.0,
@@ -164,7 +168,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(24.0, 12.0, 0.0, 12.0),
                       child: Text(
-                        'Account Settings',
+                        FFLocalizations.of(context).getText(
+                          '3cerpi9g' /* Account Settings */,
+                        ),
                         style:
                             FlutterFlowTheme.of(context).labelMedium.override(
                                   fontFamily: 'Open Sans',
@@ -208,7 +214,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Change Password',
+                              FFLocalizations.of(context).getText(
+                                'z9adcsb7' /* Change Password */,
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
@@ -271,7 +279,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 0.0, 0.0),
                               child: Text(
-                                'Edit Profile',
+                                FFLocalizations.of(context).getText(
+                                  'gozhh9ek' /* Edit Profile */,
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
@@ -354,7 +364,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 0.0, 0.0),
                                   child: Text(
-                                    'Your Accound don\'t verified',
+                                    FFLocalizations.of(context).getText(
+                                      'avk5wd6z' /* Your Accound don't verified */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
@@ -395,9 +407,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           await authManager.signOut();
                           GoRouter.of(context).clearRedirectLocation();
 
-                          context.goNamedAuth('SignUpPage', context.mounted);
+                          context.goNamedAuth('onboarding', context.mounted);
                         },
-                        text: 'Log Out',
+                        text: FFLocalizations.of(context).getText(
+                          'c6n4h8y9' /* Log Out */,
+                        ),
                         options: FFButtonOptions(
                           width: 90.0,
                           height: 40.0,
@@ -424,6 +438,146 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         ),
                       ),
                     ],
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 12.0, 0.0, 12.0),
+                      child: Text(
+                        FFLocalizations.of(context).getText(
+                          '8dflcogq' /* Application Settings */,
+                        ),
+                        style:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Open Sans',
+                                  letterSpacing: 0.0,
+                                ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 0.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed('verficationDataForm');
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 60.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 5.0,
+                            color: Color(0x3416202A),
+                            offset: Offset(
+                              0.0,
+                              2.0,
+                            ),
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(12.0),
+                        shape: BoxShape.rectangle,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Align(
+                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 0.0, 0.0, 0.0),
+                                  child: Icon(
+                                    Icons.translate_sharp,
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    size: 25.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            FlutterFlowDropDown<String>(
+                              controller: _model.dropDownValueController ??=
+                                  FormFieldController<String>(
+                                _model.dropDownValue ??=
+                                    FFLocalizations.of(context).getText(
+                                  'hb69767h' /* English */,
+                                ),
+                              ),
+                              options: [
+                                FFLocalizations.of(context).getText(
+                                  'dv7u6c3j' /* English */,
+                                ),
+                                FFLocalizations.of(context).getText(
+                                  '21j7u569' /* Arabic */,
+                                )
+                              ],
+                              onChanged: (val) async {
+                                safeSetState(() => _model.dropDownValue = val);
+                                setAppLanguage(
+                                    context,
+                                    (_model.dropDownValue != null &&
+                                                _model.dropDownValue != '') &&
+                                            (_model.dropDownValue == 'Arabic')
+                                        ? 'ar'
+                                        : 'en');
+                              },
+                              width: 276.66,
+                              height: 40.0,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Open Sans',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintText: FFLocalizations.of(context).getText(
+                                '49itwepx' /* Select langusage... */,
+                              ),
+                              icon: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              elevation: 2.0,
+                              borderColor: Colors.transparent,
+                              borderWidth: 0.0,
+                              borderRadius: 8.0,
+                              margin: EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 0.0, 12.0, 0.0),
+                              hidesUnderline: true,
+                              isOverButton: false,
+                              isSearchable: false,
+                              isMultiSelect: false,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],

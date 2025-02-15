@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
 import '/car_management/borrowed_car_card/borrowed_car_card_widget.dart';
 import '/car_management/componants/my_car_card/my_car_card_widget.dart';
 import '/components/alert_dialog_widget.dart';
@@ -106,7 +107,9 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'My Cars',
+                            FFLocalizations.of(context).getText(
+                              'mjt2l9ta' /* My Cars */,
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .titleLarge
                                 .override(
@@ -159,7 +162,9 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
 
                                 safeSetState(() {});
                               },
-                              text: 'Add New Car',
+                              text: FFLocalizations.of(context).getText(
+                                'h7qr7io9' /* Add New Car */,
+                              ),
                               icon: Icon(
                                 Icons.add,
                                 size: 15.0,
@@ -216,10 +221,7 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
 
                         return Container(
                           height: 215.5,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
+                          decoration: BoxDecoration(),
                           child: Builder(
                             builder: (context) {
                               if (myCarsContainerCarRecordList.isNotEmpty) {
@@ -259,7 +261,9 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                                     ),
                                     alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Text(
-                                      'You Didn\'t upload any Car yet!',
+                                      FFLocalizations.of(context).getText(
+                                        'p4iihd1h' /* You Didn't upload any Car yet! */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
@@ -287,7 +291,9 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Current Borrowed Cars',
+                            FFLocalizations.of(context).getText(
+                              'g7ftohom' /* Current Borrowed Cars */,
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .titleLarge
                                 .override(
@@ -299,7 +305,9 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                             onPressed: () async {
                               context.pushNamed('home');
                             },
-                            text: 'Rent Now!',
+                            text: FFLocalizations.of(context).getText(
+                              'nuyisxph' /* Rent Now! */,
+                            ),
                             options: FFButtonOptions(
                               height: 40.0,
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -355,6 +363,8 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                               snapshot.data!;
 
                           return Container(
+                            width: double.infinity,
+                            height: MediaQuery.sizeOf(context).height * 0.457,
                             decoration: BoxDecoration(),
                             child: Builder(
                               builder: (context) {
@@ -362,7 +372,11 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                                   return Builder(
                                     builder: (context) {
                                       final containerVar =
-                                          containerTripRecordList.toList();
+                                          containerTripRecordList
+                                              .where((e) =>
+                                                  e.status !=
+                                                  Status.notConfirmed)
+                                              .toList();
 
                                       return ListView.separated(
                                         padding: EdgeInsets.zero,
@@ -414,6 +428,22 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                                                   },
                                                 );
                                               }
+
+                                              await containerVarItem
+                                                  .borrowedCar!
+                                                  .update(createCarRecordData(
+                                                availableDate:
+                                                    getCurrentTimestamp >=
+                                                            containerVarItem
+                                                                .endDate!
+                                                        ? null
+                                                        : containerVarItem
+                                                            .endDate,
+                                                isAvailable:
+                                                    getCurrentTimestamp >=
+                                                        containerVarItem
+                                                            .endDate!,
+                                              ));
                                             },
                                             child: BorrowedCarCardWidget(
                                               key: Key(
@@ -429,7 +459,9 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                                   return Align(
                                     alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Text(
-                                      'You didn\'t have any requestes',
+                                      FFLocalizations.of(context).getText(
+                                        'edtunmde' /* You didn't have any requestes */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(

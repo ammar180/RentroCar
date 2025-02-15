@@ -123,7 +123,9 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
                                   ),
                             ),
                             Text(
-                              '. 5 Trips',
+                              FFLocalizations.of(context).getText(
+                                'idl0k8ui' /* . 5 Trips */,
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .labelSmall
                                   .override(
@@ -186,7 +188,9 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
                           },
                         );
                       },
-                      text: 'Details',
+                      text: FFLocalizations.of(context).getText(
+                        'hig0cuud' /* Details */,
+                      ),
                       options: FFButtonOptions(
                         height: 40.0,
                         padding: EdgeInsetsDirectional.fromSTEB(

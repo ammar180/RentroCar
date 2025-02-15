@@ -179,7 +179,12 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                         children: [
                           Icon(
                             Icons.visibility,
-                            color: FlutterFlowTheme.of(context).primary,
+                            color: valueOrDefault<Color>(
+                              widget.carData!.isVisible
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context).secondary,
+                              FlutterFlowTheme.of(context).primary,
+                            ),
                             size: 24.0,
                           ),
                           Text(
@@ -189,12 +194,21 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                                   : 'UnVisable',
                               'UnVisible',
                             ),
-                            style:
-                                FlutterFlowTheme.of(context).bodySmall.override(
-                                      fontFamily: 'Open Sans',
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodySmall
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  color: valueOrDefault<Color>(
+                                    widget.carData!.isVisible
+                                        ? FlutterFlowTheme.of(context)
+                                            .primaryText
+                                        : FlutterFlowTheme.of(context)
+                                            .secondary,
+                                    FlutterFlowTheme.of(context).primaryText,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
                           ),
                         ].divide(SizedBox(width: 4.0)),
                       ),

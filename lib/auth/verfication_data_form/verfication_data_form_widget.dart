@@ -127,7 +127,9 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
             },
           ),
           title: Text(
-            'Submit Verfication Data',
+            FFLocalizations.of(context).getText(
+              'zh6hyt2f' /* Submit Verfication Data */,
+            ),
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: 'Open Sans',
                   letterSpacing: 0.0,
@@ -153,7 +155,9 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                       child: Text(
-                        'Driver\'s License:',
+                        FFLocalizations.of(context).getText(
+                          'davn6on2' /* Driver's License: */,
+                        ),
                         style: FlutterFlowTheme.of(context).titleLarge.override(
                               fontFamily: 'Open Sans',
                               letterSpacing: 0.0,
@@ -173,7 +177,9 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
                             textInputAction: TextInputAction.next,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'License Number:',
+                              labelText: FFLocalizations.of(context).getText(
+                                'j5v4hs9t' /* License Number: */,
+                              ),
                               labelStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
@@ -235,7 +241,9 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
                             textInputAction: TextInputAction.next,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Issuance Date:',
+                              labelText: FFLocalizations.of(context).getText(
+                                'wchmtlpe' /* Issuance Date: */,
+                              ),
                               labelStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
@@ -297,7 +305,9 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
                             textInputAction: TextInputAction.next,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Expiration Date:',
+                              labelText: FFLocalizations.of(context).getText(
+                                'j7sutlhf' /* Expiration Date: */,
+                              ),
                               labelStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
@@ -355,21 +365,31 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
                         ].divide(SizedBox(height: 12.0)),
                       ),
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
-                      child: Text(
-                        'Identity document:',
-                        style: FlutterFlowTheme.of(context).titleLarge.override(
-                              fontFamily: 'Open Sans',
-                              letterSpacing: 0.0,
-                            ),
+                    Align(
+                      alignment: AlignmentDirectional(-1.0, 1.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                        child: Text(
+                          FFLocalizations.of(context).getText(
+                            'n45hwic4' /* Identity document: */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).titleLarge.override(
+                                    fontFamily: 'Open Sans',
+                                    fontSize: 18.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
                       ),
                     ),
                     Text(
-                      'Make sure to the identity in a PDF or JPG format with maximum file size 5 MB.',
+                      FFLocalizations.of(context).getText(
+                        'hxonmvem' /* Make sure to the identity in a... */,
+                      ),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Open Sans',
+                            fontSize: 12.0,
                             letterSpacing: 0.0,
                           ),
                     ),
@@ -459,7 +479,9 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 0.0, 0.0),
                                   child: Text(
-                                    'Upload Identety',
+                                    FFLocalizations.of(context).getText(
+                                      'u4kzo3mf' /* Upload Identety */,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -480,17 +502,23 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                       child: Text(
-                        'Proof of residence:- اثبات سكن (وصل)',
+                        FFLocalizations.of(context).getText(
+                          '3qlhg3w6' /* Proof of residence:- اثبات سكن... */,
+                        ),
                         style: FlutterFlowTheme.of(context).titleLarge.override(
                               fontFamily: 'Open Sans',
+                              fontSize: 18.0,
                               letterSpacing: 0.0,
                             ),
                       ),
                     ),
                     Text(
-                      'Make sure to the document in a PDF or JPG format with maximum file size 5 MB.',
+                      FFLocalizations.of(context).getText(
+                        'wc988940' /* Make sure to the document in a... */,
+                      ),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Open Sans',
+                            fontSize: 12.0,
                             letterSpacing: 0.0,
                           ),
                     ),
@@ -580,7 +608,9 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 0.0, 0.0),
                                   child: Text(
-                                    'Upload Identety',
+                                    FFLocalizations.of(context).getText(
+                                      'ohderj2j' /* Upload Identety */,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -638,7 +668,9 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
                             ),
                           );
                         },
-                        text: 'Submit Data',
+                        text: FFLocalizations.of(context).getText(
+                          'ukfhdpvi' /* Submit Data */,
+                        ),
                         icon: Icon(
                           Icons.receipt_long,
                           size: 15.0,

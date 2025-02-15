@@ -85,7 +85,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                   child: Text(
-                    'Create your Profile',
+                    FFLocalizations.of(context).getText(
+                      'tncufta9' /* Create your Profile */,
+                    ),
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
                           fontFamily: 'Open Sans',
                           color: FlutterFlowTheme.of(context).primaryText,
@@ -219,7 +221,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                   textCapitalization: TextCapitalization.words,
                   obscureText: false,
                   decoration: InputDecoration(
-                    labelText: 'Your Name',
+                    labelText: FFLocalizations.of(context).getText(
+                      'yv1nyjps' /* Your Name */,
+                    ),
                     labelStyle:
                         FlutterFlowTheme.of(context).labelMedium.override(
                               fontFamily: 'Open Sans',
@@ -326,7 +330,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Text(
-                              'Pickup and Return Location Info',
+                              FFLocalizations.of(context).getText(
+                                'bd2hrkgv' /* Pickup and Return Location Inf... */,
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .titleMedium
                                   .override(
@@ -347,7 +353,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               autofocus: false,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'Government',
+                                labelText: FFLocalizations.of(context).getText(
+                                  '32p8vukt' /* Government */,
+                                ),
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -414,7 +422,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               autofocus: false,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'City',
+                                labelText: FFLocalizations.of(context).getText(
+                                  'jzxhzs7t' /* City */,
+                                ),
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -481,7 +491,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               autofocus: false,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'Address',
+                                labelText: FFLocalizations.of(context).getText(
+                                  'umjy6cmx' /* Address */,
+                                ),
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -592,7 +604,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
 
                     context.pushNamed('profile');
                   },
-                  text: 'Save Changes',
+                  text: FFLocalizations.of(context).getText(
+                    'lcc48cq7' /* Save Changes */,
+                  ),
                   options: FFButtonOptions(
                     width: 270.0,
                     height: 50.0,

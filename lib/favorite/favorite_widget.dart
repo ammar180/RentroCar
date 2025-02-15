@@ -57,14 +57,16 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
-                        'assets/images/rentrocar-logo.jpg',
+                        'assets/images/rentrocar-log.png',
                         width: 40.0,
                         height: 40.0,
                         fit: BoxFit.fill,
                       ),
                     ),
                     Text(
-                      'RentroCar',
+                      FFLocalizations.of(context).getText(
+                        '5sw10eas' /* RentroCar */,
+                      ),
                       style:
                           FlutterFlowTheme.of(context).headlineSmall.override(
                                 fontFamily: 'Roboto Mono',
@@ -82,14 +84,15 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Your Favorite Cars',
+                        FFLocalizations.of(context).getText(
+                          'b9fv5ldt' /* Your Favorite Cars */,
+                        ),
                         style: FlutterFlowTheme.of(context).titleLarge.override(
                               fontFamily: 'Open Sans',
                               letterSpacing: 0.0,
                             ),
                       ),
-                      Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                      Flexible(
                         child: Builder(
                           builder: (context) {
                             if ((currentUserDocument?.lovedCars.toList() ?? [])
@@ -153,7 +156,9 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
                               return Align(
                                 alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Text(
-                                  'You Didn\'t have any loved cars',
+                                  FFLocalizations.of(context).getText(
+                                    '3satdo4r' /* You Didn't have any loved cars */,
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
                                       .override(
