@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -110,6 +111,100 @@ class UsersRecord extends FirestoreRecord {
   bool operator ==(other) =>
       other is UsersRecord &&
       reference.path.hashCode == other.reference.path.hashCode;
+
+  @override
+  Map<String, DebugDataField> toDebugSerializableMap() => {
+        'reference': debugSerializeParam(
+          reference,
+          ParamType.DocumentReference,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: '',
+          nullable: false,
+        ),
+        'email': debugSerializeParam(
+          email,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'String',
+          nullable: false,
+        ),
+        'display_name': debugSerializeParam(
+          displayName,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'String',
+          nullable: false,
+        ),
+        'photo_url': debugSerializeParam(
+          photoUrl,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'String',
+          nullable: false,
+        ),
+        'uid': debugSerializeParam(
+          uid,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'String',
+          nullable: false,
+        ),
+        'created_time': debugSerializeParam(
+          createdTime,
+          ParamType.DateTime,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'DateTime',
+          nullable: true,
+        ),
+        'phone_number': debugSerializeParam(
+          phoneNumber,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'String',
+          nullable: false,
+        ),
+        'is_verified': debugSerializeParam(
+          isVerified,
+          ParamType.bool,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'bool',
+          nullable: false,
+        ),
+        'owned_cars': debugSerializeParam(
+          ownedCars,
+          ParamType.DocumentReference,
+          isList: true,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'car',
+          nullable: false,
+        ),
+        'loved_cars': debugSerializeParam(
+          lovedCars,
+          ParamType.DocumentReference,
+          isList: true,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'car',
+          nullable: false,
+        ),
+        'location': debugSerializeParam(
+          location,
+          ParamType.DocumentReference,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'location',
+          nullable: true,
+        )
+      };
 }
 
 Map<String, dynamic> createUsersRecordData({

@@ -4,7 +4,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'profile_model.dart';
 export 'profile_model.dart';
 
@@ -15,7 +18,7 @@ class ProfileWidget extends StatefulWidget {
   State<ProfileWidget> createState() => _ProfileWidgetState();
 }
 
-class _ProfileWidgetState extends State<ProfileWidget> {
+class _ProfileWidgetState extends State<ProfileWidget> with RouteAware {
   late ProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -24,8 +27,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ProfileModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -36,7 +37,47 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -449,8 +490,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 12.0, 0.0, 12.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          24.0, 12.0, 0.0, 12.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           '8dflcogq' /* Application Settings */,
@@ -484,7 +525,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       width: double.infinity,
                       height: 60.0,
                       decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        color:
+                            FlutterFlowTheme.of(context).secondaryBackground,
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 5.0,
@@ -512,7 +554,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Icon(
                                     Icons.translate_sharp,
-                                    color: FlutterFlowTheme.of(context).primary,
+                                    color:
+                                        FlutterFlowTheme.of(context).primary,
                                     size: 25.0,
                                   ),
                                 ),
@@ -535,7 +578,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 )
                               ],
                               onChanged: (val) async {
-                                safeSetState(() => _model.dropDownValue = val);
+                                safeSetState(
+                                    () => _model.dropDownValue = val);
                                 setAppLanguage(
                                     context,
                                     (_model.dropDownValue != null &&
@@ -557,8 +601,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryText,
                                 size: 24.0,
                               ),
                               fillColor: FlutterFlowTheme.of(context)

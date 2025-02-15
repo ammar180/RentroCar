@@ -2,7 +2,10 @@ import '/flutter_flow/flutter_flow_pdf_viewer.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'preparing_interview_model.dart';
 export 'preparing_interview_model.dart';
 
@@ -14,7 +17,8 @@ class PreparingInterviewWidget extends StatefulWidget {
       _PreparingInterviewWidgetState();
 }
 
-class _PreparingInterviewWidgetState extends State<PreparingInterviewWidget> {
+class _PreparingInterviewWidgetState extends State<PreparingInterviewWidget>
+    with RouteAware {
   late PreparingInterviewModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -23,8 +27,6 @@ class _PreparingInterviewWidgetState extends State<PreparingInterviewWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PreparingInterviewModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -35,7 +37,47 @@ class _PreparingInterviewWidgetState extends State<PreparingInterviewWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -105,7 +147,7 @@ class _PreparingInterviewWidgetState extends State<PreparingInterviewWidget> {
                                   ),
                         ),
                         FlutterFlowPdfViewer(
-                          assetPath: 'assets/pdfs/spnzn__.pdf',
+                          assetPath: 'assets/pdfs/Borrowing_Agreement.pdf',
                           height: 426.72,
                           horizontalScroll: false,
                         ),

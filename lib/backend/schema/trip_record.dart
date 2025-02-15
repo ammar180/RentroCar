@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
 import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
@@ -94,6 +95,74 @@ class TripRecord extends FirestoreRecord {
   bool operator ==(other) =>
       other is TripRecord &&
       reference.path.hashCode == other.reference.path.hashCode;
+
+  @override
+  Map<String, DebugDataField> toDebugSerializableMap() => {
+        'reference': debugSerializeParam(
+          reference,
+          ParamType.DocumentReference,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: '',
+          nullable: false,
+        ),
+        'startDate': debugSerializeParam(
+          startDate,
+          ParamType.DateTime,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'DateTime',
+          nullable: true,
+        ),
+        'endDate': debugSerializeParam(
+          endDate,
+          ParamType.DateTime,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'DateTime',
+          nullable: true,
+        ),
+        'carOwner': debugSerializeParam(
+          carOwner,
+          ParamType.DocumentReference,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'users',
+          nullable: true,
+        ),
+        'carBorrower': debugSerializeParam(
+          carBorrower,
+          ParamType.DocumentReference,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'users',
+          nullable: true,
+        ),
+        'totalPrice': debugSerializeParam(
+          totalPrice,
+          ParamType.double,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'double',
+          nullable: false,
+        ),
+        'status': debugSerializeParam(
+          status,
+          ParamType.Enum,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'status',
+          nullable: true,
+        ),
+        'borrowedCar': debugSerializeParam(
+          borrowedCar,
+          ParamType.DocumentReference,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'car',
+          nullable: true,
+        )
+      };
 }
 
 Map<String, dynamic> createTripRecordData({

@@ -18,6 +18,7 @@ export 'schema/index.dart';
 export 'schema/util/firestore_util.dart';
 export 'schema/util/schema_util.dart';
 
+export '../flutter_flow/debug_util.dart';
 export 'schema/users_record.dart';
 export 'schema/location_record.dart';
 export 'schema/user_verfication_record.dart';

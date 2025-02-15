@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -74,6 +76,50 @@ class LocationRecord extends FirestoreRecord {
   bool operator ==(other) =>
       other is LocationRecord &&
       reference.path.hashCode == other.reference.path.hashCode;
+
+  @override
+  Map<String, DebugDataField> toDebugSerializableMap() => {
+        'reference': debugSerializeParam(
+          reference,
+          ParamType.DocumentReference,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: '',
+          nullable: false,
+        ),
+        'street': debugSerializeParam(
+          street,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'String',
+          nullable: false,
+        ),
+        'city': debugSerializeParam(
+          city,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'String',
+          nullable: false,
+        ),
+        'government': debugSerializeParam(
+          government,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'String',
+          nullable: false,
+        ),
+        'user': debugSerializeParam(
+          user,
+          ParamType.DocumentReference,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'users',
+          nullable: true,
+        )
+      };
 }
 
 Map<String, dynamic> createLocationRecordData({

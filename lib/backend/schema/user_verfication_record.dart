@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -62,6 +64,34 @@ class UserVerficationRecord extends FirestoreRecord {
   bool operator ==(other) =>
       other is UserVerficationRecord &&
       reference.path.hashCode == other.reference.path.hashCode;
+
+  @override
+  Map<String, DebugDataField> toDebugSerializableMap() => {
+        'reference': debugSerializeParam(
+          reference,
+          ParamType.DocumentReference,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: '',
+          nullable: false,
+        ),
+        'userRef': debugSerializeParam(
+          userRef,
+          ParamType.DocumentReference,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'users',
+          nullable: true,
+        ),
+        'ssn_id': debugSerializeParam(
+          ssnId,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'String',
+          nullable: false,
+        )
+      };
 }
 
 Map<String, dynamic> createUserVerficationRecordData({

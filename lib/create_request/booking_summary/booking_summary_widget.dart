@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
 import '/components/alert_dialog_widget.dart';
@@ -6,9 +7,13 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'booking_summary_model.dart';
 export 'booking_summary_model.dart';
 
@@ -68,7 +73,8 @@ class BookingSummaryWidget extends StatefulWidget {
   State<BookingSummaryWidget> createState() => _BookingSummaryWidgetState();
 }
 
-class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
+class _BookingSummaryWidgetState extends State<BookingSummaryWidget>
+    with RouteAware {
   late BookingSummaryModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -81,27 +87,25 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.fullPrice = valueOrDefault<double>(
-            widget.tripDocument?.totalPrice,
+            widget!.tripDocument?.totalPrice,
             5050.0,
           ) +
           valueOrDefault<double>(
             (FFAppConstants.serviceProvantage / 100) *
-                widget.tripDocument!.totalPrice,
+                widget!.tripDocument!.totalPrice,
             1026.0,
           ) +
           FFAppConstants.insuranceDeposit;
-      if (widget.bookedCar != null) {
-        _model.carDoc = widget.bookedCar;
+      if (widget!.bookedCar != null) {
+        _model.carDoc = widget!.bookedCar;
         safeSetState(() {});
       } else {
         _model.retrievedBorrowedCar =
-            await CarRecord.getDocumentOnce(widget.tripDocument!.borrowedCar!);
+            await CarRecord.getDocumentOnce(widget!.tripDocument!.borrowedCar!);
         _model.carDoc = _model.retrievedBorrowedCar;
         safeSetState(() {});
       }
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -112,7 +116,47 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -162,7 +206,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                     size: 24.0,
                   ),
                   onPressed: () async {
-                    await widget.tripDocument!.reference.delete();
+                    await widget!.tripDocument!.reference.delete();
                   },
                 ),
               ),
@@ -176,7 +220,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 4.0, 0.0),
                   child: Text(
                     valueOrDefault<String>(
-                      widget.tripDocument?.status?.name,
+                      widget!.tripDocument?.status?.name,
                       'unConfirmed',
                     ),
                     style: FlutterFlowTheme.of(context).labelSmall.override(
@@ -216,7 +260,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                             borderRadius: BorderRadius.circular(12.0),
                             child: Image.network(
                               valueOrDefault<String>(
-                                _model.carDoc?.carPhotos.firstOrNull,
+                                _model.carDoc?.carPhotos?.firstOrNull,
                                 'https://images.unsplash.com/photo-1510903117032-f1596c327647?w=800&h=800',
                               ),
                               width: 100.0,
@@ -252,7 +296,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                     ),
                                     Text(
                                       valueOrDefault<String>(
-                                        _model.carDoc?.rate.toString(),
+                                        _model.carDoc?.rate?.toString(),
                                         '0.0',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -301,7 +345,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                     ),
                   ),
                 ),
-                if (widget.tripDocument?.status == Status.payDone)
+                if (widget!.tripDocument?.status == Status.payDone)
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
@@ -379,7 +423,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                     valueOrDefault<String>(
                                       dateTimeFormat(
                                         "yMMMd",
-                                        widget.tripDocument?.startDate,
+                                        widget!.tripDocument?.startDate,
                                         locale: FFLocalizations.of(context)
                                             .languageCode,
                                       ),
@@ -396,7 +440,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                     valueOrDefault<String>(
                                       dateTimeFormat(
                                         "jm",
-                                        widget.tripDocument?.startDate,
+                                        widget!.tripDocument?.startDate,
                                         locale: FFLocalizations.of(context)
                                             .languageCode,
                                       ),
@@ -440,7 +484,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                     valueOrDefault<String>(
                                       dateTimeFormat(
                                         "yMMMd",
-                                        widget.tripDocument?.endDate,
+                                        widget!.tripDocument?.endDate,
                                         locale: FFLocalizations.of(context)
                                             .languageCode,
                                       ),
@@ -457,7 +501,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                     valueOrDefault<String>(
                                       dateTimeFormat(
                                         "jm",
-                                        widget.tripDocument?.endDate,
+                                        widget!.tripDocument?.endDate,
                                         locale: FFLocalizations.of(context)
                                             .languageCode,
                                       ),
@@ -481,7 +525,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                     ),
                   ),
                 ),
-                if (widget.tripDocument?.status == Status.payDone)
+                if (widget!.tripDocument?.status == Status.payDone)
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
@@ -494,7 +538,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                         padding: EdgeInsets.all(16.0),
                         child: StreamBuilder<UsersRecord>(
                           stream: UsersRecord.getDocument(
-                              widget.tripDocument!.carOwner!),
+                              widget!.tripDocument!.carOwner!),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
@@ -512,6 +556,17 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                             }
 
                             final columnUsersRecord = snapshot.data!;
+                            _model.debugBackendQueries[
+                                    'columnUsersRecord_Column_7g8ik3jy'] =
+                                debugSerializeParam(
+                              columnUsersRecord,
+                              ParamType.Document,
+                              link:
+                                  'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=booking_summary',
+                              name: 'users',
+                              nullable: false,
+                            );
+                            debugLogWidgetClass(_model);
 
                             return Column(
                               mainAxisSize: MainAxisSize.max,
@@ -544,7 +599,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                               locationRecord.where(
                                             'user',
                                             isEqualTo:
-                                                widget.tripDocument?.carOwner,
+                                                widget!.tripDocument?.carOwner,
                                           ),
                                           singleRecord: true,
                                         ),
@@ -578,6 +633,17 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                               textLocationRecordList.isNotEmpty
                                                   ? textLocationRecordList.first
                                                   : null;
+                                          _model.debugBackendQueries[
+                                                  'textLocationRecord_Text_la2kwf5s'] =
+                                              debugSerializeParam(
+                                            textLocationRecord,
+                                            ParamType.Document,
+                                            link:
+                                                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=booking_summary',
+                                            name: 'location',
+                                            nullable: false,
+                                          );
+                                          debugLogWidgetClass(_model);
 
                                           return Text(
                                             columnUsersRecord.displayName,
@@ -700,7 +766,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                               locationRecord.where(
                                             'user',
                                             isEqualTo:
-                                                widget.tripDocument?.carOwner,
+                                                widget!.tripDocument?.carOwner,
                                           ),
                                           singleRecord: true,
                                         ),
@@ -734,6 +800,17 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                                               textLocationRecordList.isNotEmpty
                                                   ? textLocationRecordList.first
                                                   : null;
+                                          _model.debugBackendQueries[
+                                                  'textLocationRecord_Text_4ki823rm'] =
+                                              debugSerializeParam(
+                                            textLocationRecord,
+                                            ParamType.Document,
+                                            link:
+                                                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=booking_summary',
+                                            name: 'location',
+                                            nullable: false,
+                                          );
+                                          debugLogWidgetClass(_model);
 
                                           return Text(
                                             valueOrDefault<String>(
@@ -787,7 +864,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                '${_model.carDoc?.rentalFare.toString()}  × ${functions.calculateDaysCount(widget.tripDocument!.startDate!.secondsSinceEpoch, widget.tripDocument!.endDate!.secondsSinceEpoch).toString()} days',
+                                '${_model.carDoc?.rentalFare?.toString()}  × ${functions.calculateDaysCount(widget!.tripDocument!.startDate!.secondsSinceEpoch, widget!.tripDocument!.endDate!.secondsSinceEpoch).toString()} days',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -797,7 +874,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                               ),
                               Text(
                                 valueOrDefault<String>(
-                                  widget.tripDocument?.totalPrice.toString(),
+                                  widget!.tripDocument?.totalPrice?.toString(),
                                   '5,040',
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -827,7 +904,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                               Text(
                                 valueOrDefault<String>(
                                   ((FFAppConstants.serviceProvantage / 100) *
-                                          widget.tripDocument!.totalPrice)
+                                          widget!.tripDocument!.totalPrice)
                                       .toString(),
                                   '1,260',
                                 ),
@@ -907,13 +984,13 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                     ),
                   ),
                 ),
-                if (widget.tripDocument?.status == Status.notConfirmed)
+                if (widget!.tripDocument?.status == Status.notConfirmed)
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        await widget.tripDocument!.reference
+                        await widget!.tripDocument!.reference
                             .update(createTripRecordData(
                           status: Status.pending,
                         ));
@@ -958,7 +1035,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                       ),
                     ),
                   ),
-                if (widget.tripDocument?.status == Status.accepted)
+                if (widget!.tripDocument?.status == Status.accepted)
                   Builder(
                     builder: (context) => Padding(
                       padding:
@@ -990,15 +1067,15 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget> {
                               safeSetState(() => _model.isPayDone = value));
 
                           if (_model.isPayDone!) {
-                            await widget.tripDocument!.reference
+                            await widget!.tripDocument!.reference
                                 .update(createTripRecordData(
                               status: Status.payDone,
                             ));
 
-                            await widget.tripDocument!.borrowedCar!
+                            await widget!.tripDocument!.borrowedCar!
                                 .update(createCarRecordData(
                               isAvailable: false,
-                              availableDate: widget.tripDocument?.endDate,
+                              availableDate: widget!.tripDocument?.endDate,
                             ));
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(

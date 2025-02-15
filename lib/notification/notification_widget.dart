@@ -1,37 +1,35 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
-import 'progressbar_model.dart';
-export 'progressbar_model.dart';
+import 'notification_model.dart';
+export 'notification_model.dart';
 
-class ProgressbarWidget extends StatefulWidget {
-  const ProgressbarWidget({super.key});
+class NotificationWidget extends StatefulWidget {
+  const NotificationWidget({super.key});
 
   @override
-  State<ProgressbarWidget> createState() => _ProgressbarWidgetState();
+  State<NotificationWidget> createState() => _NotificationWidgetState();
 }
 
-class _ProgressbarWidgetState extends State<ProgressbarWidget> with RouteAware {
-  late ProgressbarModel _model;
+class _NotificationWidgetState extends State<NotificationWidget>
+    with RouteAware {
+  late NotificationModel _model;
 
-  @override
-  void setState(VoidCallback callback) {
-    super.setState(callback);
-    _model.onUpdate();
-  }
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProgressbarModel());
+    _model = createModel(context, () => NotificationModel());
   }
 
   @override
   void dispose() {
-    _model.maybeDispose();
+    _model.dispose();
 
     super.dispose();
   }
@@ -78,29 +76,35 @@ class _ProgressbarWidgetState extends State<ProgressbarWidget> with RouteAware {
         ?.parentModelCallback
         ?.call(_model);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(12.0),
-        child: CircularPercentIndicator(
-          percent: 0.5,
-          radius: 60.0,
-          lineWidth: 12.0,
-          animation: true,
-          animateFromLastPercent: true,
-          progressColor: FlutterFlowTheme.of(context).primary,
-          backgroundColor: FlutterFlowTheme.of(context).accent4,
-          center: Text(
-            FFLocalizations.of(context).getText(
-              '3uuwhd0m' /* 50% */,
-            ),
-            style: FlutterFlowTheme.of(context).headlineSmall.override(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Page Title',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Open Sans',
+                  color: Colors.white,
+                  fontSize: 22.0,
                   letterSpacing: 0.0,
                 ),
+          ),
+          actions: [],
+          centerTitle: false,
+          elevation: 2.0,
+        ),
+        body: SafeArea(
+          top: true,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [],
           ),
         ),
       ),

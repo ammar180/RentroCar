@@ -34,13 +34,17 @@ dependencies:
   cloud_firestore: 5.5.0
   cloud_firestore_platform_interface: 6.5.0
   cloud_firestore_web: 4.3.4
-  collection: 1.19.0
+  collection: 1.18.0
   csslib: 0.17.3
+  debug_panel_proto: 
+    git:
+      url: https://github.com/FlutterFlow/debug_panel_proto.git
+      ref: v0.1.4
   dropdown_button2: 2.3.9
   file_picker: 8.1.2
   file_saver: 0.2.14
   firebase_auth: 5.3.3
-  firebase_auth_platform_interface: 7.4.9
+  # firebase_auth_platform_interface: 7.4.9
   firebase_auth_web: 5.13.4
   firebase_core: 3.8.0
   firebase_core_platform_interface: 5.3.0
@@ -130,6 +134,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
+  easy_debounce: ^2.0.3
 
 dependency_overrides:
   device_info_plus: 10.1.2
@@ -144,8 +149,8 @@ dev_dependencies:
   flutter_lints: 4.0.0
   image: 4.2.0
   lints: 4.0.0
-  flutter_test:
-    sdk: flutter
+  # flutter_test:
+  #   sdk: flutter
 
 
 flutter_launcher_icons:

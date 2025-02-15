@@ -1,7 +1,14 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'sign_up_page_widget.dart' show SignUpPageWidget;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPageModel extends FlutterFlowModel<SignUpPageWidget> {
   ///  State fields for stateful widgets in this page.
@@ -65,8 +72,17 @@ class SignUpPageModel extends FlutterFlowModel<SignUpPageWidget> {
   String? Function(BuildContext, String?)?
       signupConfirmPasswrodFieldTextControllerValidator;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
-  LocationRecord? createdLocation;
+  LocationRecord? _createdLocation;
+  set createdLocation(LocationRecord? value) {
+    _createdLocation = value;
+    debugLogWidgetClass(this);
+  }
 
+  LocationRecord? get createdLocation => _createdLocation;
+
+  final Map<String, DebugDataField> debugGeneratorVariables = {};
+  final Map<String, DebugDataField> debugBackendQueries = {};
+  final Map<String, FlutterFlowModel> widgetBuilderComponents = {};
   @override
   void initState(BuildContext context) {
     nameFieldTextControllerValidator = _nameFieldTextControllerValidator;
@@ -75,6 +91,8 @@ class SignUpPageModel extends FlutterFlowModel<SignUpPageWidget> {
         _signupEmailFieldTextControllerValidator;
     signupPasswrodFieldVisibility = false;
     signupConfirmPasswrodFieldVisibility = false;
+
+    debugLogWidgetClass(this);
   }
 
   @override
@@ -94,4 +112,74 @@ class SignUpPageModel extends FlutterFlowModel<SignUpPageWidget> {
     signupConfirmPasswrodFieldFocusNode?.dispose();
     signupConfirmPasswrodFieldTextController?.dispose();
   }
+
+  @override
+  WidgetClassDebugData toWidgetClassDebugData() => WidgetClassDebugData(
+        widgetStates: {
+          'nameFieldText': debugSerializeParam(
+            nameFieldTextController?.text,
+            ParamType.String,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=SignUpPage',
+            name: 'String',
+            nullable: true,
+          ),
+          'phoneFieldText': debugSerializeParam(
+            phoneFieldTextController?.text,
+            ParamType.String,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=SignUpPage',
+            name: 'String',
+            nullable: true,
+          ),
+          'signupEmailFieldText': debugSerializeParam(
+            signupEmailFieldTextController?.text,
+            ParamType.String,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=SignUpPage',
+            name: 'String',
+            nullable: true,
+          ),
+          'signupPasswrodFieldText': debugSerializeParam(
+            signupPasswrodFieldTextController?.text,
+            ParamType.String,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=SignUpPage',
+            name: 'String',
+            nullable: true,
+          ),
+          'signupConfirmPasswrodFieldText': debugSerializeParam(
+            signupConfirmPasswrodFieldTextController?.text,
+            ParamType.String,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=SignUpPage',
+            name: 'String',
+            nullable: true,
+          )
+        },
+        actionOutputs: {
+          'createdLocation': debugSerializeParam(
+            createdLocation,
+            ParamType.Document,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=SignUpPage',
+            name: 'location',
+            nullable: true,
+          )
+        },
+        generatorVariables: debugGeneratorVariables,
+        backendQueries: debugBackendQueries,
+        componentStates: {
+          ...widgetBuilderComponents.map(
+            (key, value) => MapEntry(
+              key,
+              value.toWidgetClassDebugData(),
+            ),
+          ),
+        }.withoutNulls,
+        link:
+            'https://app.flutterflow.io/project/rentro-car-74c8w5/tab=uiBuilder&page=SignUpPage',
+        searchReference: 'reference=OgpTaWduVXBQYWdlUAFaClNpZ25VcFBhZ2U=',
+        widgetClassName: 'SignUpPage',
+      );
 }

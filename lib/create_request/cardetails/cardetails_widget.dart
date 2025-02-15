@@ -5,11 +5,16 @@ import '/components/alert_dialog_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'cardetails_model.dart';
 export 'cardetails_model.dart';
 
@@ -25,7 +30,7 @@ class CardetailsWidget extends StatefulWidget {
   State<CardetailsWidget> createState() => _CardetailsWidgetState();
 }
 
-class _CardetailsWidgetState extends State<CardetailsWidget> {
+class _CardetailsWidgetState extends State<CardetailsWidget> with RouteAware {
   late CardetailsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -34,8 +39,6 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CardetailsModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -46,7 +49,47 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -83,7 +126,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
       body: SafeArea(
         top: true,
         child: StreamBuilder<UsersRecord>(
-          stream: UsersRecord.getDocument(widget.car!.carOwner!),
+          stream: UsersRecord.getDocument(widget!.car!.carOwner!),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
             if (!snapshot.hasData) {
@@ -101,6 +144,16 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
             }
 
             final columnUsersRecord = snapshot.data!;
+            _model.debugBackendQueries['columnUsersRecord_Column_xrjcria2'] =
+                debugSerializeParam(
+              columnUsersRecord,
+              ParamType.Document,
+              link:
+                  'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=cardetails',
+              name: 'users',
+              nullable: false,
+            );
+            debugLogWidgetClass(_model);
 
             return Column(
               mainAxisSize: MainAxisSize.max,
@@ -109,8 +162,8 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                 Expanded(
                   child: Builder(
                     builder: (context) {
-                      final carPhotos = (widget.car!.carPhotos.isNotEmpty
-                                  ? widget.car?.carPhotos
+                      final carPhotos = (widget!.car!.carPhotos.isNotEmpty
+                                  ? widget!.car?.carPhotos
                                   : List.generate(
                                       random_data.randomInteger(5, 5),
                                       (index) => random_data.randomImageUrl(
@@ -119,6 +172,18 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                           )))
                               ?.toList() ??
                           [];
+                      _model.debugGeneratorVariables[
+                              'carPhotos${carPhotos.length > 100 ? ' (first 100)' : ''}'] =
+                          debugSerializeParam(
+                        carPhotos.take(100),
+                        ParamType.String,
+                        isList: true,
+                        link:
+                            'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=cardetails',
+                        name: 'String',
+                        nullable: false,
+                      );
+                      debugLogWidgetClass(_model);
 
                       return Container(
                         width: double.infinity,
@@ -126,10 +191,13 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                         child: Stack(
                           children: [
                             PageView.builder(
-                              controller: _model.pageViewController ??=
-                                  PageController(
+                              controller:
+                                  _model.pageViewController ??= PageController(
                                       initialPage:
-                                          max(0, min(0, carPhotos.length - 1))),
+                                          max(0, min(0, carPhotos.length - 1)))
+                                    ..addListener(() {
+                                      debugLogWidgetClass(_model);
+                                    }),
                               scrollDirection: Axis.horizontal,
                               itemCount: carPhotos.length,
                               itemBuilder: (context, carPhotosIndex) {
@@ -156,7 +224,10 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                   controller: _model.pageViewController ??=
                                       PageController(
                                           initialPage: max(
-                                              0, min(0, carPhotos.length - 1))),
+                                              0, min(0, carPhotos.length - 1)))
+                                        ..addListener(() {
+                                          debugLogWidgetClass(_model);
+                                        }),
                                   count: carPhotos.length,
                                   axisDirection: Axis.horizontal,
                                   onDotClicked: (i) async {
@@ -239,9 +310,9 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                         ),
                                         child: Image.network(
                                           valueOrDefault<String>(
-                                            (widget.car?.carOwner?.id !=
+                                            (widget!.car?.carOwner?.id !=
                                                             null &&
-                                                        widget.car?.carOwner
+                                                        widget!.car?.carOwner
                                                                 ?.id !=
                                                             '') &&
                                                     (columnUsersRecord != null)
@@ -254,8 +325,8 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                       ),
                                       Text(
                                         valueOrDefault<String>(
-                                          (widget.car?.carOwner?.id != null &&
-                                                      widget.car?.carOwner
+                                          (widget!.car?.carOwner?.id != null &&
+                                                      widget!.car?.carOwner
                                                               ?.id !=
                                                           '') &&
                                                   (columnUsersRecord != null)
@@ -290,9 +361,9 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                         Text(
                                           valueOrDefault<String>(
                                             '${valueOrDefault<String>(
-                                              widget.car?.make,
+                                              widget!.car?.make,
                                               'Mada',
-                                            )} ${widget.car?.model}',
+                                            )} ${widget!.car?.model}',
                                             'BYD F3',
                                           ),
                                           style: FlutterFlowTheme.of(context)
@@ -320,7 +391,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                                 Text(
                                                   valueOrDefault<String>(
                                                     formatNumber(
-                                                      widget.car?.rate,
+                                                      widget!.car?.rate,
                                                       formatType:
                                                           FormatType.custom,
                                                       format: '#.#',
@@ -361,7 +432,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                         0.0, 5.0, 0.0, 0.0),
                                     child: Text(
                                       formatNumber(
-                                        widget.car!.rentalFare,
+                                        widget!.car!.rentalFare,
                                         formatType: FormatType.custom,
                                         format: 'EGP # / day',
                                         locale: '',
@@ -688,7 +759,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                   ),
                                   Text(
                                     valueOrDefault<String>(
-                                      widget.car?.description,
+                                      widget!.car?.description,
                                       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the',
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -736,7 +807,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                   0.0, 5.0, 0.0, 0.0),
                               child: Text(
                                 formatNumber(
-                                  widget.car!.rentalFare,
+                                  widget!.car!.rentalFare,
                                   formatType: FormatType.custom,
                                   format: 'EGP # / day',
                                   locale: '',
@@ -757,7 +828,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                   0.0, 5.0, 0.0, 0.0),
                               child: Text(
                                 formatNumber(
-                                  widget.car!.rentalFare,
+                                  widget!.car!.rentalFare,
                                   formatType: FormatType.custom,
                                   format: 'EGP # / day',
                                   locale: '',
@@ -775,7 +846,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                         ),
                         Builder(
                           builder: (context) => FFButtonWidget(
-                            onPressed: !widget.car!.isAvailable
+                            onPressed: !widget!.car!.isAvailable
                                 ? null
                                 : () async {
                                     if (valueOrDefault<bool>(
@@ -846,7 +917,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                           .set(createTripRecordData(
                                         startDate: _model.startDate,
                                         endDate: _model.endDate,
-                                        carOwner: widget.car?.carOwner,
+                                        carOwner: widget!.car?.carOwner,
                                         carBorrower: currentUserReference,
                                         totalPrice: valueOrDefault<int>(
                                               functions.calculateDaysCount(
@@ -862,16 +933,16 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                                   )),
                                               0,
                                             ) *
-                                            widget.car!.rentalFare,
+                                            widget!.car!.rentalFare,
                                         status: Status.notConfirmed,
-                                        borrowedCar: widget.car?.reference,
+                                        borrowedCar: widget!.car?.reference,
                                       ));
                                       _model.createdTrip =
                                           TripRecord.getDocumentFromData(
                                               createTripRecordData(
                                                 startDate: _model.startDate,
                                                 endDate: _model.endDate,
-                                                carOwner: widget.car?.carOwner,
+                                                carOwner: widget!.car?.carOwner,
                                                 carBorrower:
                                                     currentUserReference,
                                                 totalPrice: valueOrDefault<int>(
@@ -891,10 +962,10 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                                               )),
                                                       0,
                                                     ) *
-                                                    widget.car!.rentalFare,
+                                                    widget!.car!.rentalFare,
                                                 status: Status.notConfirmed,
                                                 borrowedCar:
-                                                    widget.car?.reference,
+                                                    widget!.car?.reference,
                                               ),
                                               tripRecordReference);
 
@@ -906,13 +977,13 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                             ParamType.Document,
                                           ),
                                           'bookedCar': serializeParam(
-                                            widget.car,
+                                            widget!.car,
                                             ParamType.Document,
                                           ),
                                         }.withoutNulls,
                                         extra: <String, dynamic>{
                                           'tripDocument': _model.createdTrip,
-                                          'bookedCar': widget.car,
+                                          'bookedCar': widget!.car,
                                         },
                                       );
                                     } else {
