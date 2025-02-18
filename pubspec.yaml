@@ -34,8 +34,12 @@ dependencies:
   cloud_firestore: 5.5.0
   cloud_firestore_platform_interface: 6.5.0
   cloud_firestore_web: 4.3.4
-  collection: 1.18.0
+  collection: 1.19.0
   csslib: 0.17.3
+  debug_panel_proto: 
+    git:
+      url: https://github.com/FlutterFlow/debug_panel_proto.git
+      ref: v0.1.4
   dio: ^5.8.0+1
   dropdown_button2: 2.3.9
   file_picker: 8.1.2

@@ -347,7 +347,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '8dflcogq': {
       'en': 'Application Settings',
-      'ar': 'إعدادات الحساب',
+      'ar': 'إعدادات التطبيق',
     },
     'hb69767h': {
       'en': 'English',

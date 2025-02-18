@@ -139,6 +139,7 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> with RouteAware {
                             fontFamily: 'Open Sans',
                             letterSpacing: 0.0,
                           ),
+                          overflow: TextOverflow.clip
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,

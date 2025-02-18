@@ -762,7 +762,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> with RouteAware {
                 ),
                 Container(
                   width: double.infinity,
-                  height: 93.7,
+                  height: 103,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryText,
                     borderRadius: BorderRadius.only(
@@ -815,7 +815,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> with RouteAware {
                                           format: 'EGP # / day',
                                           locale: '',
                                         )
-                                      : 'Available On: ${dateTimeFormat(
+                                      : '${dateTimeFormat(
                                           "MEd",
                                           widget.car?.availableDate,
                                           locale: FFLocalizations.of(context)

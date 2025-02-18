@@ -1162,9 +1162,7 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget>
                             }
                           }
 
-                          safeSetState(() {});
-
-                          safeSetState(() {});
+                          setState(() {});
                         },
                         text: FFLocalizations.of(context).getText(
                           'e0rqboja' /* Pay Now! */,

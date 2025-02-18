@@ -279,7 +279,7 @@ class _MyCarsWidgetState extends State<MyCarsWidget> with RouteAware {
                         debugLogWidgetClass(_model);
 
                         return Container(
-                          height: 300.5,
+                          height: 240,
                           decoration: BoxDecoration(),
                           child: Builder(
                             builder: (context) {
@@ -380,6 +380,7 @@ class _MyCarsWidgetState extends State<MyCarsWidget> with RouteAware {
                                   fontFamily: 'Open Sans',
                                   letterSpacing: 0.0,
                                 ),
+                            overflow: TextOverflow.clip,
                           ),
                           FFButtonWidget(
                             onPressed: () async {
@@ -457,7 +458,7 @@ class _MyCarsWidgetState extends State<MyCarsWidget> with RouteAware {
 
                           return Container(
                             width: double.infinity,
-                            height: MediaQuery.sizeOf(context).height * 0.457,
+                            height: MediaQuery.sizeOf(context).height * 0.4,
                             decoration: BoxDecoration(),
                             child: Builder(
                               builder: (context) {

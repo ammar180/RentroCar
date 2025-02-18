@@ -85,7 +85,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> with RouteAware {
         ?.parentModelCallback
         ?.call(_model);
 
-    return Container(=
+    return Container(
       width: 300,
       height: 250,
       decoration: BoxDecoration(
