@@ -14,8 +14,10 @@ class BookingSummaryModel extends FlutterFlowModel<BookingSummaryWidget> {
 
   // Stores action output result for [Backend Call - Read Document] action in booking_summary widget.
   CarRecord? retrievedBorrowedCar;
+  // Stores action output result for [Custom Action - makePayment] action in payBtn widget.
+  String? isPayDone;
   // Stores action output result for [Alert Dialog - Custom Dialog] action in payBtn widget.
-  bool? isPayDone;
+  bool? checkoutResult;
 
   @override
   void initState(BuildContext context) {}

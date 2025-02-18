@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'owner_booking_sammary_model.dart';
 export 'owner_booking_sammary_model.dart';
 
@@ -140,25 +141,29 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                   ),
             ),
             actions: [
-              Container(
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).success,
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                alignment: AlignmentDirectional(0.0, 0.0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 4.0, 0.0),
-                  child: Text(
-                    valueOrDefault<String>(
-                      widget.tripDocument?.status?.name,
-                      'unConfirmed',
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 7.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).success,
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 4.0, 0.0),
+                    child: Text(
+                      valueOrDefault<String>(
+                        widget.tripDocument?.status?.name,
+                        'unConfirmed',
+                      ),
+                      style: FlutterFlowTheme.of(context).labelSmall.override(
+                            fontFamily: 'Open Sans',
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            fontSize: 10.0,
+                            letterSpacing: 0.0,
+                          ),
                     ),
-                    style: FlutterFlowTheme.of(context).labelSmall.override(
-                          fontFamily: 'Open Sans',
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          fontSize: 10.0,
-                          letterSpacing: 0.0,
-                        ),
                   ),
                 ),
               ),
@@ -643,24 +648,26 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                                           .resolve(
                                                               Directionality.of(
                                                                   context)),
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      FocusScope.of(
-                                                              dialogContext)
-                                                          .unfocus();
-                                                      FocusManager
-                                                          .instance.primaryFocus
-                                                          ?.unfocus();
-                                                    },
-                                                    child: AlertDialogWidget(
-                                                      title: 'Open whatsapp ',
-                                                      description:
-                                                          'The application will redirect you to whatsapp to contact Car Owner, Are you sure?',
-                                                      confirmCallback:
-                                                          () async {
-                                                        await launchURL(
-                                                            'https://api.whatsapp.com/send?autoload=1&app_absent=0&phone=2${columnUsersRecord.phoneNumber}&text');
+                                                  child: WebViewAware(
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        FocusScope.of(
+                                                                dialogContext)
+                                                            .unfocus();
+                                                        FocusManager.instance
+                                                            .primaryFocus
+                                                            ?.unfocus();
                                                       },
+                                                      child: AlertDialogWidget(
+                                                        title: 'Open whatsapp ',
+                                                        description:
+                                                            'The application will redirect you to whatsapp to contact Car Owner, Are you sure?',
+                                                        confirmCallback:
+                                                            () async {
+                                                          await launchURL(
+                                                              'https://api.whatsapp.com/send?autoload=1&app_absent=0&phone=2${columnUsersRecord.phoneNumber}&text');
+                                                        },
+                                                      ),
                                                     ),
                                                   ),
                                                 );
@@ -849,23 +856,26 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                                       .resolve(
                                                           Directionality.of(
                                                               context)),
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  FocusScope.of(dialogContext)
-                                                      .unfocus();
-                                                  FocusManager
-                                                      .instance.primaryFocus
-                                                      ?.unfocus();
-                                                },
-                                                child: AlertDialogWidget(
-                                                  title: 'Confirm Locaiton',
-                                                  description:
-                                                      'Note: the client will pickup and return the car on your location: ${'${buttonLocationRecord.government}, ${buttonLocationRecord.city}, ${buttonLocationRecord.street}'}',
-                                                  confirmButton:
-                                                      'Confrm Location',
-                                                  cancelButton:
-                                                      'Update Location',
-                                                  confirmCallback: () async {},
+                                              child: WebViewAware(
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    FocusScope.of(dialogContext)
+                                                        .unfocus();
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  },
+                                                  child: AlertDialogWidget(
+                                                    title: 'Confirm Locaiton',
+                                                    description:
+                                                        'Note: the client will pickup and return the car on your location: ${'${buttonLocationRecord.government}, ${buttonLocationRecord.city}, ${buttonLocationRecord.street}'}',
+                                                    confirmButton:
+                                                        'Confrm Location',
+                                                    cancelButton:
+                                                        'Update Location',
+                                                    confirmCallback:
+                                                        () async {},
+                                                  ),
                                                 ),
                                               ),
                                             );

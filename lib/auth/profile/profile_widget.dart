@@ -407,7 +407,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           await authManager.signOut();
                           GoRouter.of(context).clearRedirectLocation();
 
-                          context.goNamedAuth('onboarding', context.mounted);
+                          context.goNamedAuth('SignUpPage', context.mounted);
                         },
                         text: FFLocalizations.of(context).getText(
                           'c6n4h8y9' /* Log Out */,

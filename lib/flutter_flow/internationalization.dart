@@ -154,9 +154,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Login',
       'ar': 'تسجيل الدخول',
     },
-    'xolhhmcc': {
-      'en': 'Username',
-      'ar': 'اسم المستخدم',
+    'apotk2i5': {
+      'en': 'Email',
+      'ar': '',
     },
     '4rg9nmej': {
       'en': 'Password',
@@ -274,33 +274,33 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'ccku15hv': {
       'en': 'Your Smart Car Rental Platform!',
-      'ar': 'عنوان التوجيه',
+      'ar': 'منصة تأجير السيارات الذكية الخاصة بك!',
     },
     'nnqkju1u': {
       'en':
           'Whether you need a luxury car for a special occasion or a budget-friendly option for everyday use, RentroCar lets you explore the best deals from rental companies and private car owners. Enjoy a seamless and fast booking experience with just a tap!',
       'ar':
-          'Duis aute irure dolor in rerehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+          'سواء كنت بحاجة إلى سيارة فاخرة لمناسبة خاصة أو خيار مناسب للميزانية للاستخدام اليومي، يتيح لك RentroCar استكشاف أفضل العروض من شركات التأجير وأصحاب السيارات الخاصة. استمتع بتجربة حجز سلسة وسريعة بنقرة واحدة فقط!',
     },
     'ulwb4g5g': {
       'en': 'More Choices, Better Prices!',
-      'ar': 'عنوان التوجيه',
+      'ar': 'مزيد من الخيارات، وأسعار أفضل!',
     },
     'edxliqql': {
       'en':
           'Compare rental options for private car owners. Competition means better cars at lower prices, giving you the best value for your money. Find the perfect ride that suits your needs!',
       'ar':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut Labore et dolore magna aliqua.',
+          'قارن بين خيارات التأجير لأصحاب السيارات الخاصة. المنافسة تعني الحصول على سيارات أفضل بأسعار أقل، مما يمنحك أفضل قيمة مقابل أموالك. اعثر على السيارة المثالية التي تناسب احتياجاتك!',
     },
     'tcedlq4k': {
       'en': 'Car Rental Made Easier Than Ever!',
-      'ar': 'عنوان التوجيه',
+      'ar': 'تأجير السيارات أصبح أسهل من أي وقت مضى!',
     },
     'wufi3bxj': {
       'en':
           'With RentroCar, compare multiple offers, book your ideal car in minutes, and enjoy your trip hassle-free. We provide you with flexibility and security for a smooth rental experience, wherever you are',
       'ar':
-          'إننا لا نسمح إلا بالحد الأدنى من النشاط الذي نمارسه من خلال العمل، ولا نتركه بعيدًا عن أي شيء يترتب على ذلك.',
+          'مع RentroCar، قارن بين العروض المتعددة، واحجز سيارتك المثالية في دقائق، واستمتع برحلتك دون أي متاعب. نحن نوفر لك المرونة والأمان لتجربة تأجير سلسة، أينما كنت',
     },
     'p89mnttq': {
       'en': 'Your Journey Begins',
@@ -308,7 +308,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'wd9kxwfe': {
       'en': 'Sign up below in order to get started!',
-      'ar': 'قم بالتسجيل أدناه للبدء!',
+      'ar': 'سجل أدناه للبدء!',
     },
     'q30l7fuc': {
       'en': 'Get Started',
@@ -487,10 +487,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'lbttlx0b': {
       'en': 'Description',
       'ar': 'وصف',
-    },
-    'kgpg6jbe': {
-      'en': 'Book Now',
-      'ar': 'احجز الآن',
     },
   },
   // AddingNewCarPage
@@ -890,10 +886,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // preparingInterview
   {
-    'm1twnkew': {
-      'en': 'RentroCar',
-      'ar': 'رينتروكار',
-    },
     '3qa1rshn': {
       'en': 'Important Nots for preparing clinet',
       'ar': 'ملاحظات هامة عند تحضير العميل',
@@ -905,6 +897,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'tu2wic38': {
       'en': 'Download contract',
       'ar': 'تنزيل العقد',
+    },
+    'm1twnkew': {
+      'en': 'RentroCar',
+      'ar': 'رينتروكار',
     },
     '1dqzsqbp': {
       'en': 'Home',

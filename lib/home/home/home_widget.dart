@@ -211,7 +211,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     ),
                               ),
                               Container(
-                                height: 232.99,
+                                height: 240.0,
                                 decoration: BoxDecoration(),
                                 child: StreamBuilder<List<CarRecord>>(
                                   stream: queryCarRecord(

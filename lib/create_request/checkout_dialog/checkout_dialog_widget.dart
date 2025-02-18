@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_credit_card_form.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_web_view.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'checkout_dialog_model.dart';
@@ -333,6 +334,18 @@ class _CheckoutDialogWidgetState extends State<CheckoutDialogWidget> {
                       ),
                     ],
                   ),
+                ),
+                Divider(
+                  height: 24.0,
+                  thickness: 2.0,
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                ),
+                FlutterFlowWebView(
+                  content:
+                      '<script\n     id=\"kashier-iFrame\"\n     src=\"https://checkout.kashier.io/kashier-checkout.js\"\n     data-amount=\"ORDER-AMOUNT\"\n     data-hash=\"ORDER-HASH\"\n     data-currency=\"ORDER-CURRENCY\"\n     data-orderId=\"ORDER-ORDERID\"\n     data-merchantId=\"ORDER-MERCHANTID\"\n     data-merchantRedirect=\"ORDER-MERCHANTREDIRECT\"\n    data-serverWebhook=\"ORDER-WEBHOOK-URL\"\n    data-mode=\"ORDER-MODE\"\n    data-metaData=\"ORDER-METADATA\"\n    data-description=\"ORDER-DESCRIPTION\"\n    data-allowedMethods=\"ORDER-ALLOWEDMETHODS\"\n    data-defaultMethod=\"ORDER-DEFAULTMETHOD\"\n    data-redirectMethod=\"ORDER-REDIRECTMETHOD\"\n    data-failureRedirect=\"ORDER-FAILUREREDIRECT\"\n    data-paymentRequestId=\"ORDER-PAYMENTREQUESTID\"\n    data-connectedAccount=\"ORDER-CONNECTEDACCOUNT\"\n    data-type=\"ORDER-TYPE\"\n    data-brandColor=\"ORDER-BRANDCOLOR\"\n    data-display=\"ORDER-DISPLAY\"\n    data-manualCapture=\"ORDER-AUTH\"\n    data-customer=\"CUSTOMER-DATA\"\n    data-saveCard=\"SAVING-CARD\"\n    data-interactionSource=\"Ecommerce\"\n    data-enable3DS=\"true\"\n></script>\n      ',
+                  height: 500.0,
+                  verticalScroll: true,
+                  horizontalScroll: false,
                 ),
               ],
             ),

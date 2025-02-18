@@ -44,6 +44,36 @@ class _PreparingInterviewWidgetState extends State<PreparingInterviewWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: true,
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.asset(
+                  'assets/images/rentrocar-log.png',
+                  width: 40.0,
+                  height: 40.0,
+                  fit: BoxFit.fill,
+                ),
+              ),
+              Text(
+                FFLocalizations.of(context).getText(
+                  'm1twnkew' /* RentroCar */,
+                ),
+                style: FlutterFlowTheme.of(context).headlineSmall.override(
+                      fontFamily: 'Roboto Mono',
+                      letterSpacing: 0.0,
+                    ),
+              ),
+            ].divide(SizedBox(width: 10.0)),
+          ),
+          actions: [],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
         body: SafeArea(
           top: true,
           child: Padding(
@@ -51,30 +81,6 @@ class _PreparingInterviewWidgetState extends State<PreparingInterviewWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/rentrocar-logo.jpg',
-                        width: 40.0,
-                        height: 40.0,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Text(
-                      FFLocalizations.of(context).getText(
-                        'm1twnkew' /* RentroCar */,
-                      ),
-                      style:
-                          FlutterFlowTheme.of(context).headlineSmall.override(
-                                fontFamily: 'Roboto Mono',
-                                letterSpacing: 0.0,
-                              ),
-                    ),
-                  ].divide(SizedBox(width: 10.0)),
-                ),
                 Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,9 +118,9 @@ class _PreparingInterviewWidgetState extends State<PreparingInterviewWidget> {
                         FFButtonWidget(
                           onPressed: () async {
                             await downloadFile(
-                              filename: 'Borrowing Agreement-contract.pdf',
+                              filename: 'Borrowing Agreement-contract-15/2.pdf',
                               url:
-                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/rentro-car-74c8w5/assets/3byf3wcsjk1s/Borrowing_Agreement.pdf',
+                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/rentro-car-74c8w5/assets/6ygjj8ommk59/%D8%A7%D8%AA%D9%81%D8%A7%D9%82%D9%8A%D8%A9_%D8%A7%D9%84%D8%A7%D9%82%D8%AA%D8%B1%D8%A7%D8%B6.pdf',
                             );
                           },
                           text: FFLocalizations.of(context).getText(

@@ -10,6 +10,7 @@ import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'cardetails_model.dart';
 export 'cardetails_model.dart';
 
@@ -106,87 +107,84 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Builder(
-                    builder: (context) {
-                      final carPhotos = (widget.car!.carPhotos.isNotEmpty
-                                  ? widget.car?.carPhotos
-                                  : List.generate(
-                                      random_data.randomInteger(5, 5),
-                                      (index) => random_data.randomImageUrl(
-                                            200,
-                                            200,
-                                          )))
-                              ?.toList() ??
-                          [];
+                Builder(
+                  builder: (context) {
+                    final carPhotos = (widget.car!.carPhotos.isNotEmpty
+                                ? widget.car?.carPhotos
+                                : List.generate(
+                                    random_data.randomInteger(5, 5),
+                                    (index) => random_data.randomImageUrl(
+                                          200,
+                                          200,
+                                        )))
+                            ?.toList() ??
+                        [];
 
-                      return Container(
-                        width: double.infinity,
-                        height: 200.0,
-                        child: Stack(
-                          children: [
-                            PageView.builder(
-                              controller: _model.pageViewController ??=
-                                  PageController(
-                                      initialPage:
-                                          max(0, min(0, carPhotos.length - 1))),
-                              scrollDirection: Axis.horizontal,
-                              itemCount: carPhotos.length,
-                              itemBuilder: (context, carPhotosIndex) {
-                                final carPhotosItem = carPhotos[carPhotosIndex];
-                                return ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.network(
-                                    valueOrDefault<String>(
-                                      carPhotosItem,
-                                      'https://files.friendycar.com/uploads/cars/35749/2tTXTMuft8KgNNvNZpR7JSAu1cUQnTM7sxc8uAWA.jpg',
-                                    ),
-                                    fit: BoxFit.cover,
+                    return Container(
+                      width: double.infinity,
+                      height: 224.11,
+                      child: Stack(
+                        children: [
+                          PageView.builder(
+                            controller: _model.pageViewController ??=
+                                PageController(
+                                    initialPage:
+                                        max(0, min(0, carPhotos.length - 1))),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: carPhotos.length,
+                            itemBuilder: (context, carPhotosIndex) {
+                              final carPhotosItem = carPhotos[carPhotosIndex];
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                  valueOrDefault<String>(
+                                    carPhotosItem,
+                                    'https://files.friendycar.com/uploads/cars/35749/2tTXTMuft8KgNNvNZpR7JSAu1cUQnTM7sxc8uAWA.jpg',
                                   ),
-                                );
-                              },
-                            ),
-                            Align(
-                              alignment: AlignmentDirectional(0.0, 1.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 16.0),
-                                child:
-                                    smooth_page_indicator.SmoothPageIndicator(
-                                  controller: _model.pageViewController ??=
-                                      PageController(
-                                          initialPage: max(
-                                              0, min(0, carPhotos.length - 1))),
-                                  count: carPhotos.length,
-                                  axisDirection: Axis.horizontal,
-                                  onDotClicked: (i) async {
-                                    await _model.pageViewController!
-                                        .animateToPage(
-                                      i,
-                                      duration: Duration(milliseconds: 500),
-                                      curve: Curves.ease,
-                                    );
-                                    safeSetState(() {});
-                                  },
-                                  effect: smooth_page_indicator.SlideEffect(
-                                    spacing: 8.0,
-                                    radius: 8.0,
-                                    dotWidth: 8.0,
-                                    dotHeight: 8.0,
-                                    dotColor:
-                                        FlutterFlowTheme.of(context).accent1,
-                                    activeDotColor:
-                                        FlutterFlowTheme.of(context).primary,
-                                    paintStyle: PaintingStyle.fill,
-                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              );
+                            },
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(0.0, 1.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 16.0),
+                              child: smooth_page_indicator.SmoothPageIndicator(
+                                controller: _model.pageViewController ??=
+                                    PageController(
+                                        initialPage: max(
+                                            0, min(0, carPhotos.length - 1))),
+                                count: carPhotos.length,
+                                axisDirection: Axis.horizontal,
+                                onDotClicked: (i) async {
+                                  await _model.pageViewController!
+                                      .animateToPage(
+                                    i,
+                                    duration: Duration(milliseconds: 500),
+                                    curve: Curves.ease,
+                                  );
+                                  safeSetState(() {});
+                                },
+                                effect: smooth_page_indicator.SlideEffect(
+                                  spacing: 8.0,
+                                  radius: 8.0,
+                                  dotWidth: 8.0,
+                                  dotHeight: 8.0,
+                                  dotColor:
+                                      FlutterFlowTheme.of(context).accent1,
+                                  activeDotColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  paintStyle: PaintingStyle.fill,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
                 Expanded(
                   child: SingleChildScrollView(
@@ -689,7 +687,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                   Text(
                                     valueOrDefault<String>(
                                       widget.car?.description,
-                                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the',
+                                      'N/A',
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
@@ -711,7 +709,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                 ),
                 Container(
                   width: double.infinity,
-                  height: 93.69,
+                  height: 93.7,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryText,
                     borderRadius: BorderRadius.only(
@@ -756,11 +754,21 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 5.0, 0.0, 0.0),
                               child: Text(
-                                formatNumber(
-                                  widget.car!.rentalFare,
-                                  formatType: FormatType.custom,
-                                  format: 'EGP # / day',
-                                  locale: '',
+                                valueOrDefault<String>(
+                                  widget.car!.isAvailable
+                                      ? formatNumber(
+                                          widget.car?.rentalFare,
+                                          formatType: FormatType.custom,
+                                          format: 'EGP # / day',
+                                          locale: '',
+                                        )
+                                      : 'Available On: ${dateTimeFormat(
+                                          "MEd",
+                                          widget.car?.availableDate,
+                                          locale: FFLocalizations.of(context)
+                                              .languageCode,
+                                        )}',
+                                  'Available',
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .labelLarge
@@ -927,13 +935,15 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
                                                     0.0, 0.0)
                                                 .resolve(
                                                     Directionality.of(context)),
-                                            child: AlertDialogWidget(
-                                              title: 'Worning',
-                                              description:
-                                                  'Please verify your self first and Try to add car again',
-                                              confirmButton:
-                                                  'Go To verfication',
-                                              confirmCallback: () async {},
+                                            child: WebViewAware(
+                                              child: AlertDialogWidget(
+                                                title: 'Worning',
+                                                description:
+                                                    'Please verify your self first and Try to add car again',
+                                                confirmButton:
+                                                    'Go To verfication',
+                                                confirmCallback: () async {},
+                                              ),
                                             ),
                                           );
                                         },
@@ -947,8 +957,11 @@ class _CardetailsWidgetState extends State<CardetailsWidget> {
 
                                     safeSetState(() {});
                                   },
-                            text: FFLocalizations.of(context).getText(
-                              'kgpg6jbe' /* Book Now */,
+                            text: valueOrDefault<String>(
+                              widget.car!.isAvailable
+                                  ? 'Book Now!'
+                                  : 'Not Available',
+                              'Book Now!',
                             ),
                             options: FFButtonOptions(
                               width: 190.0,

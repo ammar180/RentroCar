@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'my_cars_model.dart';
 export 'my_cars_model.dart';
 
@@ -135,19 +136,22 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                                             AlignmentDirectional(0.0, 0.0)
                                                 .resolve(
                                                     Directionality.of(context)),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            FocusScope.of(dialogContext)
-                                                .unfocus();
-                                            FocusManager.instance.primaryFocus
-                                                ?.unfocus();
-                                          },
-                                          child: AlertDialogWidget(
-                                            title: 'Worning',
-                                            description:
-                                                'Please verify your self first and Try to add car again',
-                                            confirmButton: 'Go To verfication',
-                                            confirmCallback: () async {},
+                                        child: WebViewAware(
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              FocusScope.of(dialogContext)
+                                                  .unfocus();
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                            },
+                                            child: AlertDialogWidget(
+                                              title: 'Worning',
+                                              description:
+                                                  'Please verify your self first and Try to add car again',
+                                              confirmButton:
+                                                  'Go To verfication',
+                                              confirmCallback: () async {},
+                                            ),
                                           ),
                                         ),
                                       );
@@ -220,7 +224,7 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                             snapshot.data!;
 
                         return Container(
-                          height: 215.5,
+                          height: 219.09,
                           decoration: BoxDecoration(),
                           child: Builder(
                             builder: (context) {

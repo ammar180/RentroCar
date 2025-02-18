@@ -45,8 +45,8 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 273.66,
-      height: 222.3,
+      width: 283.5,
+      height: 222.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.circular(20.0),
@@ -80,7 +80,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                       'https://files.friendycar.com/uploads/cars/35749/2tTXTMuft8KgNNvNZpR7JSAu1cUQnTM7sxc8uAWA.jpg',
                     ),
                     width: double.infinity,
-                    height: 109.0,
+                    height: 116.19,
                     fit: BoxFit.cover,
                   ),
                 ),

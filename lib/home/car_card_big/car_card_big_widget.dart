@@ -45,8 +45,8 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 335.0,
-      height: 280.0,
+      width: 357.5,
+      height: 280.92,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.circular(20.0),
@@ -90,6 +90,7 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> {
               children: [
                 Column(
                   mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       '${widget.carParam?.make} ${widget.carParam?.model}',
