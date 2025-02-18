@@ -10,8 +10,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'my_cars_model.dart';
 export 'my_cars_model.dart';
 
@@ -179,19 +178,22 @@ class _MyCarsWidgetState extends State<MyCarsWidget> with RouteAware {
                                             AlignmentDirectional(0.0, 0.0)
                                                 .resolve(
                                                     Directionality.of(context)),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            FocusScope.of(dialogContext)
-                                                .unfocus();
-                                            FocusManager.instance.primaryFocus
-                                                ?.unfocus();
-                                          },
-                                          child: AlertDialogWidget(
-                                            title: 'Worning',
-                                            description:
-                                                'Please verify your self first and Try to add car again',
-                                            confirmButton: 'Go To verfication',
-                                            confirmCallback: () async {},
+                                        child: WebViewAware(
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              FocusScope.of(dialogContext)
+                                                  .unfocus();
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                            },
+                                            child: AlertDialogWidget(
+                                              title: 'Worning',
+                                              description:
+                                                  'Please verify your self first and Try to add car again',
+                                              confirmButton:
+                                                  'Go To verfication',
+                                              confirmCallback: () async {},
+                                            ),
                                           ),
                                         ),
                                       );

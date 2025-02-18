@@ -131,6 +131,7 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> with RouteAware {
               children: [
                 Column(
                   mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       '${widget!.carParam?.make} ${widget!.carParam?.model}',

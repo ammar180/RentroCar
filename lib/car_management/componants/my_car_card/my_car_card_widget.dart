@@ -85,7 +85,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> with RouteAware {
         ?.parentModelCallback
         ?.call(_model);
 
-    return Container(
+    return Container(=
       width: 300,
       height: 250,
       decoration: BoxDecoration(
@@ -121,7 +121,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> with RouteAware {
                       'https://files.friendycar.com/uploads/cars/35749/2tTXTMuft8KgNNvNZpR7JSAu1cUQnTM7sxc8uAWA.jpg',
                     ),
                     width: double.infinity,
-                    height: 109.0,
+                    height: 116.19,
                     fit: BoxFit.cover,
                   ),
                 ),

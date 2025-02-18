@@ -308,14 +308,23 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                               ),
                                                         ),
                                                         subtitle: Text(
-                                                          'from: (${dateTimeFormat(
+                                                          '${(FFLocalizations.of(context).languageCode == '') || (FFLocalizations.of(context).languageCode == 'en') ? 'From: (' : 'من: ('}${dateTimeFormat(
                                                             "MMMEd",
                                                             containerVarItem
                                                                 .startDate,
                                                             locale: FFLocalizations
                                                                     .of(context)
                                                                 .languageCode,
-                                                          )}) to: (${dateTimeFormat(
+                                                          )}${valueOrDefault<String>(
+                                                            (FFLocalizations.of(context).languageCode ==
+                                                                            '') ||
+                                                                    (FFLocalizations.of(context)
+                                                                            .languageCode ==
+                                                                        'en')
+                                                                ? ') to: ('
+                                                                : ') الى: (',
+                                                            ') to: (',
+                                                          )}${dateTimeFormat(
                                                             "MMMEd",
                                                             containerVarItem
                                                                 .endDate,
