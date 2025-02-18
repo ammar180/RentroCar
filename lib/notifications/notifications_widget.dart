@@ -3,7 +3,11 @@ import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'notifications_model.dart';
 export 'notifications_model.dart';
 
@@ -14,7 +18,8 @@ class NotificationsWidget extends StatefulWidget {
   State<NotificationsWidget> createState() => _NotificationsWidgetState();
 }
 
-class _NotificationsWidgetState extends State<NotificationsWidget> {
+class _NotificationsWidgetState extends State<NotificationsWidget>
+    with RouteAware {
   late NotificationsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -23,8 +28,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => NotificationsModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -35,7 +38,47 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -80,7 +123,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                       ].divide(SizedBox(width: 10.0)),
                     ),
                     Container(
-                      height: MediaQuery.sizeOf(context).height * 0.8,
+                      height: MediaQuery.sizeOf(context).height * 0.655,
                       decoration: BoxDecoration(),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
@@ -131,6 +174,19 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                     conditionalBuilderTripRecordList =
                                     snapshot.data!;
 
+                                _model.debugBackendQueries[
+                                        'conditionalBuilderTripRecordList_ConditionalBuilder_c5r4ael6${conditionalBuilderTripRecordList.length > 100 ? ' (first 100)' : ''}'] =
+                                    debugSerializeParam(
+                                  conditionalBuilderTripRecordList.take(100),
+                                  ParamType.Document,
+                                  isList: true,
+                                  link:
+                                      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=Notifications',
+                                  name: 'trip',
+                                  nullable: false,
+                                );
+                                debugLogWidgetClass(_model);
+
                                 return Builder(
                                   builder: (context) {
                                     if (conditionalBuilderTripRecordList
@@ -140,6 +196,18 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                           final containerVar =
                                               conditionalBuilderTripRecordList
                                                   .toList();
+                                          _model.debugGeneratorVariables[
+                                                  'containerVar${containerVar.length > 100 ? ' (first 100)' : ''}'] =
+                                              debugSerializeParam(
+                                            containerVar.take(100),
+                                            ParamType.Document,
+                                            isList: true,
+                                            link:
+                                                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=Notifications',
+                                            name: 'trip',
+                                            nullable: false,
+                                          );
+                                          debugLogWidgetClass(_model);
 
                                           return ListView.builder(
                                             padding: EdgeInsets.zero,
@@ -178,6 +246,17 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
 
                                                   final listTileUsersRecord =
                                                       snapshot.data!;
+                                                  _model.debugBackendQueries[
+                                                          'listTileUsersRecord_ListTile_000f4g5w'] =
+                                                      debugSerializeParam(
+                                                    listTileUsersRecord,
+                                                    ParamType.Document,
+                                                    link:
+                                                        'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=Notifications',
+                                                    name: 'users',
+                                                    nullable: false,
+                                                  );
+                                                  debugLogWidgetClass(_model);
 
                                                   return InkWell(
                                                     splashColor:

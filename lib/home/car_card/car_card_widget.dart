@@ -3,8 +3,12 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'car_card_model.dart';
 export 'car_card_model.dart';
 
@@ -20,7 +24,7 @@ class CarCardWidget extends StatefulWidget {
   State<CarCardWidget> createState() => _CarCardWidgetState();
 }
 
-class _CarCardWidgetState extends State<CarCardWidget> {
+class _CarCardWidgetState extends State<CarCardWidget> with RouteAware {
   late CarCardModel _model;
 
   @override
@@ -36,12 +40,10 @@ class _CarCardWidgetState extends State<CarCardWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.loved = (currentUserDocument?.lovedCars.toList() ?? [])
-          .contains(widget.car?.reference);
+      _model.loved = (currentUserDocument?.lovedCars?.toList() ?? [])
+          .contains(widget!.car?.reference);
       safeSetState(() {});
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -52,7 +54,47 @@ class _CarCardWidgetState extends State<CarCardWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return InkWell(
       splashColor: Colors.transparent,
       focusColor: Colors.transparent,
@@ -63,18 +105,18 @@ class _CarCardWidgetState extends State<CarCardWidget> {
           'cardetails',
           queryParameters: {
             'car': serializeParam(
-              widget.car,
+              widget!.car,
               ParamType.Document,
             ),
           }.withoutNulls,
           extra: <String, dynamic>{
-            'car': widget.car,
+            'car': widget!.car,
           },
         );
       },
       child: Container(
-        width: 273.66,
-        height: 222.3,
+        width: 273,
+        height: 235,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.circular(20.0),
@@ -91,7 +133,7 @@ class _CarCardWidgetState extends State<CarCardWidget> {
               children: [
                 Hero(
                   tag: valueOrDefault<String>(
-                    widget.car?.carPhotos.firstOrNull,
+                    widget!.car?.carPhotos?.firstOrNull,
                     'https://files.friendycar.com/uploads/cars/36261/FnBuiB0vJokoQkoRkRSDdwkSAMHgoo5n19JP0PHg.jpg',
                   ),
                   transitionOnUserGestures: true,
@@ -104,7 +146,7 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                     ),
                     child: Image.network(
                       valueOrDefault<String>(
-                        widget.car?.carPhotos.firstOrNull,
+                        widget!.car?.carPhotos?.firstOrNull,
                         'https://files.friendycar.com/uploads/cars/36261/FnBuiB0vJokoQkoRkRSDdwkSAMHgoo5n19JP0PHg.jpg',
                       ),
                       width: double.infinity,
@@ -121,7 +163,7 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                         ...mapToFirestore(
                           {
                             'loved_cars':
-                                FieldValue.arrayUnion([widget.car?.reference]),
+                                FieldValue.arrayUnion([widget!.car?.reference]),
                           },
                         ),
                       });
@@ -130,7 +172,7 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                         ...mapToFirestore(
                           {
                             'loved_cars': FieldValue.arrayRemove(
-                                [widget.car?.reference]),
+                                [widget!.car?.reference]),
                           },
                         ),
                       });
@@ -162,7 +204,7 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${widget.car?.make} ${widget.car?.model}',
+                          '${widget!.car?.make} ${widget!.car?.model}',
                           style:
                               FlutterFlowTheme.of(context).titleLarge.override(
                                     fontFamily: 'Open Sans',
@@ -179,7 +221,7 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                             ),
                             Text(
                               formatNumber(
-                                widget.car!.rate,
+                                widget!.car!.rate,
                                 formatType: FormatType.custom,
                                 format: '#.##',
                                 locale: '',
@@ -197,11 +239,11 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                     ),
                     Text(
                       valueOrDefault<String>(
-                        widget.car?.availableDate != null
+                        widget!.car?.availableDate != null
                             ? valueOrDefault<String>(
                                 dateTimeFormat(
                                   "MMMEd",
-                                  widget.car?.availableDate,
+                                  widget!.car?.availableDate,
                                   locale:
                                       FFLocalizations.of(context).languageCode,
                                 ),
@@ -251,7 +293,7 @@ class _CarCardWidgetState extends State<CarCardWidget> {
                             ),
                             Text(
                               formatNumber(
-                                widget.car!.rentalFare,
+                                widget!.car!.rentalFare,
                                 formatType: FormatType.decimal,
                                 decimalType: DecimalType.periodDecimal,
                                 currency: 'EGP ',

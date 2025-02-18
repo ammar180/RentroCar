@@ -1,7 +1,10 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'my_car_card_model.dart';
 export 'my_car_card_model.dart';
 
@@ -18,7 +21,7 @@ class MyCarCardWidget extends StatefulWidget {
   State<MyCarCardWidget> createState() => _MyCarCardWidgetState();
 }
 
-class _MyCarCardWidgetState extends State<MyCarCardWidget> {
+class _MyCarCardWidgetState extends State<MyCarCardWidget> with RouteAware {
   late MyCarCardModel _model;
 
   @override
@@ -31,8 +34,6 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyCarCardModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -43,10 +44,50 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 283.5,
-      height: 222.0,
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
+    return Container(=
+      width: 300,
+      height: 250,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.circular(20.0),
@@ -63,7 +104,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
             children: [
               Hero(
                 tag: valueOrDefault<String>(
-                  widget.carData?.carPhotos.firstOrNull,
+                  widget!.carData?.carPhotos?.firstOrNull,
                   'https://files.friendycar.com/uploads/cars/35749/2tTXTMuft8KgNNvNZpR7JSAu1cUQnTM7sxc8uAWA.jpg',
                 ),
                 transitionOnUserGestures: true,
@@ -76,7 +117,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                   ),
                   child: Image.network(
                     valueOrDefault<String>(
-                      widget.carData?.carPhotos.firstOrNull,
+                      widget!.carData?.carPhotos?.firstOrNull,
                       'https://files.friendycar.com/uploads/cars/35749/2tTXTMuft8KgNNvNZpR7JSAu1cUQnTM7sxc8uAWA.jpg',
                     ),
                     width: double.infinity,
@@ -100,7 +141,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                     children: [
                       Text(
                         valueOrDefault<String>(
-                          widget.carData?.make,
+                          widget!.carData?.make,
                           'BYD',
                         ),
                         style:
@@ -120,7 +161,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                           Text(
                             valueOrDefault<String>(
                               formatNumber(
-                                widget.carData?.rate,
+                                widget!.carData?.rate,
                                 formatType: FormatType.decimal,
                                 decimalType: DecimalType.periodDecimal,
                               ),
@@ -143,7 +184,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                     children: [
                       Text(
                         valueOrDefault<String>(
-                          widget.carData?.model,
+                          widget!.carData?.model,
                           'F3',
                         ),
                         style:
@@ -159,7 +200,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                       ),
                       Text(
                         valueOrDefault<String>(
-                          widget.carData?.year.toString(),
+                          widget!.carData?.year?.toString(),
                           '2007',
                         ),
                         style:
@@ -180,7 +221,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                           Icon(
                             Icons.visibility,
                             color: valueOrDefault<Color>(
-                              widget.carData!.isVisible
+                              widget!.carData!.isVisible
                                   ? FlutterFlowTheme.of(context).primary
                                   : FlutterFlowTheme.of(context).secondary,
                               FlutterFlowTheme.of(context).primary,
@@ -189,7 +230,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                           ),
                           Text(
                             valueOrDefault<String>(
-                              widget.carData?.isVisible != null
+                              widget!.carData?.isVisible != null
                                   ? 'Visible'
                                   : 'UnVisable',
                               'UnVisible',
@@ -199,7 +240,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                                 .override(
                                   fontFamily: 'Open Sans',
                                   color: valueOrDefault<Color>(
-                                    widget.carData!.isVisible
+                                    widget!.carData!.isVisible
                                         ? FlutterFlowTheme.of(context)
                                             .primaryText
                                         : FlutterFlowTheme.of(context)
@@ -223,7 +264,7 @@ class _MyCarCardWidgetState extends State<MyCarCardWidget> {
                           Text(
                             valueOrDefault<String>(
                               formatNumber(
-                                widget.carData?.rentalFare,
+                                widget!.carData?.rentalFare,
                                 formatType: FormatType.custom,
                                 format: 'EGP # / Day',
                                 locale: '',

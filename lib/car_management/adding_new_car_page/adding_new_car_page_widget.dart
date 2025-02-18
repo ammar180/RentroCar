@@ -7,10 +7,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:math';
+import 'dart:ui';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'adding_new_car_page_model.dart';
 export 'adding_new_car_page_model.dart';
 
@@ -22,7 +28,7 @@ class AddingNewCarPageWidget extends StatefulWidget {
 }
 
 class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, RouteAware {
   late AddingNewCarPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -34,22 +40,40 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
     super.initState();
     _model = createModel(context, () => AddingNewCarPageModel());
 
-    _model.carMakeTextController ??= TextEditingController();
+    _model.carMakeTextController ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.carMakeFocusNode ??= FocusNode();
 
-    _model.carModelTextController ??= TextEditingController();
+    _model.carModelTextController ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.carModelFocusNode ??= FocusNode();
 
-    _model.carYearTextController ??= TextEditingController();
+    _model.carYearTextController ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.carYearFocusNode ??= FocusNode();
 
-    _model.textController4 ??= TextEditingController();
+    _model.textController4 ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.carPriceTextController ??= TextEditingController();
+    _model.carPriceTextController ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.carPriceFocusNode ??= FocusNode();
 
-    _model.textController6 ??= TextEditingController();
+    _model.textController6 ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.textFieldFocusNode2 ??= FocusNode();
 
     animationsMap.addAll({
@@ -154,8 +178,6 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
         ],
       ),
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -166,7 +188,47 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -214,7 +276,10 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                   child: PageView(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: _model.addingNewCarStepsController ??=
-                        PageController(initialPage: 0),
+                        PageController(initialPage: 0)
+                          ..addListener(() {
+                            debugLogWidgetClass(_model);
+                          }),
                     scrollDirection: Axis.horizontal,
                     children: [
                       Align(
@@ -1572,7 +1637,10 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                                       ),
                                                     ),
                                                     child: Visibility(
-                                                      visible: _model.uploadedFileUrl3 ==
+                                                      visible: _model
+                                                                  .uploadedFileUrl3 ==
+                                                              null ||
+                                                          _model.uploadedFileUrl3 ==
                                                               '',
                                                       child: Padding(
                                                         padding: EdgeInsets.all(
@@ -2281,7 +2349,8 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                                           .validate()) {
                                     return;
                                   }
-                                  if (_model.uploadedFileUrl1.isEmpty) {
+                                  if (_model.uploadedFileUrl1 == null ||
+                                      _model.uploadedFileUrl1.isEmpty) {
                                     return;
                                   }
                                   await _model.addingNewCarStepsController
@@ -2906,7 +2975,10 @@ class _AddingNewCarPageWidgetState extends State<AddingNewCarPageWidget>
                         EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                     child: smooth_page_indicator.SmoothPageIndicator(
                       controller: _model.addingNewCarStepsController ??=
-                          PageController(initialPage: 0),
+                          PageController(initialPage: 0)
+                            ..addListener(() {
+                              debugLogWidgetClass(_model);
+                            }),
                       count: 5,
                       axisDirection: Axis.horizontal,
                       onDotClicked: (i) async {

@@ -7,8 +7,15 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:math';
+import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:provider/provider.dart';
 import 'verfication_data_form_model.dart';
 export 'verfication_data_form_model.dart';
 
@@ -21,7 +28,7 @@ class VerficationDataFormWidget extends StatefulWidget {
 }
 
 class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, RouteAware {
   late VerficationDataFormModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -33,13 +40,22 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
     super.initState();
     _model = createModel(context, () => VerficationDataFormModel());
 
-    _model.textController1 ??= TextEditingController();
+    _model.textController1 ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
+    _model.textController2 ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
+    _model.textController3 ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.textFieldFocusNode3 ??= FocusNode();
 
     animationsMap.addAll({
@@ -88,8 +104,6 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
           !anim.applyInitialState),
       this,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -100,7 +114,47 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -636,10 +690,12 @@ class _VerficationDataFormWidgetState extends State<VerficationDataFormWidget>
                               !_model.formKey.currentState!.validate()) {
                             return;
                           }
-                          if (_model.uploadedFileUrl1.isEmpty) {
+                          if (_model.uploadedFileUrl1 == null ||
+                              _model.uploadedFileUrl1.isEmpty) {
                             return;
                           }
-                          if (_model.uploadedFileUrl2.isEmpty) {
+                          if (_model.uploadedFileUrl2 == null ||
+                              _model.uploadedFileUrl2.isEmpty) {
                             return;
                           }
                           await Future.delayed(

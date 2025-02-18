@@ -5,7 +5,9 @@ import '/components/alert_dialog_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -69,7 +71,8 @@ class OwnerBookingSammaryWidget extends StatefulWidget {
       _OwnerBookingSammaryWidgetState();
 }
 
-class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
+class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget>
+    with RouteAware {
   late OwnerBookingSammaryModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -81,18 +84,16 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget.bookedCar != null) {
-        _model.carDoc = widget.bookedCar;
+      if (widget!.bookedCar != null) {
+        _model.carDoc = widget!.bookedCar;
         safeSetState(() {});
       } else {
         _model.retrievedBorrowedCar =
-            await CarRecord.getDocumentOnce(widget.tripDocument!.borrowedCar!);
+            await CarRecord.getDocumentOnce(widget!.tripDocument!.borrowedCar!);
         _model.carDoc = _model.retrievedBorrowedCar;
         safeSetState(() {});
       }
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -103,7 +104,47 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -163,6 +204,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                             fontSize: 10.0,
                             letterSpacing: 0.0,
                           ),
+
                     ),
                   ),
                 ),
@@ -200,7 +242,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                               borderRadius: BorderRadius.circular(12.0),
                               child: Image.network(
                                 valueOrDefault<String>(
-                                  _model.carDoc?.carPhotos.firstOrNull,
+                                  _model.carDoc?.carPhotos?.firstOrNull,
                                   'https://images.unsplash.com/photo-1510903117032-f1596c327647?w=800&h=800',
                                 ),
                                 width: 100.0,
@@ -236,7 +278,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                       ),
                                       Text(
                                         valueOrDefault<String>(
-                                          _model.carDoc?.rate.toString(),
+                                          _model.carDoc?.rate?.toString(),
                                           '0.0',
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -286,7 +328,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                       ),
                     ),
                   ),
-                  if (widget.tripDocument?.status == Status.payDone)
+                  if (widget!.tripDocument?.status == Status.payDone)
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
@@ -365,7 +407,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                       valueOrDefault<String>(
                                         dateTimeFormat(
                                           "yMMMd",
-                                          widget.tripDocument?.startDate,
+                                          widget!.tripDocument?.startDate,
                                           locale: FFLocalizations.of(context)
                                               .languageCode,
                                         ),
@@ -382,7 +424,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                       valueOrDefault<String>(
                                         dateTimeFormat(
                                           "jm",
-                                          widget.tripDocument?.startDate,
+                                          widget!.tripDocument?.startDate,
                                           locale: FFLocalizations.of(context)
                                               .languageCode,
                                         ),
@@ -426,7 +468,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                       valueOrDefault<String>(
                                         dateTimeFormat(
                                           "yMMMd",
-                                          widget.tripDocument?.endDate,
+                                          widget!.tripDocument?.endDate,
                                           locale: FFLocalizations.of(context)
                                               .languageCode,
                                         ),
@@ -443,7 +485,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                       valueOrDefault<String>(
                                         dateTimeFormat(
                                           "jm",
-                                          widget.tripDocument?.endDate,
+                                          widget!.tripDocument?.endDate,
                                           locale: FFLocalizations.of(context)
                                               .languageCode,
                                         ),
@@ -467,7 +509,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                       ),
                     ),
                   ),
-                  if (widget.tripDocument?.status == Status.payDone)
+                  if (widget!.tripDocument?.status == Status.payDone)
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
@@ -481,7 +523,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                           padding: EdgeInsets.all(16.0),
                           child: StreamBuilder<UsersRecord>(
                             stream: UsersRecord.getDocument(
-                                widget.tripDocument!.carBorrower!),
+                                widget!.tripDocument!.carBorrower!),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
                               if (!snapshot.hasData) {
@@ -499,6 +541,17 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                               }
 
                               final columnUsersRecord = snapshot.data!;
+                              _model.debugBackendQueries[
+                                      'columnUsersRecord_Column_haug6rme'] =
+                                  debugSerializeParam(
+                                columnUsersRecord,
+                                ParamType.Document,
+                                link:
+                                    'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=ownerBookingSammary',
+                                name: 'users',
+                                nullable: false,
+                              );
+                              debugLogWidgetClass(_model);
 
                               return Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -552,7 +605,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                             queryBuilder: (locationRecord) =>
                                                 locationRecord.where(
                                               'user',
-                                              isEqualTo: widget
+                                              isEqualTo: widget!
                                                   .tripDocument?.carOwner,
                                             ),
                                             singleRecord: true,
@@ -590,6 +643,17 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                                     ? textLocationRecordList
                                                         .first
                                                     : null;
+                                            _model.debugBackendQueries[
+                                                    'textLocationRecord_Text_kvhblz3w'] =
+                                                debugSerializeParam(
+                                              textLocationRecord,
+                                              ParamType.Document,
+                                              link:
+                                                  'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=ownerBookingSammary',
+                                              name: 'location',
+                                              nullable: false,
+                                            );
+                                            debugLogWidgetClass(_model);
 
                                             return Text(
                                               valueOrDefault<String>(
@@ -743,7 +807,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '${_model.carDoc?.rentalFare.toString()}  × ${functions.calculateDaysCount(widget.tripDocument!.startDate!.secondsSinceEpoch, widget.tripDocument!.endDate!.secondsSinceEpoch).toString()} days',
+                                  '${_model.carDoc?.rentalFare?.toString()}  × ${functions.calculateDaysCount(widget!.tripDocument!.startDate!.secondsSinceEpoch, widget!.tripDocument!.endDate!.secondsSinceEpoch).toString()} days',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -753,8 +817,8 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                 ),
                                 Text(
                                   valueOrDefault<String>(
-                                    widget.tripDocument?.totalPrice
-                                        .toString(),
+                                    widget!.tripDocument?.totalPrice
+                                        ?.toString(),
                                     '5,040',
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -787,8 +851,8 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                 ),
                                 Text(
                                   valueOrDefault<String>(
-                                    widget.tripDocument?.totalPrice
-                                        .toString(),
+                                    widget!.tripDocument?.totalPrice
+                                        ?.toString(),
                                     '[total_price]',
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -807,7 +871,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                       ),
                     ),
                   ),
-                  if (widget.tripDocument?.status != Status.payDone)
+                  if (widget!.tripDocument?.status != Status.payDone)
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -840,6 +904,17 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                     }
 
                                     final buttonLocationRecord = snapshot.data!;
+                                    _model.debugBackendQueries[
+                                            'buttonLocationRecord_Button_3cq9dzit'] =
+                                        debugSerializeParam(
+                                      buttonLocationRecord,
+                                      ParamType.Document,
+                                      link:
+                                          'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=ownerBookingSammary',
+                                      name: 'location',
+                                      nullable: false,
+                                    );
+                                    debugLogWidgetClass(_model);
 
                                     return FFButtonWidget(
                                       onPressed: () async {
@@ -884,7 +959,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                             _model.locationConfirmed = value));
 
                                         if (_model.locationConfirmed!) {
-                                          await widget.tripDocument!.reference
+                                          await widget!.tripDocument!.reference
                                               .update(createTripRecordData(
                                             status: Status.accepted,
                                           ));
@@ -956,7 +1031,7 @@ class _OwnerBookingSammaryWidgetState extends State<OwnerBookingSammaryWidget> {
                                 16.0, 0.0, 16.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                await widget.tripDocument!.reference
+                                await widget!.tripDocument!.reference
                                     .update(createTripRecordData(
                                   status: Status.rejected,
                                 ));

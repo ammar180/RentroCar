@@ -6,8 +6,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'edit_profile_model.dart';
 export 'edit_profile_model.dart';
 
@@ -18,7 +22,7 @@ class EditProfileWidget extends StatefulWidget {
   State<EditProfileWidget> createState() => _EditProfileWidgetState();
 }
 
-class _EditProfileWidgetState extends State<EditProfileWidget> {
+class _EditProfileWidgetState extends State<EditProfileWidget> with RouteAware {
   late EditProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -29,9 +33,12 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     _model = createModel(context, () => EditProfileModel());
 
     _model.yourNameTextController ??= TextEditingController(
-        text: currentUserDisplayName != ''
+        text: currentUserDisplayName != null && currentUserDisplayName != ''
             ? currentUserDisplayName
-            : '');
+            : '')
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.yourNameFocusNode ??= FocusNode();
 
     _model.textFieldFocusNode1 ??= FocusNode();
@@ -39,8 +46,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     _model.textFieldFocusNode2 ??= FocusNode();
 
     _model.textFieldFocusNode3 ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,7 +56,47 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -192,9 +237,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               fadeOutDuration: Duration(milliseconds: 500),
                               imageUrl: valueOrDefault<String>(
                                 () {
-                                  if (_model.uploadedFileUrl != '') {
+                                  if (_model.uploadedFileUrl != null &&
+                                      _model.uploadedFileUrl != '') {
                                     return _model.uploadedFileUrl;
-                                  } else if (currentUserPhoto != '') {
+                                  } else if (currentUserPhoto != null &&
+                                      currentUserPhoto != '') {
                                     return currentUserPhoto;
                                   } else {
                                     return 'https://th.bing.com/th/id/OIP.iGXXTQ2_jBkxPfeH-_jRJQHaHa?rs=1&pid=ImgDetMain';
@@ -311,6 +358,17 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       containerLocationRecordList.isNotEmpty
                           ? containerLocationRecordList.first
                           : null;
+                  _model.debugBackendQueries[
+                          'containerLocationRecord_Container_e7iriz2z'] =
+                      debugSerializeParam(
+                    containerLocationRecord,
+                    ParamType.Document,
+                    link:
+                        'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=edit_profile',
+                    name: 'location',
+                    nullable: false,
+                  );
+                  debugLogWidgetClass(_model);
 
                   return Material(
                     color: Colors.transparent,
@@ -346,7 +404,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               controller: _model.textController2 ??=
                                   TextEditingController(
                                 text: containerLocationRecord != null
-                                    ? containerLocationRecord.government
+                                    ? containerLocationRecord?.government
                                     : '',
                               ),
                               focusNode: _model.textFieldFocusNode1,
@@ -415,7 +473,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               controller: _model.textController3 ??=
                                   TextEditingController(
                                 text: containerLocationRecord != null
-                                    ? containerLocationRecord.city
+                                    ? containerLocationRecord?.city
                                     : '',
                               ),
                               focusNode: _model.textFieldFocusNode2,
@@ -484,7 +542,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               controller: _model.textController4 ??=
                                   TextEditingController(
                                 text: containerLocationRecord != null
-                                    ? containerLocationRecord.street
+                                    ? containerLocationRecord?.street
                                     : '',
                               ),
                               focusNode: _model.textFieldFocusNode3,
@@ -567,9 +625,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       displayName: _model.yourNameTextController.text,
                       photoUrl: valueOrDefault<String>(
                         () {
-                          if (_model.uploadedFileUrl != '') {
+                          if (_model.uploadedFileUrl != null &&
+                              _model.uploadedFileUrl != '') {
                             return _model.uploadedFileUrl;
-                          } else if (currentUserPhoto != '') {
+                          } else if (currentUserPhoto != null &&
+                              currentUserPhoto != '') {
                             return currentUserPhoto;
                           } else {
                             return 'https://th.bing.com/th/id/OIP.iGXXTQ2_jBkxPfeH-_jRJQHaHa?rs=1&pid=ImgDetMain';

@@ -1,7 +1,10 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'alert_dialog_model.dart';
 export 'alert_dialog_model.dart';
 
@@ -26,7 +29,7 @@ class AlertDialogWidget extends StatefulWidget {
   State<AlertDialogWidget> createState() => _AlertDialogWidgetState();
 }
 
-class _AlertDialogWidgetState extends State<AlertDialogWidget> {
+class _AlertDialogWidgetState extends State<AlertDialogWidget> with RouteAware {
   late AlertDialogModel _model;
 
   @override
@@ -39,8 +42,6 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => AlertDialogModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,7 +52,47 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: Padding(
@@ -78,7 +119,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                 children: [
                   Text(
                     valueOrDefault<String>(
-                      widget.title,
+                      widget!.title,
                       'Title',
                     ),
                     style: FlutterFlowTheme.of(context).titleLarge.override(
@@ -88,7 +129,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                   ),
                   Text(
                     valueOrDefault<String>(
-                      widget.description,
+                      widget!.description,
                       'Description',
                     ),
                     style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -105,7 +146,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                           Navigator.pop(context, false);
                         },
                         text: valueOrDefault<String>(
-                          widget.cancelButton,
+                          widget!.cancelButton,
                           'Cancel',
                         ),
                         options: FFButtonOptions(
@@ -138,7 +179,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                           await widget.confirmCallback?.call();
                         },
                         text: valueOrDefault<String>(
-                          widget.confirmButton,
+                          widget!.confirmButton,
                           'Confirm',
                         ),
                         options: FFButtonOptions(

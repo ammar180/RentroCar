@@ -1,15 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
 
+import '/backend/schema/enums/enums.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
 import '/main.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/lat_lng.dart';
+import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -17,6 +24,39 @@ export 'serialization_util.dart';
 const kTransitionInfoKey = '__transition_info__';
 
 GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
+
+const debugRouteLinkMap = {
+  '/loginPage':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=LoginPage',
+  '/signUpPage':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=SignUpPage',
+  '/onboarding':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=onboarding',
+  '/profile':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=profile',
+  '/home':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=home',
+  '/myCars':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=MyCars',
+  '/favorite':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=Favorite',
+  '/notifications':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=Notifications',
+  '/cardetails':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=cardetails',
+  '/addingNewCarPage':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=AddingNewCarPage',
+  '/editProfile':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=edit_profile',
+  '/bookingSummary':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=booking_summary',
+  '/ownerBookingSammary':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=ownerBookingSammary',
+  '/preparingInterview':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=preparingInterview',
+  '/verficationDataForm':
+      'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=verficationDataForm'
+};
 
 class AppStateNotifier extends ChangeNotifier {
   AppStateNotifier._();
@@ -209,6 +249,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => VerficationDataFormWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
+      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {
@@ -392,9 +433,9 @@ class FFRoute {
               : builder(context, ffParams);
           final child = appStateNotifier.loading
               ? Container(
-                  color: Colors.transparent,
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
                   child: Image.asset(
-                    'assets/images/WhatsApp_Image_2025-02-15_at_16.56.17_c980b10f.jpg',
+                    'assets/images/rentrocar-log.png',
                     fit: BoxFit.contain,
                   ),
                 )

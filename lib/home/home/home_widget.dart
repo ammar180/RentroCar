@@ -1,9 +1,16 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/home/car_card/car_card_widget.dart';
 import '/home/car_card_big/car_card_big_widget.dart';
+import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'home_model.dart';
 export 'home_model.dart';
 
@@ -14,7 +21,7 @@ class HomeWidget extends StatefulWidget {
   State<HomeWidget> createState() => _HomeWidgetState();
 }
 
-class _HomeWidgetState extends State<HomeWidget> {
+class _HomeWidgetState extends State<HomeWidget> with RouteAware {
   late HomeModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -24,10 +31,11 @@ class _HomeWidgetState extends State<HomeWidget> {
     super.initState();
     _model = createModel(context, () => HomeModel());
 
-    _model.searchBarFieldTextController ??= TextEditingController();
+    _model.searchBarFieldTextController ??= TextEditingController()
+      ..addListener(() {
+        debugLogWidgetClass(_model);
+      });
     _model.searchBarFieldFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -38,7 +46,49 @@ class _HomeWidgetState extends State<HomeWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+    _model.carCard2Models.clear();
+    _model.carCardBigModels.clear();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -186,8 +236,21 @@ class _HomeWidgetState extends State<HomeWidget> {
                   }
                   List<CarRecord> containerCarRecordList = snapshot.data!;
 
+                  _model.debugBackendQueries[
+                          'containerCarRecordList_Container_vmnwgw2o${containerCarRecordList.length > 100 ? ' (first 100)' : ''}'] =
+                      debugSerializeParam(
+                    containerCarRecordList.take(100),
+                    ParamType.Document,
+                    isList: true,
+                    link:
+                        'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=home',
+                    name: 'car',
+                    nullable: false,
+                  );
+                  debugLogWidgetClass(_model);
+
                   return Container(
-                    height: MediaQuery.sizeOf(context).height * 0.705,
+                    height: MediaQuery.sizeOf(context).height * 0.655,
                     decoration: BoxDecoration(),
                     child: SingleChildScrollView(
                       child: Column(
@@ -211,7 +274,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     ),
                               ),
                               Container(
-                                height: 240.0,
+                                height: 250,
                                 decoration: BoxDecoration(),
                                 child: StreamBuilder<List<CarRecord>>(
                                   stream: queryCarRecord(
@@ -242,6 +305,19 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     List<CarRecord> listViewCarRecordList =
                                         snapshot.data!;
 
+                                    _model.debugBackendQueries[
+                                            'listViewCarRecordList_Row_4tw0z3vj${listViewCarRecordList.length > 100 ? ' (first 100)' : ''}'] =
+                                        debugSerializeParam(
+                                      listViewCarRecordList.take(100),
+                                      ParamType.Document,
+                                      isList: true,
+                                      link:
+                                          'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=home',
+                                      name: 'car',
+                                      nullable: false,
+                                    );
+                                    debugLogWidgetClass(_model);
+
                                     return ListView.separated(
                                       padding: EdgeInsets.zero,
                                       shrinkWrap: true,
@@ -253,11 +329,20 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         final listViewCarRecord =
                                             listViewCarRecordList[
                                                 listViewIndex];
-                                        return CarCardWidget(
-                                          key: Key(
-                                              'Keymm9_${listViewIndex}_of_${listViewCarRecordList.length}'),
-                                          car: listViewCarRecord,
-                                        );
+                                        return Builder(builder: (_) {
+                                          return DebugFlutterFlowModelContext(
+                                            rootModel: _model.rootModel,
+                                            parentModelCallback: (m) {
+                                              _model.carCard2Models[
+                                                  'Keymm9_${listViewIndex}_of_${listViewCarRecordList.length}'] = m;
+                                            },
+                                            child: CarCardWidget(
+                                              key: Key(
+                                                  'Keymm9_${listViewIndex}_of_${listViewCarRecordList.length}'),
+                                              car: listViewCarRecord,
+                                            ),
+                                          );
+                                        });
                                       },
                                     );
                                   },
@@ -291,6 +376,18 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           : containerCarRecordList
                                               .where((e) => e.isVisible)
                                               .toList();
+                                  _model.debugGeneratorVariables[
+                                          'carDocument${carDocument.length > 100 ? ' (first 100)' : ''}'] =
+                                      debugSerializeParam(
+                                    carDocument.take(100),
+                                    ParamType.Document,
+                                    isList: true,
+                                    link:
+                                        'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=home',
+                                    name: 'car',
+                                    nullable: false,
+                                  );
+                                  debugLogWidgetClass(_model);
 
                                   return Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -298,11 +395,20 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         (carDocumentIndex) {
                                       final carDocumentItem =
                                           carDocument[carDocumentIndex];
-                                      return CarCardBigWidget(
-                                        key: Key(
-                                            'Key2pd_${carDocumentIndex}_of_${carDocument.length}'),
-                                        carParam: carDocumentItem,
-                                      );
+                                      return Builder(builder: (_) {
+                                        return DebugFlutterFlowModelContext(
+                                          rootModel: _model.rootModel,
+                                          parentModelCallback: (m) {
+                                            _model.carCardBigModels[
+                                                'Key2pd_${carDocumentIndex}_of_${carDocument.length}'] = m;
+                                          },
+                                          child: CarCardBigWidget(
+                                            key: Key(
+                                                'Key2pd_${carDocumentIndex}_of_${carDocument.length}'),
+                                            carParam: carDocumentItem,
+                                          ),
+                                        );
+                                      });
                                     }).divide(SizedBox(height: 10.0)),
                                   );
                                 },

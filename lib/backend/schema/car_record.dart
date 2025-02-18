@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -122,6 +123,115 @@ class CarRecord extends FirestoreRecord {
   bool operator ==(other) =>
       other is CarRecord &&
       reference.path.hashCode == other.reference.path.hashCode;
+
+  @override
+  Map<String, DebugDataField> toDebugSerializableMap() => {
+        'reference': debugSerializeParam(
+          reference,
+          ParamType.DocumentReference,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: '',
+          nullable: false,
+        ),
+        'model': debugSerializeParam(
+          model,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'String',
+          nullable: false,
+        ),
+        'carPhotos': debugSerializeParam(
+          carPhotos,
+          ParamType.String,
+          isList: true,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'String',
+          nullable: false,
+        ),
+        'rentalFare': debugSerializeParam(
+          rentalFare,
+          ParamType.double,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'double',
+          nullable: false,
+        ),
+        'isAvailable': debugSerializeParam(
+          isAvailable,
+          ParamType.bool,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'bool',
+          nullable: false,
+        ),
+        'isVisible': debugSerializeParam(
+          isVisible,
+          ParamType.bool,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'bool',
+          nullable: false,
+        ),
+        'AvailableDays': debugSerializeParam(
+          availableDays,
+          ParamType.int,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'int',
+          nullable: false,
+        ),
+        'available_date': debugSerializeParam(
+          availableDate,
+          ParamType.DateTime,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'DateTime',
+          nullable: true,
+        ),
+        'rate': debugSerializeParam(
+          rate,
+          ParamType.double,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'double',
+          nullable: false,
+        ),
+        'make': debugSerializeParam(
+          make,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'String',
+          nullable: false,
+        ),
+        'year': debugSerializeParam(
+          year,
+          ParamType.int,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'int',
+          nullable: false,
+        ),
+        'car_owner': debugSerializeParam(
+          carOwner,
+          ParamType.DocumentReference,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'users',
+          nullable: true,
+        ),
+        'description': debugSerializeParam(
+          description,
+          ParamType.String,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=database',
+          name: 'String',
+          nullable: false,
+        )
+      };
 }
 
 Map<String, dynamic> createCarRecordData({

@@ -1,11 +1,38 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
+import 'dart:math';
+import 'dart:ui';
 import 'adding_new_car_page_widget.dart' show AddingNewCarPageWidget;
+import 'package:smooth_page_indicator/smooth_page_indicator.dart'
+    as smooth_page_indicator;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class AddingNewCarPageModel extends FlutterFlowModel<AddingNewCarPageWidget> {
   ///  Local state fields for this page.
 
-  List<String> photosList = [];
+  late LoggableList<String> _photosList = LoggableList([]);
+  set photosList(List<String> value) {
+    if (value != null) {
+      _photosList = LoggableList(value);
+    }
+
+    debugLogWidgetClass(this);
+  }
+
+  List<String> get photosList =>
+      _photosList?..logger = () => debugLogWidgetClass(this);
   void addToPhotosList(String item) => photosList.add(item);
   void removeFromPhotosList(String item) => photosList.remove(item);
   void removeAtIndexFromPhotosList(int index) => photosList.removeAt(index);
@@ -138,6 +165,9 @@ class AddingNewCarPageModel extends FlutterFlowModel<AddingNewCarPageWidget> {
     return null;
   }
 
+  final Map<String, DebugDataField> debugGeneratorVariables = {};
+  final Map<String, DebugDataField> debugBackendQueries = {};
+  final Map<String, FlutterFlowModel> widgetBuilderComponents = {};
   @override
   void initState(BuildContext context) {
     carMakeTextControllerValidator = _carMakeTextControllerValidator;
@@ -145,6 +175,8 @@ class AddingNewCarPageModel extends FlutterFlowModel<AddingNewCarPageWidget> {
     carYearTextControllerValidator = _carYearTextControllerValidator;
     carPriceTextControllerValidator = _carPriceTextControllerValidator;
     textController6Validator = _textController6Validator;
+
+    debugLogWidgetClass(this);
   }
 
   @override
@@ -167,4 +199,94 @@ class AddingNewCarPageModel extends FlutterFlowModel<AddingNewCarPageWidget> {
     textFieldFocusNode2?.dispose();
     textController6?.dispose();
   }
+
+  @override
+  WidgetClassDebugData toWidgetClassDebugData() => WidgetClassDebugData(
+        localStates: {
+          'photosList': debugSerializeParam(
+            photosList,
+            ParamType.String,
+            isList: true,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=AddingNewCarPage',
+            searchReference:
+                'reference=Qh0KEwoKcGhvdG9zTGlzdBIFZjB2dXRyBhICCAQgAVABWgpwaG90b3NMaXN0YhBBZGRpbmdOZXdDYXJQYWdl',
+            name: 'String',
+            nullable: false,
+          )
+        },
+        widgetStates: {
+          'addingNewCarStepsCurrentIndex': debugSerializeParam(
+            addingNewCarStepsCurrentIndex,
+            ParamType.int,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=AddingNewCarPage',
+            name: 'int',
+            nullable: true,
+          ),
+          'carMakeText': debugSerializeParam(
+            carMakeTextController?.text,
+            ParamType.String,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=AddingNewCarPage',
+            name: 'String',
+            nullable: true,
+          ),
+          'carModelText': debugSerializeParam(
+            carModelTextController?.text,
+            ParamType.String,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=AddingNewCarPage',
+            name: 'String',
+            nullable: true,
+          ),
+          'carYearText': debugSerializeParam(
+            carYearTextController?.text,
+            ParamType.String,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=AddingNewCarPage',
+            name: 'String',
+            nullable: true,
+          ),
+          'textFieldText1': debugSerializeParam(
+            textController4?.text,
+            ParamType.String,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=AddingNewCarPage',
+            name: 'String',
+            nullable: true,
+          ),
+          'carPriceText': debugSerializeParam(
+            carPriceTextController?.text,
+            ParamType.String,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=AddingNewCarPage',
+            name: 'String',
+            nullable: true,
+          ),
+          'textFieldText2': debugSerializeParam(
+            textController6?.text,
+            ParamType.String,
+            link:
+                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=AddingNewCarPage',
+            name: 'String',
+            nullable: true,
+          )
+        },
+        generatorVariables: debugGeneratorVariables,
+        backendQueries: debugBackendQueries,
+        componentStates: {
+          ...widgetBuilderComponents.map(
+            (key, value) => MapEntry(
+              key,
+              value.toWidgetClassDebugData(),
+            ),
+          ),
+        }.withoutNulls,
+        link:
+            'https://app.flutterflow.io/project/rentro-car-74c8w5/tab=uiBuilder&page=AddingNewCarPage',
+        searchReference:
+            'reference=OhBBZGRpbmdOZXdDYXJQYWdlUAFaEEFkZGluZ05ld0NhclBhZ2U=',
+        widgetClassName: 'AddingNewCarPage',
+      );
 }

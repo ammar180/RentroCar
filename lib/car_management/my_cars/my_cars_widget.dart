@@ -7,6 +7,8 @@ import '/components/alert_dialog_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'my_cars_model.dart';
@@ -60,7 +62,7 @@ class MyCarsWidget extends StatefulWidget {
   State<MyCarsWidget> createState() => _MyCarsWidgetState();
 }
 
-class _MyCarsWidgetState extends State<MyCarsWidget> {
+class _MyCarsWidgetState extends State<MyCarsWidget> with RouteAware {
   late MyCarsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -69,8 +71,6 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyCarsModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -81,7 +81,49 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+    _model.myCarCardModels.clear();
+    _model.borrowedCarCardModels.clear();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -223,8 +265,21 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                         List<CarRecord> myCarsContainerCarRecordList =
                             snapshot.data!;
 
+                        _model.debugBackendQueries[
+                                'myCarsContainerCarRecordList_Container_pnnrjanj${myCarsContainerCarRecordList.length > 100 ? ' (first 100)' : ''}'] =
+                            debugSerializeParam(
+                          myCarsContainerCarRecordList.take(100),
+                          ParamType.Document,
+                          isList: true,
+                          link:
+                              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=MyCars',
+                          name: 'car',
+                          nullable: false,
+                        );
+                        debugLogWidgetClass(_model);
+
                         return Container(
-                          height: 219.09,
+                          height: 300.5,
                           decoration: BoxDecoration(),
                           child: Builder(
                             builder: (context) {
@@ -233,6 +288,18 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                                   builder: (context) {
                                     final myCarVar =
                                         myCarsContainerCarRecordList.toList();
+                                    _model.debugGeneratorVariables[
+                                            'myCarVar${myCarVar.length > 100 ? ' (first 100)' : ''}'] =
+                                        debugSerializeParam(
+                                      myCarVar.take(100),
+                                      ParamType.Document,
+                                      isList: true,
+                                      link:
+                                          'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=MyCars',
+                                      name: 'car',
+                                      nullable: false,
+                                    );
+                                    debugLogWidgetClass(_model);
 
                                     return ListView.separated(
                                       padding: EdgeInsets.zero,
@@ -243,11 +310,20 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                                       itemBuilder: (context, myCarVarIndex) {
                                         final myCarVarItem =
                                             myCarVar[myCarVarIndex];
-                                        return MyCarCardWidget(
-                                          key: Key(
-                                              'Keyxfy_${myCarVarIndex}_of_${myCarVar.length}'),
-                                          carData: myCarVarItem,
-                                        );
+                                        return Builder(builder: (_) {
+                                          return DebugFlutterFlowModelContext(
+                                            rootModel: _model.rootModel,
+                                            parentModelCallback: (m) {
+                                              _model.myCarCardModels[
+                                                  'Keyxfy_${myCarVarIndex}_of_${myCarVar.length}'] = m;
+                                            },
+                                            child: MyCarCardWidget(
+                                              key: Key(
+                                                  'Keyxfy_${myCarVarIndex}_of_${myCarVar.length}'),
+                                              carData: myCarVarItem,
+                                            ),
+                                          );
+                                        });
                                       },
                                     );
                                   },
@@ -366,6 +442,19 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                           List<TripRecord> containerTripRecordList =
                               snapshot.data!;
 
+                          _model.debugBackendQueries[
+                                  'containerTripRecordList_Container_rvk3j6vw${containerTripRecordList.length > 100 ? ' (first 100)' : ''}'] =
+                              debugSerializeParam(
+                            containerTripRecordList.take(100),
+                            ParamType.Document,
+                            isList: true,
+                            link:
+                                'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=MyCars',
+                            name: 'trip',
+                            nullable: false,
+                          );
+                          debugLogWidgetClass(_model);
+
                           return Container(
                             width: double.infinity,
                             height: MediaQuery.sizeOf(context).height * 0.457,
@@ -381,6 +470,18 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                                                   e.status !=
                                                   Status.notConfirmed)
                                               .toList();
+                                      _model.debugGeneratorVariables[
+                                              'containerVar${containerVar.length > 100 ? ' (first 100)' : ''}'] =
+                                          debugSerializeParam(
+                                        containerVar.take(100),
+                                        ParamType.Document,
+                                        isList: true,
+                                        link:
+                                            'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=MyCars',
+                                        name: 'trip',
+                                        nullable: false,
+                                      );
+                                      debugLogWidgetClass(_model);
 
                                       return ListView.separated(
                                         padding: EdgeInsets.zero,
@@ -449,11 +550,20 @@ class _MyCarsWidgetState extends State<MyCarsWidget> {
                                                             .endDate!,
                                               ));
                                             },
-                                            child: BorrowedCarCardWidget(
-                                              key: Key(
-                                                  'Keyrja_${containerVarIndex}_of_${containerVar.length}'),
-                                              tribData: containerVarItem,
-                                            ),
+                                            child: Builder(builder: (_) {
+                                              return DebugFlutterFlowModelContext(
+                                                rootModel: _model.rootModel,
+                                                parentModelCallback: (m) {
+                                                  _model.borrowedCarCardModels[
+                                                      'Keyrja_${containerVarIndex}_of_${containerVar.length}'] = m;
+                                                },
+                                                child: BorrowedCarCardWidget(
+                                                  key: Key(
+                                                      'Keyrja_${containerVarIndex}_of_${containerVar.length}'),
+                                                  tribData: containerVarItem,
+                                                ),
+                                              );
+                                            }),
                                           );
                                         },
                                       );

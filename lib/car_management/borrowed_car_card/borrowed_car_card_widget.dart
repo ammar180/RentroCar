@@ -2,7 +2,10 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'borrowed_car_card_model.dart';
 export 'borrowed_car_card_model.dart';
 
@@ -18,7 +21,8 @@ class BorrowedCarCardWidget extends StatefulWidget {
   State<BorrowedCarCardWidget> createState() => _BorrowedCarCardWidgetState();
 }
 
-class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget> {
+class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget>
+    with RouteAware {
   late BorrowedCarCardModel _model;
 
   @override
@@ -31,8 +35,6 @@ class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BorrowedCarCardModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -43,9 +45,49 @@ class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return StreamBuilder<CarRecord>(
-      stream: CarRecord.getDocument(widget.tribData!.borrowedCar!),
+      stream: CarRecord.getDocument(widget!.tribData!.borrowedCar!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -63,6 +105,16 @@ class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget> {
         }
 
         final containerCarRecord = snapshot.data!;
+        _model.debugBackendQueries['containerCarRecord_Container_qj4bpa2h'] =
+            debugSerializeParam(
+          containerCarRecord,
+          ParamType.Document,
+          link:
+              'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=borrowedCarCard',
+          name: 'car',
+          nullable: false,
+        );
+        debugLogWidgetClass(_model);
 
         return Material(
           color: Colors.transparent,
@@ -124,7 +176,7 @@ class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget> {
                                   padding: EdgeInsets.all(8.0),
                                   child: Text(
                                     valueOrDefault<String>(
-                                      widget.tribData?.status?.name,
+                                      widget!.tribData?.status?.name,
                                       'pending',
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -146,7 +198,7 @@ class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget> {
                             'Due: ${valueOrDefault<String>(
                               dateTimeFormat(
                                 "MEd",
-                                widget.tribData?.startDate,
+                                widget!.tribData?.startDate,
                                 locale:
                                     FFLocalizations.of(context).languageCode,
                               ),
@@ -154,7 +206,7 @@ class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget> {
                             )} - ${valueOrDefault<String>(
                               dateTimeFormat(
                                 "MEd",
-                                widget.tribData?.endDate,
+                                widget!.tribData?.endDate,
                                 locale:
                                     FFLocalizations.of(context).languageCode,
                               ),
@@ -185,10 +237,10 @@ class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget> {
                                 ),
                                 StreamBuilder<UsersRecord>(
                                   stream: UsersRecord.getDocument(
-                                      widget.tribData?.carOwner ==
+                                      widget!.tribData?.carOwner ==
                                               currentUserReference
-                                          ? widget.tribData!.carBorrower!
-                                          : widget.tribData!.carOwner!),
+                                          ? widget!.tribData!.carBorrower!
+                                          : widget!.tribData!.carOwner!),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
                                     if (!snapshot.hasData) {
@@ -208,6 +260,17 @@ class _BorrowedCarCardWidgetState extends State<BorrowedCarCardWidget> {
                                     }
 
                                     final textUsersRecord = snapshot.data!;
+                                    _model.debugBackendQueries[
+                                            'textUsersRecord_Text_j9bmzejw'] =
+                                        debugSerializeParam(
+                                      textUsersRecord,
+                                      ParamType.Document,
+                                      link:
+                                          'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=borrowedCarCard',
+                                      name: 'users',
+                                      nullable: false,
+                                    );
+                                    debugLogWidgetClass(_model);
 
                                     return Text(
                                       textUsersRecord.displayName,

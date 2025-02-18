@@ -4,7 +4,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'checkout_dialog_model.dart';
 export 'checkout_dialog_model.dart';
 
@@ -20,7 +23,8 @@ class CheckoutDialogWidget extends StatefulWidget {
   State<CheckoutDialogWidget> createState() => _CheckoutDialogWidgetState();
 }
 
-class _CheckoutDialogWidgetState extends State<CheckoutDialogWidget> {
+class _CheckoutDialogWidgetState extends State<CheckoutDialogWidget>
+    with RouteAware {
   late CheckoutDialogModel _model;
 
   @override
@@ -33,8 +37,6 @@ class _CheckoutDialogWidgetState extends State<CheckoutDialogWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CheckoutDialogModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -45,7 +47,47 @@ class _CheckoutDialogWidgetState extends State<CheckoutDialogWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = DebugModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+    debugLogGlobalProperty(context);
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPush() {
+    if (mounted && DebugFlutterFlowModelContext.maybeOf(context) == null) {
+      setState(() => _model.isRouteVisible = true);
+      debugLogWidgetClass(_model);
+    }
+  }
+
+  @override
+  void didPop() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
+  void didPushNext() {
+    _model.isRouteVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DebugFlutterFlowModelContext.maybeOf(context)
+        ?.parentModelCallback
+        ?.call(_model);
+
     return Padding(
       padding: EdgeInsets.all(12.0),
       child: Container(
@@ -220,7 +262,7 @@ class _CheckoutDialogWidgetState extends State<CheckoutDialogWidget> {
                             ),
                             Text(
                               formatNumber(
-                                widget.totalRent,
+                                widget!.totalRent,
                                 formatType: FormatType.custom,
                                 format: 'EGP #',
                                 locale: '',
