@@ -7,13 +7,12 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'booking_summary_model.dart';
 export 'booking_summary_model.dart';
 
@@ -210,25 +209,29 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget>
                   },
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).success,
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                alignment: AlignmentDirectional(0.0, 0.0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 4.0, 0.0),
-                  child: Text(
-                    valueOrDefault<String>(
-                      widget!.tripDocument?.status?.name,
-                      'unConfirmed',
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).success,
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 4.0, 0.0),
+                    child: Text(
+                      valueOrDefault<String>(
+                        widget.tripDocument?.status?.name,
+                        'unConfirmed',
+                      ),
+                      style: FlutterFlowTheme.of(context).labelSmall.override(
+                            fontFamily: 'Open Sans',
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            fontSize: 10.0,
+                            letterSpacing: 0.0,
+                          ),
                     ),
-                    style: FlutterFlowTheme.of(context).labelSmall.override(
-                          fontFamily: 'Open Sans',
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          fontSize: 10.0,
-                          letterSpacing: 0.0,
-                        ),
                   ),
                 ),
               ),
@@ -694,22 +697,26 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget>
                                                         0.0, 0.0)
                                                     .resolve(Directionality.of(
                                                         context)),
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    FocusScope.of(dialogContext)
-                                                        .unfocus();
-                                                    FocusManager
-                                                        .instance.primaryFocus
-                                                        ?.unfocus();
-                                                  },
-                                                  child: AlertDialogWidget(
-                                                    title: 'Open whatsapp ',
-                                                    description:
-                                                        'The application will redirect you to whatsapp to contact Car Owner, Are you sure?',
-                                                    confirmCallback: () async {
-                                                      await launchURL(
-                                                          'https://api.whatsapp.com/send?autoload=1&app_absent=0&phone=2${columnUsersRecord.phoneNumber}&text');
+                                                child: WebViewAware(
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(
+                                                              dialogContext)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
                                                     },
+                                                    child: AlertDialogWidget(
+                                                      title: 'Open whatsapp ',
+                                                      description:
+                                                          'The application will redirect you to whatsapp to contact Car Owner, Are you sure?',
+                                                      confirmCallback:
+                                                          () async {
+                                                        await launchURL(
+                                                            'https://api.whatsapp.com/send?autoload=1&app_absent=0&phone=2${columnUsersRecord.phoneNumber}&text');
+                                                      },
+                                                    ),
                                                   ),
                                                 ),
                                               );
@@ -1042,32 +1049,15 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget>
                           EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          await showDialog(
-                            context: context,
-                            builder: (dialogContext) {
-                              return Dialog(
-                                elevation: 0,
-                                insetPadding: EdgeInsets.zero,
-                                backgroundColor: Colors.transparent,
-                                alignment: AlignmentDirectional(0.0, 0.0)
-                                    .resolve(Directionality.of(context)),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    FocusScope.of(dialogContext).unfocus();
-                                    FocusManager.instance.primaryFocus
-                                        ?.unfocus();
-                                  },
-                                  child: CheckoutDialogWidget(
-                                    totalRent: _model.fullPrice,
-                                  ),
-                                ),
-                              );
-                            },
-                          ).then((value) =>
-                              safeSetState(() => _model.isPayDone = value));
+                          _model.isPayDone = await actions.makePayment(
+                            _model.fullPrice,
+                            'EGP',
+                            'pk_test_51QtBMFQIjxSnjATLqPwN1yYfWWdjIBsgJkq8Vio8mm3OT3KRFmBEAeoufQdfprvaRjFxY7WNi4qRixyO3OGBO9A900CBVQvOL9',
+                            'sk_test_51QtBMFQIjxSnjATLj6COUcnjz7zDk5NEFHC4de72b6HIJnJnQToIKlmDePwoiQ1SECKixLeHPkpjeTZcQBkRBA7z008blrwLQI',
+                          );
+                          if (_model.isPayDone == 'PayDone') {
+                            await widget.tripDocument!.reference
 
-                          if (_model.isPayDone!) {
-                            await widget!.tripDocument!.reference
                                 .update(createTripRecordData(
                               status: Status.payDone,
                             ));
@@ -1095,11 +1085,84 @@ class _BookingSummaryWidgetState extends State<BookingSummaryWidget>
                                     FlutterFlowTheme.of(context).success,
                               ),
                             );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  _model.isPayDone!,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .override(
+                                        fontFamily: 'Open Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).error,
+                              ),
+                            );
+                            await showDialog(
+                              context: context,
+                              builder: (dialogContext) {
+                                return Dialog(
+                                  elevation: 0,
+                                  insetPadding: EdgeInsets.zero,
+                                  backgroundColor: Colors.transparent,
+                                  alignment: AlignmentDirectional(0.0, 0.0)
+                                      .resolve(Directionality.of(context)),
+                                  child: WebViewAware(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        FocusScope.of(dialogContext).unfocus();
+                                        FocusManager.instance.primaryFocus
+                                            ?.unfocus();
+                                      },
+                                      child: CheckoutDialogWidget(
+                                        totalRent: _model.fullPrice,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ).then((value) => safeSetState(
+                                () => _model.checkoutResult = value));
+
+                            if (_model.checkoutResult!) {
+                              await widget.tripDocument!.reference
+                                  .update(createTripRecordData(
+                                status: Status.payDone,
+                              ));
+
+                              await widget.tripDocument!.borrowedCar!
+                                  .update(createCarRecordData(
+                                isAvailable: false,
+                                availableDate: widget.tripDocument?.endDate,
+                              ));
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'pay done successfully, now you can contact car owner',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).success,
+                                ),
+                              );
+                            }
                           }
 
-                          safeSetState(() {});
-
-                          safeSetState(() {});
+                          setState(() {});
                         },
                         text: FFLocalizations.of(context).getText(
                           'e0rqboja' /* Pay Now! */,

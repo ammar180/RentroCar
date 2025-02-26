@@ -448,7 +448,7 @@ class _ProfileWidgetState extends State<ProfileWidget> with RouteAware {
                           await authManager.signOut();
                           GoRouter.of(context).clearRedirectLocation();
 
-                          context.goNamedAuth('onboarding', context.mounted);
+                          context.goNamedAuth('SignUpPage', context.mounted);
                         },
                         text: FFLocalizations.of(context).getText(
                           'c6n4h8y9' /* Log Out */,
@@ -513,113 +513,104 @@ class _ProfileWidgetState extends State<ProfileWidget> with RouteAware {
                 Padding(
                   padding:
                       EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 0.0),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed('verficationDataForm');
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      height: 60.0,
-                      decoration: BoxDecoration(
-                        color:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 5.0,
-                            color: Color(0x3416202A),
-                            offset: Offset(
-                              0.0,
-                              2.0,
+                  child: Container(
+                    width: double.infinity,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 5.0,
+                          color: Color(0x3416202A),
+                          offset: Offset(
+                            0.0,
+                            2.0,
+                          ),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(12.0),
+                      shape: BoxShape.rectangle,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Align(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                child: Icon(
+                                  Icons.translate_sharp,
+                                  color:
+                                      FlutterFlowTheme.of(context).primary,
+                                  size: 25.0,
+                                ),
+                              ),
                             ),
-                          )
+                          ),
+                          FlutterFlowDropDown<String>(
+                            controller: _model.dropDownValueController ??=
+                                FormFieldController<String>(
+                              _model.dropDownValue ??=
+                                  FFLocalizations.of(context).getText(
+                                'hb69767h' /* English */,
+                              ),
+                            ),
+                            options: [
+                              FFLocalizations.of(context).getText(
+                                'dv7u6c3j' /* English */,
+                              ),
+                              FFLocalizations.of(context).getText(
+                                '21j7u569' /* Arabic */,
+                              )
+                            ],
+                            onChanged: (val) async {
+                              safeSetState(
+                                  () => _model.dropDownValue = val);
+                              setAppLanguage(
+                                  context,
+                                  (_model.dropDownValue != null &&
+                                              _model.dropDownValue != '') &&
+                                          (_model.dropDownValue == 'Arabic')
+                                      ? 'ar'
+                                      : 'en');
+                            },
+                            width: 276.66,
+                            height: 40.0,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  letterSpacing: 0.0,
+                                ),
+                            hintText: FFLocalizations.of(context).getText(
+                              '49itwepx' /* Select langusage... */,
+                            ),
+                            icon: Icon(
+                              Icons.keyboard_arrow_down_rounded,
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryText,
+                              size: 24.0,
+                            ),
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            elevation: 2.0,
+                            borderColor: Colors.transparent,
+                            borderWidth: 0.0,
+                            borderRadius: 8.0,
+                            margin: EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 12.0, 0.0),
+                            hidesUnderline: true,
+                            isOverButton: false,
+                            isSearchable: false,
+                            isMultiSelect: false,
+                          ),
                         ],
-                        borderRadius: BorderRadius.circular(12.0),
-                        shape: BoxShape.rectangle,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Align(
-                                alignment: AlignmentDirectional(-1.0, 0.0),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 0.0, 0.0),
-                                  child: Icon(
-                                    Icons.translate_sharp,
-                                    color:
-                                        FlutterFlowTheme.of(context).primary,
-                                    size: 25.0,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            FlutterFlowDropDown<String>(
-                              controller: _model.dropDownValueController ??=
-                                  FormFieldController<String>(
-                                _model.dropDownValue ??=
-                                    FFLocalizations.of(context).getText(
-                                  'hb69767h' /* English */,
-                                ),
-                              ),
-                              options: [
-                                FFLocalizations.of(context).getText(
-                                  'dv7u6c3j' /* English */,
-                                ),
-                                FFLocalizations.of(context).getText(
-                                  '21j7u569' /* Arabic */,
-                                )
-                              ],
-                              onChanged: (val) async {
-                                safeSetState(
-                                    () => _model.dropDownValue = val);
-                                setAppLanguage(
-                                    context,
-                                    (_model.dropDownValue != null &&
-                                                _model.dropDownValue != '') &&
-                                            (_model.dropDownValue == 'Arabic')
-                                        ? 'ar'
-                                        : 'en');
-                              },
-                              width: 276.66,
-                              height: 40.0,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Open Sans',
-                                    letterSpacing: 0.0,
-                                  ),
-                              hintText: FFLocalizations.of(context).getText(
-                                '49itwepx' /* Select langusage... */,
-                              ),
-                              icon: Icon(
-                                Icons.keyboard_arrow_down_rounded,
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryText,
-                                size: 24.0,
-                              ),
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              elevation: 2.0,
-                              borderColor: Colors.transparent,
-                              borderWidth: 0.0,
-                              borderRadius: 8.0,
-                              margin: EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 0.0, 12.0, 0.0),
-                              hidesUnderline: true,
-                              isOverButton: false,
-                              isSearchable: false,
-                              isMultiSelect: false,
-                            ),
-                          ],
-                        ),
                       ),
                     ),
                   ),

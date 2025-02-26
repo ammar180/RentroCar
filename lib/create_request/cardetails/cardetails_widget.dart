@@ -13,8 +13,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart'
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'cardetails_model.dart';
 export 'cardetails_model.dart';
 
@@ -159,105 +158,85 @@ class _CardetailsWidgetState extends State<CardetailsWidget> with RouteAware {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Builder(
-                    builder: (context) {
-                      final carPhotos = (widget!.car!.carPhotos.isNotEmpty
-                                  ? widget!.car?.carPhotos
-                                  : List.generate(
-                                      random_data.randomInteger(5, 5),
-                                      (index) => random_data.randomImageUrl(
-                                            200,
-                                            200,
-                                          )))
-                              ?.toList() ??
-                          [];
-                      _model.debugGeneratorVariables[
-                              'carPhotos${carPhotos.length > 100 ? ' (first 100)' : ''}'] =
-                          debugSerializeParam(
-                        carPhotos.take(100),
-                        ParamType.String,
-                        isList: true,
-                        link:
-                            'https://app.flutterflow.io/project/rentro-car-74c8w5?tab=uiBuilder&page=cardetails',
-                        name: 'String',
-                        nullable: false,
-                      );
-                      debugLogWidgetClass(_model);
+                Builder(
+                  builder: (context) {
+                    final carPhotos = (widget.car!.carPhotos.isNotEmpty
+                                ? widget.car?.carPhotos
+                                : List.generate(
+                                    random_data.randomInteger(5, 5),
+                                    (index) => random_data.randomImageUrl(
+                                          200,
+                                          200,
+                                        )))
+                            ?.toList() ??
+                        [];
 
-                      return Container(
-                        width: double.infinity,
-                        height: 200.0,
-                        child: Stack(
-                          children: [
-                            PageView.builder(
-                              controller:
-                                  _model.pageViewController ??= PageController(
-                                      initialPage:
-                                          max(0, min(0, carPhotos.length - 1)))
-                                    ..addListener(() {
-                                      debugLogWidgetClass(_model);
-                                    }),
-                              scrollDirection: Axis.horizontal,
-                              itemCount: carPhotos.length,
-                              itemBuilder: (context, carPhotosIndex) {
-                                final carPhotosItem = carPhotos[carPhotosIndex];
-                                return ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.network(
-                                    valueOrDefault<String>(
-                                      carPhotosItem,
-                                      'https://files.friendycar.com/uploads/cars/35749/2tTXTMuft8KgNNvNZpR7JSAu1cUQnTM7sxc8uAWA.jpg',
-                                    ),
-                                    fit: BoxFit.cover,
+                    return Container(
+                      width: double.infinity,
+                      height: 224.11,
+                      child: Stack(
+                        children: [
+                          PageView.builder(
+                            controller: _model.pageViewController ??=
+                                PageController(
+                                    initialPage:
+                                        max(0, min(0, carPhotos.length - 1))),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: carPhotos.length,
+                            itemBuilder: (context, carPhotosIndex) {
+                              final carPhotosItem = carPhotos[carPhotosIndex];
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                  valueOrDefault<String>(
+                                    carPhotosItem,
+                                    'https://files.friendycar.com/uploads/cars/35749/2tTXTMuft8KgNNvNZpR7JSAu1cUQnTM7sxc8uAWA.jpg',
+
                                   ),
-                                );
-                              },
-                            ),
-                            Align(
-                              alignment: AlignmentDirectional(0.0, 1.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 16.0),
-                                child:
-                                    smooth_page_indicator.SmoothPageIndicator(
-                                  controller: _model.pageViewController ??=
-                                      PageController(
-                                          initialPage: max(
-                                              0, min(0, carPhotos.length - 1)))
-                                        ..addListener(() {
-                                          debugLogWidgetClass(_model);
-                                        }),
-                                  count: carPhotos.length,
-                                  axisDirection: Axis.horizontal,
-                                  onDotClicked: (i) async {
-                                    await _model.pageViewController!
-                                        .animateToPage(
-                                      i,
-                                      duration: Duration(milliseconds: 500),
-                                      curve: Curves.ease,
-                                    );
-                                    safeSetState(() {});
-                                  },
-                                  effect: smooth_page_indicator.SlideEffect(
-                                    spacing: 8.0,
-                                    radius: 8.0,
-                                    dotWidth: 8.0,
-                                    dotHeight: 8.0,
-                                    dotColor:
-                                        FlutterFlowTheme.of(context).accent1,
-                                    activeDotColor:
-                                        FlutterFlowTheme.of(context).primary,
-                                    paintStyle: PaintingStyle.fill,
-                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              );
+                            },
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(0.0, 1.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 16.0),
+                              child: smooth_page_indicator.SmoothPageIndicator(
+                                controller: _model.pageViewController ??=
+                                    PageController(
+                                        initialPage: max(
+                                            0, min(0, carPhotos.length - 1))),
+                                count: carPhotos.length,
+                                axisDirection: Axis.horizontal,
+                                onDotClicked: (i) async {
+                                  await _model.pageViewController!
+                                      .animateToPage(
+                                    i,
+                                    duration: Duration(milliseconds: 500),
+                                    curve: Curves.ease,
+                                  );
+                                  safeSetState(() {});
+                                },
+                                effect: smooth_page_indicator.SlideEffect(
+                                  spacing: 8.0,
+                                  radius: 8.0,
+                                  dotWidth: 8.0,
+                                  dotHeight: 8.0,
+                                  dotColor:
+                                      FlutterFlowTheme.of(context).accent1,
+                                  activeDotColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  paintStyle: PaintingStyle.fill,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
                 Expanded(
                   child: SingleChildScrollView(
@@ -759,8 +738,9 @@ class _CardetailsWidgetState extends State<CardetailsWidget> with RouteAware {
                                   ),
                                   Text(
                                     valueOrDefault<String>(
-                                      widget!.car?.description,
-                                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the',
+                                      widget.car?.description,
+                                      'N/A',
+
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
@@ -782,7 +762,7 @@ class _CardetailsWidgetState extends State<CardetailsWidget> with RouteAware {
                 ),
                 Container(
                   width: double.infinity,
-                  height: 93.69,
+                  height: 103,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryText,
                     borderRadius: BorderRadius.only(
@@ -827,11 +807,22 @@ class _CardetailsWidgetState extends State<CardetailsWidget> with RouteAware {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 5.0, 0.0, 0.0),
                               child: Text(
-                                formatNumber(
-                                  widget!.car!.rentalFare,
-                                  formatType: FormatType.custom,
-                                  format: 'EGP # / day',
-                                  locale: '',
+                                valueOrDefault<String>(
+                                  widget.car!.isAvailable
+                                      ? formatNumber(
+                                          widget.car?.rentalFare,
+                                          formatType: FormatType.custom,
+                                          format: 'EGP # / day',
+                                          locale: '',
+                                        )
+                                      : '${dateTimeFormat(
+                                          "MEd",
+                                          widget.car?.availableDate,
+                                          locale: FFLocalizations.of(context)
+                                              .languageCode,
+                                        )}',
+                                  'Available',
+
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .labelLarge
@@ -998,13 +989,15 @@ class _CardetailsWidgetState extends State<CardetailsWidget> with RouteAware {
                                                     0.0, 0.0)
                                                 .resolve(
                                                     Directionality.of(context)),
-                                            child: AlertDialogWidget(
-                                              title: 'Worning',
-                                              description:
-                                                  'Please verify your self first and Try to add car again',
-                                              confirmButton:
-                                                  'Go To verfication',
-                                              confirmCallback: () async {},
+                                            child: WebViewAware(
+                                              child: AlertDialogWidget(
+                                                title: 'Worning',
+                                                description:
+                                                    'Please verify your self first and Try to add car again',
+                                                confirmButton:
+                                                    'Go To verfication',
+                                                confirmCallback: () async {},
+                                              ),
                                             ),
                                           );
                                         },
@@ -1018,8 +1011,11 @@ class _CardetailsWidgetState extends State<CardetailsWidget> with RouteAware {
 
                                     safeSetState(() {});
                                   },
-                            text: FFLocalizations.of(context).getText(
-                              'kgpg6jbe' /* Book Now */,
+                            text: valueOrDefault<String>(
+                              widget.car!.isAvailable
+                                  ? 'Book Now!'
+                                  : 'Not Available',
+                              'Book Now!',
                             ),
                             options: FFButtonOptions(
                               width: 190.0,

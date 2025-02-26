@@ -38,22 +38,18 @@ class BookingSummaryModel extends FlutterFlowModel<BookingSummaryWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - Read Document] action in booking_summary widget.
-  CarRecord? _retrievedBorrowedCar;
-  set retrievedBorrowedCar(CarRecord? value) {
-    _retrievedBorrowedCar = value;
-    debugLogWidgetClass(this);
-  }
-
-  CarRecord? get retrievedBorrowedCar => _retrievedBorrowedCar;
-
-  // Stores action output result for [Alert Dialog - Custom Dialog] action in payBtn widget.
-  bool? _isPayDone;
-  set isPayDone(bool? value) {
+  CarRecord? retrievedBorrowedCar;
+  // Stores action output result for [Custom Action - makePayment] action in payBtn widget.
+  String? _isPayDone;
+  set isPayDone(String? value) {
     _isPayDone = value;
     debugLogWidgetClass(this);
   }
 
-  bool? get isPayDone => _isPayDone;
+  String? get isPayDone => _isPayDone;
+  // Stores action output result for [Alert Dialog - Custom Dialog] action in payBtn widget.
+  bool? checkoutResult;
+
 
   final Map<String, DebugDataField> debugGeneratorVariables = {};
   final Map<String, DebugDataField> debugBackendQueries = {};

@@ -418,7 +418,9 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           title: Text(
-            _model.pageViewCurrentIndex == 0 ? 'home' : 'Welcome To Rentro Car',
+            _model.pageViewCurrentIndex == 0
+                ? 'Welcome To Rentro Car'
+                : 'Welcome To Rentro Car',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Open Sans',
                   color: FlutterFlowTheme.of(context).info,

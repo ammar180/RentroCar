@@ -131,6 +131,7 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> with RouteAware {
               children: [
                 Column(
                   mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       '${widget!.carParam?.make} ${widget!.carParam?.model}',
@@ -138,6 +139,7 @@ class _CarCardBigWidgetState extends State<CarCardBigWidget> with RouteAware {
                             fontFamily: 'Open Sans',
                             letterSpacing: 0.0,
                           ),
+                          overflow: TextOverflow.clip
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
