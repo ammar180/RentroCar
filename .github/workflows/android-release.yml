@@ -1,0 +1,42 @@
+name: Release Android APK
+
+on:
+  push:
+    tags:
+      - 'v*'  # Only run when a tag like v1.0.0 is pushed
+
+permissions:
+  contents: write  # Needed to create a release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.0'
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Clean previous builds
+        run: flutter clean
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Rename APK to <reponame>.apk
+        run: |
+          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/${{ github.event.repository.name }}.apk
+
+      - name: Upload APK to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/app/outputs/flutter-apk/${{ github.event.repository.name }}.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
